@@ -1,0 +1,4 @@
+go.mod.tmp
+go.sum.tmp
+customer-hours-tracker
+vendor/
