@@ -16,6 +16,7 @@ type AllOfVendorContactInfo struct {
 	Country string `json:"country,omitempty"`
 	Zipcode string `json:"zipcode,omitempty"`
 	Url string `json:"url,omitempty"`
+	LogoUrl string `json:"logo_url,omitempty"`
 	Email string `json:"email,omitempty"`
 	Phone string `json:"phone,omitempty"`
 }

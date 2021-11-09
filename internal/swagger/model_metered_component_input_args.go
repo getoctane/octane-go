@@ -11,5 +11,7 @@ package swagger
 type MeteredComponentInputArgs struct {
 	MeterId int32 `json:"meter_id,omitempty"`
 	PriceScheme *PriceSchemeInputArgs `json:"price_scheme,omitempty"`
+	Limit int32 `json:"limit,omitempty"`
 	MeterName string `json:"meter_name,omitempty"`
+	Id int32 `json:"id,omitempty"`
 }

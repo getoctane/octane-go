@@ -19,7 +19,21 @@ type BillingSettings struct {
 	PaymentGracePeriodUnit string `json:"payment_grace_period_unit,omitempty"`
 	// Flag that controls whether or not invoices should be sent to customers.
 	ShouldSendInvoiceToCustomers bool `json:"should_send_invoice_to_customers,omitempty"`
+	// Flag that controls whether to invoice through Octane or through payment provider
+	InvoiceViaOctane bool `json:"invoice_via_octane,omitempty"`
+	// Flag that controls whether invoices are auto-approved or require manual approval
+	AutoApproveInvoices bool `json:"auto_approve_invoices,omitempty"`
 	CustomerInvoiceDetailLevel string `json:"customer_invoice_detail_level,omitempty"`
-	// Flag that controls whether or not to charge the customer based on the invoice.
+	// Flag that controls whether or not to auto-charge the customer based on the invoice.
 	ChargesEnabled bool `json:"charges_enabled,omitempty"`
+	// Flag that controls whether or not to invoice/charge the base rate, add ons and other fixed price plan components at the beginning of the billing cycle.
+	InvoiceFixedComponentsAtStart bool `json:"invoice_fixed_components_at_start,omitempty"`
+	// Flag that controls the number of retry attempts for invoicing/payments.
+	RetryAttempts int32 `json:"retry_attempts,omitempty"`
+	// Time length after which to attempt invoice/payment retry.
+	RetryFrequencyLength int32 `json:"retry_frequency_length,omitempty"`
+	// Time length unit after which to attempt invoice/payment retry.
+	RetryFrequencyUnit string `json:"retry_frequency_unit,omitempty"`
+	// The percentage tax rate to apply to invoices.
+	TaxRate float64 `json:"tax_rate,omitempty"`
 }

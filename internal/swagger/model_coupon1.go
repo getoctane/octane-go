@@ -14,6 +14,8 @@ import (
 type Coupon1 struct {
 	// Unique name identifier.
 	Name string `json:"name"`
+	// UI-friendly name used for data display. Defaults to `name`.
+	DisplayName string `json:"display_name,omitempty"`
 	// The time when the coupon will stop being effective one its applied.
 	DurationLength int32 `json:"duration_length,omitempty"`
 	// The unit time unit to apply to the specified duration length.

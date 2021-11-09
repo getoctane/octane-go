@@ -8,8 +8,13 @@
  */
 package swagger
 
-type FeatureInputArgs struct {
-	DisplayName string `json:"display_name,omitempty"`
+type LineItems struct {
+	PriceInt int32 `json:"price_int,omitempty"`
 	Description string `json:"description,omitempty"`
+	QuantityUnit string `json:"quantity_unit,omitempty"`
 	Name string `json:"name,omitempty"`
+	Quantity float64 `json:"quantity,omitempty"`
+	Price string `json:"price,omitempty"`
+	Id string `json:"id,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 }

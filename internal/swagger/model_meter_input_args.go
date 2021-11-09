@@ -9,13 +9,13 @@
 package swagger
 
 type MeterInputArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
+	UnitName string `json:"unit_name,omitempty"`
+	MeterType string `json:"meter_type,omitempty"`
 	Description string `json:"description,omitempty"`
 	PrimaryLabels []string `json:"primary_labels,omitempty"`
-	MeterType string `json:"meter_type,omitempty"`
+	Name string `json:"name,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
+	ExpectedLabels []string `json:"expected_labels,omitempty"`
 	DisplayName string `json:"display_name,omitempty"`
 	IsIncremental bool `json:"is_incremental,omitempty"`
-	Name string `json:"name,omitempty"`
-	UnitName string `json:"unit_name,omitempty"`
-	ExpectedLabels []string `json:"expected_labels,omitempty"`
 }

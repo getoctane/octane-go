@@ -12,18 +12,19 @@ import (
 )
 
 type CouponInputArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
 	DurationUnit string `json:"duration_unit,omitempty"`
-	MaxUses int32 `json:"max_uses,omitempty"`
 	ExcludedCustomers []string `json:"excluded_customers,omitempty"`
-	DurationLength int32 `json:"duration_length,omitempty"`
 	DiscountAmount int32 `json:"discount_amount"`
-	IsEndProrated bool `json:"is_end_prorated,omitempty"`
-	ExcludedPricePlans []string `json:"excluded_price_plans,omitempty"`
 	IsStartProrated bool `json:"is_start_prorated,omitempty"`
 	DiscountType string `json:"discount_type"`
+	IsEndProrated bool `json:"is_end_prorated,omitempty"`
+	ExcludedPricePlans []string `json:"excluded_price_plans,omitempty"`
 	Name string `json:"name"`
+	ExpirationTime time.Time `json:"expiration_time,omitempty"`
+	DurationLength int32 `json:"duration_length,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
+	MaxUses int32 `json:"max_uses,omitempty"`
 	Code string `json:"code,omitempty"`
 	Frequency string `json:"frequency"`
-	ExpirationTime time.Time `json:"expiration_time,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
 }

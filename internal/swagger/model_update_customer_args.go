@@ -9,10 +9,10 @@
 package swagger
 
 type UpdateCustomerArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
+	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
+	Name string `json:"name,omitempty"`
 	Tags []string `json:"tags,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
 	DisplayName string `json:"display_name,omitempty"`
 	ContactInfo *ContactInfoInputArgs `json:"contact_info,omitempty"`
-	Name string `json:"name,omitempty"`
-	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
 }

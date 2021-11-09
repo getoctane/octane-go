@@ -8,7 +8,8 @@
  */
 package swagger
 
-type PricePlan struct {
+// Price plan associated with this subscription.
+type AllOfActiveSubscriptionPricePlan struct {
 	// Unique name indentifier of a price plan
 	Name string `json:"name"`
 	// UI-friendly name used for data display. Defaults to `name`.

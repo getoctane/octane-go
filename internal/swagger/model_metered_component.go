@@ -12,4 +12,6 @@ type MeteredComponent struct {
 	// Unique name identifier
 	MeterName string `json:"meter_name,omitempty"`
 	PriceScheme *PriceScheme `json:"price_scheme,omitempty"`
+	// Limit to set on the metered component.
+	Limit float64 `json:"limit,omitempty"`
 }

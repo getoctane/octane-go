@@ -9,8 +9,7 @@
 package swagger
 
 type PaymentGatewayCredential struct {
-	// One of `STRIPE` or `PADDLE`
-	PaymentGateway string `json:"payment_gateway"`
+	PaymentGateway string `json:"payment_gateway,omitempty"`
 	// Payment gateway account id associated with customer
 	AccountId string `json:"account_id"`
 	// Unique name identifier of a customer

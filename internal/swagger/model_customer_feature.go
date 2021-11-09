@@ -8,8 +8,8 @@
  */
 package swagger
 
-type PaymentGatewayCredentialInputArgs struct {
-	PaymentGateway string `json:"payment_gateway,omitempty"`
-	AccountId string `json:"account_id,omitempty"`
-	AuthToken string `json:"auth_token,omitempty"`
+type CustomerFeature struct {
+	Enabled bool `json:"enabled,omitempty"`
+	Limit float64 `json:"limit,omitempty"`
+	FeatureName string `json:"feature_name,omitempty"`
 }

@@ -9,10 +9,13 @@
 package swagger
 
 type CreateCustomerArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
+	PricePlanName string `json:"price_plan_name,omitempty"`
+	AutogeneratePaymentGatewayCustomer bool `json:"autogenerate_payment_gateway_customer,omitempty"`
+	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
+	Name string `json:"name,omitempty"`
 	Tags []string `json:"tags,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
+	PricePlanTag string `json:"price_plan_tag,omitempty"`
 	DisplayName string `json:"display_name,omitempty"`
 	ContactInfo *ContactInfoInputArgs `json:"contact_info,omitempty"`
-	Name string `json:"name,omitempty"`
-	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
 }

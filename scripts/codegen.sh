@@ -90,5 +90,25 @@ cat mount/model_subscription.go | \
 mv mount/model_subscription.go.tmp \
   mount/model_subscription.go
 
+cat mount/model_active_subscription.go | \
+  sed 's/CustomerName \*Object/CustomerName string/g' | \
+  sed 's/PricePlanName \*Object/PricePlanName string/g' \
+  > mount/model_active_subscription.go.tmp
+mv mount/model_active_subscription.go.tmp \
+  mount/model_active_subscription.go
+
+cat mount/model_all_of_active_subscription_discount_override.go | \
+  sed 's/DiscountType \*Object/DiscountType string/g' \
+  > mount/model_all_of_active_subscription_discount_override.go.tmp
+mv mount/model_all_of_active_subscription_discount_override.go.tmp \
+  mount/model_all_of_active_subscription_discount_override.go
+
+cat mount/model_payment_gateway_credential.go | \
+  sed 's/PaymentGateway \*Object/PaymentGateway string/g' \
+  > mount/model_payment_gateway_credential.go.tmp
+mv mount/model_payment_gateway_credential.go.tmp \
+  mount/model_payment_gateway_credential.go
+
 rm -f internal/swagger/*.go
+mkdir -p internal/swagger/
 cp mount/*.go internal/swagger/

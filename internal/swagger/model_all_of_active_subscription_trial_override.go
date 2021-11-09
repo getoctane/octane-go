@@ -8,8 +8,9 @@
  */
 package swagger
 
-type PaymentGatewayCredentialInputArgs struct {
-	PaymentGateway string `json:"payment_gateway,omitempty"`
-	AccountId string `json:"account_id,omitempty"`
-	AuthToken string `json:"auth_token,omitempty"`
+// Optional trial override for the associated subscription.
+type AllOfActiveSubscriptionTrialOverride struct {
+	TimeLength float64 `json:"time_length,omitempty"`
+	TimeUnitName string `json:"time_unit_name,omitempty"`
+	Credit int32 `json:"credit,omitempty"`
 }

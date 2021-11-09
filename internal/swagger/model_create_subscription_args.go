@@ -12,12 +12,13 @@ import (
 )
 
 type CreateSubscriptionArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
+	PricePlanName string `json:"price_plan_name,omitempty"`
+	DiscountOverride *DiscountInputArgs `json:"discount_override,omitempty"`
+	CouponOverrideName string `json:"coupon_override_name,omitempty"`
+	EffectiveAt time.Time `json:"effective_at,omitempty"`
 	CouponOverrideId int32 `json:"coupon_override_id,omitempty"`
 	CustomerId int32 `json:"customer_id,omitempty"`
-	DiscountOverride *DiscountInputArgs `json:"discount_override,omitempty"`
-	EffectiveAt time.Time `json:"effective_at,omitempty"`
-	PricePlanName string `json:"price_plan_name,omitempty"`
-	CouponOverrideName string `json:"coupon_override_name,omitempty"`
 	PricePlanId int32 `json:"price_plan_id,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
+	PricePlanTag string `json:"price_plan_tag,omitempty"`
 }

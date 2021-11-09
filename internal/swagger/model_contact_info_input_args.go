@@ -9,13 +9,14 @@
 package swagger
 
 type ContactInfoInputArgs struct {
-	Country string `json:"country,omitempty"`
-	AddressLine1 string `json:"address_line_1,omitempty"`
-	State string `json:"state,omitempty"`
-	Zipcode string `json:"zipcode,omitempty"`
-	Email string `json:"email,omitempty"`
-	AddressLine2 string `json:"address_line_2,omitempty"`
 	City string `json:"city,omitempty"`
 	Url string `json:"url,omitempty"`
+	State string `json:"state,omitempty"`
+	Country string `json:"country,omitempty"`
 	Phone string `json:"phone,omitempty"`
+	AddressLine1 string `json:"address_line_1,omitempty"`
+	Zipcode string `json:"zipcode,omitempty"`
+	Email string `json:"email,omitempty"`
+	LogoUrl string `json:"logo_url,omitempty"`
+	AddressLine2 string `json:"address_line_2,omitempty"`
 }

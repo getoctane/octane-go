@@ -9,8 +9,8 @@
 package swagger
 
 type PriceSchemeInputArgs struct {
-	TimeUnitName string `json:"time_unit_name,omitempty"`
 	UnitName string `json:"unit_name,omitempty"`
-	SchemeType string `json:"scheme_type,omitempty"`
+	TimeUnitName string `json:"time_unit_name,omitempty"`
 	Prices []PriceInputArgs `json:"prices,omitempty"`
+	SchemeType string `json:"scheme_type,omitempty"`
 }

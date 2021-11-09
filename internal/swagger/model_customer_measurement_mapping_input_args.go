@@ -9,6 +9,6 @@
 package swagger
 
 type CustomerMeasurementMappingInputArgs struct {
-	Label string `json:"label,omitempty"`
 	ValueRegex string `json:"value_regex,omitempty"`
+	Label string `json:"label,omitempty"`
 }
