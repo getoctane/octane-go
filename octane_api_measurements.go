@@ -3,6 +3,7 @@ package octane
 import (
 	"context"
 	"net/http"
+	"time"
 
 	"github.com/getoctane/octane-go/internal/swagger"
 )
@@ -22,6 +23,9 @@ func newMeasurementsAPI(impl *swagger.APIClient, ctx func() context.Context) *me
 
 // Create sends a measurement.
 func (api *measurementsAPI) Create(body Measurement) (Measurement, *http.Response, error) {
+	if body.Time.IsZero() {
+		body.Time = time.Now()
+	}
 	implMeasurement := swagger.Measurement{
 		Value:      body.Value,
 		Labels:     body.Labels,
@@ -39,6 +43,9 @@ func (api *measurementsAPI) Create(body Measurement) (Measurement, *http.Respons
 func (api *measurementsAPI) CreateMulti(body []Measurement) ([]Measurement, *http.Response, error) {
 	var implMeasurements []swagger.Measurement
 	for _, measurement := range body {
+		if measurement.Time.IsZero() {
+			measurement.Time = time.Now()
+		}
 		implMeasurements = append(implMeasurements, swagger.Measurement{
 			Value:      measurement.Value,
 			Labels:     measurement.Labels,
