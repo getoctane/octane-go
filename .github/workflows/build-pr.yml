@@ -13,26 +13,12 @@ jobs:
         run: |
           # Build example app "antler-db-cloud-shop" with latest source
           pushd examples/antler-db-cloud-shop/
-          cat go.mod | grep -v 'github.com/getoctane/octane-go ' > go.mod.tmp
-          mv go.mod.tmp go.mod
-          cat go.sum | grep -v 'github.com/getoctane/octane-go ' > go.sum.tmp
-          mv go.sum.tmp go.sum
           go mod vendor
-          mkdir -p vendor/github.com/getoctane/octane-go
-          cp -r ../../internal vendor/github.com/getoctane/octane-go
-          cp -r ../../*.go vendor/github.com/getoctane/octane-go
           go build -o ./antler-db-cloud-shop main.go
           popd
 
           # Build example app "customer-hours-tracker" with latest source
           pushd examples/customer-hours-tracker/
-          cat go.mod | grep -v 'github.com/getoctane/octane-go ' > go.mod.tmp
-          mv go.mod.tmp go.mod
-          cat go.sum | grep -v 'github.com/getoctane/octane-go ' > go.sum.tmp
-          mv go.sum.tmp go.sum
           go mod vendor
-          mkdir -p vendor/github.com/getoctane/octane-go
-          cp -r ../../internal vendor/github.com/getoctane/octane-go
-          cp -r ../../*.go vendor/github.com/getoctane/octane-go
           go build -o ./customer-hours-tracker main.go
           popd
