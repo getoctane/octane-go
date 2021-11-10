@@ -10,12 +10,15 @@ import (
 
 type (
 	CreateCustomerArgs struct {
-		VendorId            int32                                 `json:"vendor_id,omitempty"`
-		Tags                []string                              `json:"tags,omitempty"`
-		DisplayName         string                                `json:"display_name,omitempty"`
-		ContactInfo         *ContactInfoInputArgs                 `json:"contact_info,omitempty"`
-		Name                string                                `json:"name,omitempty"`
-		MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
+		VendorId                           int32                                 `json:"vendor_id,omitempty"`
+		Tags                               []string                              `json:"tags,omitempty"`
+		DisplayName                        string                                `json:"display_name,omitempty"`
+		ContactInfo                        *ContactInfoInputArgs                 `json:"contact_info,omitempty"`
+		Name                               string                                `json:"name,omitempty"`
+		MeasurementMappings                []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
+		PricePlanName                      string                                `json:"price_plan_name,omitempty"`
+		PricePlanTag                       string                                `json:"price_plan_tag,omitempty"`
+		AutogeneratePaymentGatewayCustomer bool                                  `json:"autogenerate_payment_gateway_customer,omitempty"`
 	}
 	ContactInfoInputArgs struct {
 		Country      string `json:"country,omitempty"`
@@ -52,6 +55,20 @@ type (
 	DeleteSubscriptionArgs swagger.DeleteSubscriptionArgs
 	Subscription           swagger.Subscription
 
+	CustomerMeasurmentMapping swagger.CustomerMeasurementMapping
+
+	CustomersApiCustomersCustomerNameRevenueGetOpts swagger.CustomersApiCustomersCustomerNameRevenueGetOpts
+	RevenueResponse                                 swagger.RevenueResponse
+
+	RevenueBreakdown struct {
+		TotalRevenue float64     `json:"total_revenue,omitempty"`
+		LineItems    []LineItems `json:"line_items,omitempty"`
+	}
+	LineItems swagger.LineItems
+
+	CustomersApiCustomersCustomerNameUsageGetOpts swagger.CustomersApiCustomersCustomerNameUsageGetOpts
+	CustomerUsage                                 swagger.CustomerUsage
+
 	customersAPI struct {
 		impl *swagger.APIClient
 		ctx  func() context.Context
@@ -86,12 +103,15 @@ func (api *customersAPI) Create(body CreateCustomerArgs) (Customer, *http.Respon
 		}
 	}
 	implCreateCustomerArgs := swagger.CreateCustomerArgs{
-		VendorId:            body.VendorId,
-		Tags:                body.Tags,
-		DisplayName:         body.DisplayName,
-		ContactInfo:         &implContactInfo,
-		Name:                body.Name,
-		MeasurementMappings: implMeasurementMappingInputArgs,
+		VendorId:                           body.VendorId,
+		Tags:                               body.Tags,
+		DisplayName:                        body.DisplayName,
+		ContactInfo:                        &implContactInfo,
+		Name:                               body.Name,
+		MeasurementMappings:                implMeasurementMappingInputArgs,
+		PricePlanName:                      body.PricePlanName,
+		PricePlanTag:                       body.PricePlanTag,
+		AutogeneratePaymentGatewayCustomer: body.AutogeneratePaymentGatewayCustomer,
 	}
 	implCustomer, resp, err := api.impl.CustomersApi.CustomersPost(
 		api.ctx(), implCreateCustomerArgs)
@@ -182,6 +202,7 @@ func (api *customersAPI) CreateSubscription(customerName string, body CreateSubs
 		PricePlanName:      body.PricePlanName,
 		CouponOverrideName: body.CouponOverrideName,
 		PricePlanId:        body.PricePlanId,
+		PricePlanTag:       body.PricePlanTag,
 	}
 	// TODO: if EffectiveAt is nil, causes 500 error
 	if implCreateSubscriptionArgs.EffectiveAt.IsZero() {
@@ -233,6 +254,51 @@ func (api *customersAPI) DeleteSubscription(customerName string, body DeleteSubs
 		api.ctx(), implDeleteSubscriptionArgs, customerName)
 }
 
+// CreateMapping creates a measurement mapping for a speciifc customer (by customer name).
+func (api *customersAPI) CreateMapping(customerName string, body CustomerMeasurementMappingInputArgs) (CustomerMeasurmentMapping, *http.Response, error) {
+	implCustomerMeasurementMappingInputArgs := swagger.CustomerMeasurementMappingInputArgs{
+		ValueRegex: body.ValueRegex,
+		Label:      body.Label,
+	}
+	implCustomerMeasurmentMapping, resp, err := api.impl.CustomersApi.CustomersCustomerNameMappingsPost(
+		api.ctx(), implCustomerMeasurementMappingInputArgs, customerName)
+	customerMeasurmentMapping := implCustomerMeasurmentMappingToCustomerMeasurmentMapping(&implCustomerMeasurmentMapping)
+	return customerMeasurmentMapping, resp, err
+}
+
+// RetrieveRevenue fetches a customer revenue data by their unique name.
+func (api *customersAPI) RetrieveRevenue(customerName string, body CustomersApiCustomersCustomerNameRevenueGetOpts) (RevenueResponse, *http.Response, error) {
+	implCustomersApiCustomersCustomerNameRevenueGetOpts := swagger.CustomersApiCustomersCustomerNameRevenueGetOpts{
+		StartTime: body.StartTime,
+		EndTime:   body.EndTime,
+	}
+	implRevenueResponse, resp, err := api.impl.CustomersApi.CustomersCustomerNameRevenueGet(
+		api.ctx(), customerName, &implCustomersApiCustomersCustomerNameRevenueGetOpts)
+	revenueResponse := implRevenueResponseToRevenueResponse(&implRevenueResponse)
+	return revenueResponse, resp, err
+}
+
+// RetrieveAccruedRevenue fetches a customer accrued revenue data by their unique name.
+func (api *customersAPI) RetrieveAccruedRevenue(customerName string) (RevenueBreakdown, *http.Response, error) {
+	implRevenueBreakdown, resp, err := api.impl.CustomersApi.CustomersCustomerNameAccruedRevenueGet(
+		api.ctx(), customerName)
+	revenueBreakdown := implRevenueBreakdownToRevenueBreakdown(&implRevenueBreakdown)
+	return revenueBreakdown, resp, err
+}
+
+// RetrieveUsage fetches a customer usage data by their unique name.
+func (api *customersAPI) RetrieveUsage(customerName string, body CustomersApiCustomersCustomerNameUsageGetOpts) (CustomerUsage, *http.Response, error) {
+	implCustomersApiCustomersCustomerNameUsageGetOpts := swagger.CustomersApiCustomersCustomerNameUsageGetOpts{
+		MeterName: body.MeterName,
+		StartTime: body.StartTime,
+		EndTime:   body.EndTime,
+	}
+	implCustomerUsage, resp, err := api.impl.CustomersApi.CustomersCustomerNameUsageGet(
+		api.ctx(), customerName, &implCustomersApiCustomersCustomerNameUsageGetOpts)
+	customerUsage := implCustomerUsageToCustomerUsage(&implCustomerUsage)
+	return customerUsage, resp, err
+}
+
 // Convert a Swagger Customer struct to our Customer struct
 func implCustomerToCustomer(implCustomer *swagger.Customer) Customer {
 	var customer Customer
@@ -274,4 +340,47 @@ func implPaymentGatewayCredentialToPaymentGatewayCredential(implPaymentGatewayCr
 		}
 	}
 	return paymentGatewayCredential
+}
+
+// Convert a Swagger CustomerMeasurmentMapping struct to our CustomerMeasurmentMapping struct
+func implCustomerMeasurmentMappingToCustomerMeasurmentMapping(implCustomerMeasurmentMapping *swagger.CustomerMeasurementMapping) CustomerMeasurmentMapping {
+	return CustomerMeasurmentMapping{
+		Label:      implCustomerMeasurmentMapping.Label,
+		ValueRegex: implCustomerMeasurmentMapping.ValueRegex,
+	}
+}
+
+// Convert a Swagger RevenueResponse struct to our RevenueResponse struct
+func implRevenueResponseToRevenueResponse(implRevenueResponse *swagger.RevenueResponse) RevenueResponse {
+	return RevenueResponse{
+		Revenue: implRevenueResponse.Revenue,
+	}
+}
+
+// Convert a Swagger RevenueBreakdown struct to our RevenueBreakdown struct
+func implRevenueBreakdownToRevenueBreakdown(implRevenueBreakdown *swagger.RevenueBreakdown) RevenueBreakdown {
+	var lineItems []LineItems
+	for _, implLineItem := range implRevenueBreakdown.LineItems {
+		lineItems = append(lineItems, LineItems{
+			PriceInt:     implLineItem.PriceInt,
+			Description:  implLineItem.Description,
+			QuantityUnit: implLineItem.QuantityUnit,
+			Name:         implLineItem.Name,
+			Quantity:     implLineItem.Quantity,
+			Price:        implLineItem.Price,
+			Id:           implLineItem.Id,
+			Metadata:     implLineItem.Metadata,
+		})
+	}
+	return RevenueBreakdown{
+		TotalRevenue: implRevenueBreakdown.TotalRevenue,
+		LineItems:    lineItems,
+	}
+}
+
+// Convert a Swagger CustomerUsage struct to our CustomerUsage struct
+func implCustomerUsageToCustomerUsage(implCustomerUsage *swagger.CustomerUsage) CustomerUsage {
+	return CustomerUsage{
+		Usage: implCustomerUsage.Usage,
+	}
 }
