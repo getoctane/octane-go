@@ -57,6 +57,15 @@ type (
 
 	CustomerMeasurmentMapping swagger.CustomerMeasurementMapping
 
+	CustomersApiCustomersCustomerNameRevenueGetOpts swagger.CustomersApiCustomersCustomerNameRevenueGetOpts
+	RevenueResponse                                 swagger.RevenueResponse
+
+	RevenueBreakdown struct {
+		TotalRevenue float64     `json:"total_revenue,omitempty"`
+		LineItems    []LineItems `json:"line_items,omitempty"`
+	}
+	LineItems swagger.LineItems
+
 	customersAPI struct {
 		impl *swagger.APIClient
 		ctx  func() context.Context
@@ -254,6 +263,26 @@ func (api *customersAPI) CreateMapping(customerName string, body CustomerMeasure
 	return customerMeasurmentMapping, resp, err
 }
 
+// RetrieveRevenue fetches a customer revenue data by their unique name.
+func (api *customersAPI) RetrieveRevenue(customerName string, body CustomersApiCustomersCustomerNameRevenueGetOpts) (RevenueResponse, *http.Response, error) {
+	implCustomersApiCustomersCustomerNameRevenueGetOpts := swagger.CustomersApiCustomersCustomerNameRevenueGetOpts{
+		StartTime: body.StartTime,
+		EndTime:   body.EndTime,
+	}
+	implRevenueResponse, resp, err := api.impl.CustomersApi.CustomersCustomerNameRevenueGet(
+		api.ctx(), customerName, &implCustomersApiCustomersCustomerNameRevenueGetOpts)
+	revenueResponse := implRevenueResponseToRevenueResponse(&implRevenueResponse)
+	return revenueResponse, resp, err
+}
+
+// RetrieveAccruedRevenue fetches a customer accrued revenue data by their unique name.
+func (api *customersAPI) RetrieveAccruedRevenue(customerName string) (RevenueBreakdown, *http.Response, error) {
+	implRevenueBreakdown, resp, err := api.impl.CustomersApi.CustomersCustomerNameAccruedRevenueGet(
+		api.ctx(), customerName)
+	revenueBreakdown := implRevenueBreakdownToRevenueBreakdown(&implRevenueBreakdown)
+	return revenueBreakdown, resp, err
+}
+
 // Convert a Swagger Customer struct to our Customer struct
 func implCustomerToCustomer(implCustomer *swagger.Customer) Customer {
 	var customer Customer
@@ -302,5 +331,33 @@ func implCustomerMeasurmentMappingToCustomerMeasurmentMapping(implCustomerMeasur
 	return CustomerMeasurmentMapping{
 		Label:      implCustomerMeasurmentMapping.Label,
 		ValueRegex: implCustomerMeasurmentMapping.ValueRegex,
+	}
+}
+
+// Convert a Swagger RevenueResponse struct to our RevenueResponse struct
+func implRevenueResponseToRevenueResponse(implRevenueResponse *swagger.RevenueResponse) RevenueResponse {
+	return RevenueResponse{
+		Revenue: implRevenueResponse.Revenue,
+	}
+}
+
+// Convert a Swagger RevenueBreakdown struct to our RevenueBreakdown struct
+func implRevenueBreakdownToRevenueBreakdown(implRevenueBreakdown *swagger.RevenueBreakdown) RevenueBreakdown {
+	var lineItems []LineItems
+	for _, implLineItem := range implRevenueBreakdown.LineItems {
+		lineItems = append(lineItems, LineItems{
+			PriceInt:     implLineItem.PriceInt,
+			Description:  implLineItem.Description,
+			QuantityUnit: implLineItem.QuantityUnit,
+			Name:         implLineItem.Name,
+			Quantity:     implLineItem.Quantity,
+			Price:        implLineItem.Price,
+			Id:           implLineItem.Id,
+			Metadata:     implLineItem.Metadata,
+		})
+	}
+	return RevenueBreakdown{
+		TotalRevenue: implRevenueBreakdown.TotalRevenue,
+		LineItems:    lineItems,
 	}
 }
