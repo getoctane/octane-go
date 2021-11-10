@@ -66,6 +66,9 @@ type (
 	}
 	LineItems swagger.LineItems
 
+	CustomersApiCustomersCustomerNameUsageGetOpts swagger.CustomersApiCustomersCustomerNameUsageGetOpts
+	CustomerUsage                                 swagger.CustomerUsage
+
 	customersAPI struct {
 		impl *swagger.APIClient
 		ctx  func() context.Context
@@ -283,6 +286,19 @@ func (api *customersAPI) RetrieveAccruedRevenue(customerName string) (RevenueBre
 	return revenueBreakdown, resp, err
 }
 
+// RetrieveUsage fetches a customer usage data by their unique name.
+func (api *customersAPI) RetrieveUsage(customerName string, body CustomersApiCustomersCustomerNameUsageGetOpts) (CustomerUsage, *http.Response, error) {
+	implCustomersApiCustomersCustomerNameUsageGetOpts := swagger.CustomersApiCustomersCustomerNameUsageGetOpts{
+		MeterName: body.MeterName,
+		StartTime: body.StartTime,
+		EndTime:   body.EndTime,
+	}
+	implCustomerUsage, resp, err := api.impl.CustomersApi.CustomersCustomerNameUsageGet(
+		api.ctx(), customerName, &implCustomersApiCustomersCustomerNameUsageGetOpts)
+	customerUsage := implCustomerUsageToCustomerUsage(&implCustomerUsage)
+	return customerUsage, resp, err
+}
+
 // Convert a Swagger Customer struct to our Customer struct
 func implCustomerToCustomer(implCustomer *swagger.Customer) Customer {
 	var customer Customer
@@ -359,5 +375,12 @@ func implRevenueBreakdownToRevenueBreakdown(implRevenueBreakdown *swagger.Revenu
 	return RevenueBreakdown{
 		TotalRevenue: implRevenueBreakdown.TotalRevenue,
 		LineItems:    lineItems,
+	}
+}
+
+// Convert a Swagger CustomerUsage struct to our CustomerUsage struct
+func implCustomerUsageToCustomerUsage(implCustomerUsage *swagger.CustomerUsage) CustomerUsage {
+	return CustomerUsage{
+		Usage: implCustomerUsage.Usage,
 	}
 }
