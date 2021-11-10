@@ -50,7 +50,21 @@ type (
 	CustomerPaymentGatewayCredentialInputArgs swagger.CustomerPaymentGatewayCredentialInputArgs
 	PaymentGatewayCredential                  swagger.PaymentGatewayCredential
 
-	CreateSubscriptionArgs swagger.CreateSubscriptionArgs
+	CreateSubscriptionArgs struct {
+		PricePlanName      string             `json:"price_plan_name,omitempty"`
+		DiscountOverride   *DiscountInputArgs `json:"discount_override,omitempty"`
+		CouponOverrideName string             `json:"coupon_override_name,omitempty"`
+		EffectiveAt        time.Time          `json:"effective_at,omitempty"`
+		CouponOverrideId   int32              `json:"coupon_override_id,omitempty"`
+		CustomerId         int32              `json:"customer_id,omitempty"`
+		PricePlanId        int32              `json:"price_plan_id,omitempty"`
+		VendorId           int32              `json:"vendor_id,omitempty"`
+		PricePlanTag       string             `json:"price_plan_tag,omitempty"`
+	}
+
+	// Redeclared in octane_api_priceplans.go
+	// DiscountInputArgs swagger.DiscountInputArgs
+
 	UpdateSubscriptionArgs swagger.UpdateSubscriptionArgs
 	DeleteSubscriptionArgs swagger.DeleteSubscriptionArgs
 	Subscription           swagger.Subscription
@@ -197,12 +211,17 @@ func (api *customersAPI) CreateSubscription(customerName string, body CreateSubs
 		VendorId:           body.VendorId,
 		CouponOverrideId:   body.CouponOverrideId,
 		CustomerId:         body.CustomerId,
-		DiscountOverride:   body.DiscountOverride,
 		EffectiveAt:        body.EffectiveAt,
 		PricePlanName:      body.PricePlanName,
 		CouponOverrideName: body.CouponOverrideName,
 		PricePlanId:        body.PricePlanId,
 		PricePlanTag:       body.PricePlanTag,
+	}
+	if body.DiscountOverride != nil {
+		implCreateSubscriptionArgs.DiscountOverride = &swagger.DiscountInputArgs{
+			Amount:       body.DiscountOverride.Amount,
+			DiscountType: body.DiscountOverride.DiscountType,
+		}
 	}
 	// TODO: if EffectiveAt is nil, causes 500 error
 	if implCreateSubscriptionArgs.EffectiveAt.IsZero() {
