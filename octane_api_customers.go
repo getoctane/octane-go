@@ -55,6 +55,8 @@ type (
 	DeleteSubscriptionArgs swagger.DeleteSubscriptionArgs
 	Subscription           swagger.Subscription
 
+	CustomerMeasurmentMapping swagger.CustomerMeasurementMapping
+
 	customersAPI struct {
 		impl *swagger.APIClient
 		ctx  func() context.Context
@@ -240,6 +242,18 @@ func (api *customersAPI) DeleteSubscription(customerName string, body DeleteSubs
 		api.ctx(), implDeleteSubscriptionArgs, customerName)
 }
 
+// CreateMapping creates a measurement mapping for a speciifc customer (by customer name).
+func (api *customersAPI) CreateMapping(customerName string, body CustomerMeasurementMappingInputArgs) (CustomerMeasurmentMapping, *http.Response, error) {
+	implCustomerMeasurementMappingInputArgs := swagger.CustomerMeasurementMappingInputArgs{
+		ValueRegex: body.ValueRegex,
+		Label:      body.Label,
+	}
+	implCustomerMeasurmentMapping, resp, err := api.impl.CustomersApi.CustomersCustomerNameMappingsPost(
+		api.ctx(), implCustomerMeasurementMappingInputArgs, customerName)
+	customerMeasurmentMapping := implCustomerMeasurmentMappingToCustomerMeasurmentMapping(&implCustomerMeasurmentMapping)
+	return customerMeasurmentMapping, resp, err
+}
+
 // Convert a Swagger Customer struct to our Customer struct
 func implCustomerToCustomer(implCustomer *swagger.Customer) Customer {
 	var customer Customer
@@ -281,4 +295,12 @@ func implPaymentGatewayCredentialToPaymentGatewayCredential(implPaymentGatewayCr
 		}
 	}
 	return paymentGatewayCredential
+}
+
+// Convert a Swagger CustomerMeasurmentMapping struct to our CustomerMeasurmentMapping struct
+func implCustomerMeasurmentMappingToCustomerMeasurmentMapping(implCustomerMeasurmentMapping *swagger.CustomerMeasurementMapping) CustomerMeasurmentMapping {
+	return CustomerMeasurmentMapping{
+		Label:      implCustomerMeasurmentMapping.Label,
+		ValueRegex: implCustomerMeasurmentMapping.ValueRegex,
+	}
 }
