@@ -10,12 +10,15 @@ import (
 
 type (
 	CreateCustomerArgs struct {
-		VendorId            int32                                 `json:"vendor_id,omitempty"`
-		Tags                []string                              `json:"tags,omitempty"`
-		DisplayName         string                                `json:"display_name,omitempty"`
-		ContactInfo         *ContactInfoInputArgs                 `json:"contact_info,omitempty"`
-		Name                string                                `json:"name,omitempty"`
-		MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
+		VendorId                           int32                                 `json:"vendor_id,omitempty"`
+		Tags                               []string                              `json:"tags,omitempty"`
+		DisplayName                        string                                `json:"display_name,omitempty"`
+		ContactInfo                        *ContactInfoInputArgs                 `json:"contact_info,omitempty"`
+		Name                               string                                `json:"name,omitempty"`
+		MeasurementMappings                []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
+		PricePlanName                      string                                `json:"price_plan_name,omitempty"`
+		PricePlanTag                       string                                `json:"price_plan_tag,omitempty"`
+		AutogeneratePaymentGatewayCustomer bool                                  `json:"autogenerate_payment_gateway_customer,omitempty"`
 	}
 	ContactInfoInputArgs struct {
 		Country      string `json:"country,omitempty"`
@@ -86,12 +89,15 @@ func (api *customersAPI) Create(body CreateCustomerArgs) (Customer, *http.Respon
 		}
 	}
 	implCreateCustomerArgs := swagger.CreateCustomerArgs{
-		VendorId:            body.VendorId,
-		Tags:                body.Tags,
-		DisplayName:         body.DisplayName,
-		ContactInfo:         &implContactInfo,
-		Name:                body.Name,
-		MeasurementMappings: implMeasurementMappingInputArgs,
+		VendorId:                           body.VendorId,
+		Tags:                               body.Tags,
+		DisplayName:                        body.DisplayName,
+		ContactInfo:                        &implContactInfo,
+		Name:                               body.Name,
+		MeasurementMappings:                implMeasurementMappingInputArgs,
+		PricePlanName:                      body.PricePlanName,
+		PricePlanTag:                       body.PricePlanTag,
+		AutogeneratePaymentGatewayCustomer: body.AutogeneratePaymentGatewayCustomer,
 	}
 	implCustomer, resp, err := api.impl.CustomersApi.CustomersPost(
 		api.ctx(), implCreateCustomerArgs)
@@ -182,6 +188,7 @@ func (api *customersAPI) CreateSubscription(customerName string, body CreateSubs
 		PricePlanName:      body.PricePlanName,
 		CouponOverrideName: body.CouponOverrideName,
 		PricePlanId:        body.PricePlanId,
+		PricePlanTag:       body.PricePlanTag,
 	}
 	// TODO: if EffectiveAt is nil, causes 500 error
 	if implCreateSubscriptionArgs.EffectiveAt.IsZero() {
