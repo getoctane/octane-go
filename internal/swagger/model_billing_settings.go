@@ -36,4 +36,16 @@ type BillingSettings struct {
 	RetryFrequencyUnit string `json:"retry_frequency_unit,omitempty"`
 	// The percentage tax rate to apply to invoices.
 	TaxRate float64 `json:"tax_rate,omitempty"`
+	// Flag that controls whether to do automated taxes via payment provider
+	TaxViaPaymentProvider bool `json:"tax_via_payment_provider"`
+	// Flag that controls whether or not to invoice/charge gauge meters upfront according to their value at start of cycle. Only applies if invoice_fixed_components_at_start is enabled.
+	InvoiceMeteredComponentsAtStart bool `json:"invoice_metered_components_at_start,omitempty"`
+	// Flag that controls whether or not to invoice/charge a true up for a billing cycle on the following invoice. Only applies if invoice_fixed_components_at_start is enabled.
+	InvoiceOverages bool `json:"invoice_overages,omitempty"`
+	// Optional description attached to the invoice
+	InvoiceMemo string `json:"invoice_memo,omitempty"`
+	// Sets the due date on invoices to the number of days after the invoice is sent
+	DaysUntilDue int32 `json:"days_until_due"`
+	// If using stripe, this field can be used to configure whether invoices should be auto advanced for collection
+	StripeAutoAdvance bool `json:"stripe_auto_advance"`
 }

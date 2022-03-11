@@ -12,7 +12,7 @@ import (
 )
 
 type DeleteSubscriptionArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
 	ExpireAt time.Time `json:"expire_at,omitempty"`
 	CustomerId int32 `json:"customer_id,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
 }

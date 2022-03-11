@@ -22,7 +22,6 @@ type Coupon1 struct {
 	DurationUnit string `json:"duration_unit,omitempty"`
 	// ISO-8601 formatted timestamp that defines after what timestamp this coupon cannot be applied.
 	ExpirationTime time.Time `json:"expiration_time,omitempty"`
-	// One of RECURRRING or ONCE.
 	Frequency string `json:"frequency,omitempty"`
 	// The maximum number of times this coupon can be used.
 	MaxUses int32 `json:"max_uses,omitempty"`
@@ -32,10 +31,9 @@ type Coupon1 struct {
 	IsStartProrated bool `json:"is_start_prorated,omitempty"`
 	// True if prorate at end of duration, false otherwise
 	IsEndProrated bool `json:"is_end_prorated,omitempty"`
-	// One of FLAT or PERCENT.
-	DiscountType string `json:"discount_type"`
+	DiscountType string `json:"discount_type,omitempty"`
 	// The amount of discount to give based on discount_type
-	DiscountAmount int32 `json:"discount_amount"`
+	DiscountAmount float64 `json:"discount_amount"`
 	ExcludedCustomers []Customer1 `json:"excluded_customers,omitempty"`
 	ExcludedPricePlans []PricePlan1 `json:"excluded_price_plans,omitempty"`
 }

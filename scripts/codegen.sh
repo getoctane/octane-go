@@ -33,9 +33,11 @@ docker run --rm \
   -v ${PWD}/mount:/mount \
   -v ${PWD}/testbin:/testbin \
   --entrypoint java \
-  java:8 \
+  arm64v8/openjdk \
+  --add-opens=java.base/java.util=ALL-UNNAMED \
   -jar /testbin/codegen.jar generate \
-  -i /testbin/openapi.json -l go -o /mount
+  -i /testbin/openapi.json -l go -o /mount \
+  
 
 # Fixes for strange "Object" types
 cat mount/model_all_of_subscription_discount_override.go | \
@@ -108,6 +110,54 @@ cat mount/model_payment_gateway_credential.go | \
   > mount/model_payment_gateway_credential.go.tmp
 mv mount/model_payment_gateway_credential.go.tmp \
   mount/model_payment_gateway_credential.go
+
+cat mount/model_all_of_subscription_price_plan.go | \
+  sed 's/Coupon \*Object/Coupon \*Coupon/g' | \
+  sed 's/Discount \*Object/Discount \*Discount/g' \
+  > mount/model_all_of_subscription_price_plan.go.tmp
+mv mount/model_all_of_subscription_price_plan.go.tmp \
+  mount/model_all_of_subscription_price_plan.go
+
+
+cat mount/model_all_of_active_subscription_price_plan.go | \
+  sed 's/Coupon \*Object/Coupon \*Coupon/g' | \
+  sed 's/Discount \*Object/Discount \*Discount/g' \
+  > mount/model_all_of_active_subscription_price_plan.go.tmp
+mv mount/model_all_of_active_subscription_price_plan.go.tmp \
+  mount/model_all_of_active_subscription_price_plan.go
+
+cat mount/model_all_of_price_plan_discount.go | \
+  sed 's/DiscountType \*Object/DiscountType string/g' \
+  > mount/model_all_of_price_plan_discount.go.tmp
+mv mount/model_all_of_price_plan_discount.go.tmp \
+  mount/model_all_of_price_plan_discount.go
+
+
+cat mount/model_all_of_active_subscription_price_plan.go | \
+  sed 's/Coupon \*Object/Coupon \*Coupon/g' | \
+  sed 's/Discount \*Object/Discount \*Discount/g' \
+  > mount/model_all_of_active_subscription_price_plan.go.tmp
+mv mount/model_all_of_active_subscription_price_plan.go.tmp \
+  mount/model_all_of_active_subscription_price_plan.go
+
+cat mount/model_coupon1.go | \
+  sed 's/DiscountType \*Object/DiscountType string/g' | \
+  sed 's/Frequency \*Object/Frequency string/g' \
+  > mount/model_coupon1.go.tmp
+mv mount/model_coupon1.go.tmp \
+  mount/model_coupon1.go
+
+cat mount/model_create_price_plan_args.go | \
+  sed 's/Discount \*AllOfCreatePricePlanArgsDiscount/Discount \*DiscountInputArgs/g' \
+  > mount/model_create_price_plan_args.go.tmp
+mv mount/model_create_price_plan_args.go.tmp \
+  mount/model_create_price_plan_args.go
+
+cat mount/model_update_price_plan_args.go | \
+  sed 's/Discount \*AllOfUpdatePricePlanArgsDiscount/Discount \*DiscountInputArgs/g' \
+  > mount/model_update_price_plan_args.go.tmp
+mv mount/model_update_price_plan_args.go.tmp \
+  mount/model_update_price_plan_args.go
 
 rm -f internal/swagger/*.go
 mkdir -p internal/swagger/

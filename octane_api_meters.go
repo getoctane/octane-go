@@ -52,14 +52,9 @@ func (api *metersAPI) Retrieve(meterName string) (Meter, *http.Response, error) 
 // Update updates a meter by its unique name.
 func (api *metersAPI) Update(meterName string, body UpdateMeterArgs) (Meter, *http.Response, error) {
 	implUpdateMeterArgs := swagger.UpdateMeterArgs{
-		VendorId:       body.VendorId,
 		Description:    body.Description,
 		PrimaryLabels:  body.PrimaryLabels,
-		MeterType:      body.MeterType,
 		DisplayName:    body.DisplayName,
-		IsIncremental:  body.IsIncremental,
-		Name:           body.Name,
-		UnitName:       body.UnitName,
 		ExpectedLabels: body.ExpectedLabels,
 	}
 	implMeter, resp, err := api.impl.MetersApi.MetersMeterNamePut(

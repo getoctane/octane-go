@@ -9,7 +9,7 @@
 package swagger
 
 type CustomerFeature struct {
-	Enabled bool `json:"enabled,omitempty"`
-	Limit float64 `json:"limit,omitempty"`
 	FeatureName string `json:"feature_name,omitempty"`
+	Limit float64 `json:"limit,omitempty"`
+	Enabled bool `json:"enabled,omitempty"`
 }

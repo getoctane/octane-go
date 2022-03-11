@@ -9,7 +9,7 @@
 package swagger
 
 type FeatureInputArgs struct {
-	DisplayName string `json:"display_name,omitempty"`
-	Description string `json:"description,omitempty"`
 	Name string `json:"name,omitempty"`
+	Description string `json:"description,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
 }

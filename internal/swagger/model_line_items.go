@@ -9,12 +9,12 @@
 package swagger
 
 type LineItems struct {
-	PriceInt int32 `json:"price_int,omitempty"`
+	Price string `json:"price,omitempty"`
 	Description string `json:"description,omitempty"`
+	Quantity float64 `json:"quantity,omitempty"`
+	Id string `json:"id,omitempty"`
+	PriceInt int32 `json:"price_int,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 	QuantityUnit string `json:"quantity_unit,omitempty"`
 	Name string `json:"name,omitempty"`
-	Quantity float64 `json:"quantity,omitempty"`
-	Price string `json:"price,omitempty"`
-	Id string `json:"id,omitempty"`
-	Metadata map[string]string `json:"metadata,omitempty"`
 }

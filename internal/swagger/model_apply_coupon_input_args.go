@@ -9,9 +9,9 @@
 package swagger
 
 type ApplyCouponInputArgs struct {
-	Name string `json:"name,omitempty"`
-	CustomerId int32 `json:"customer_id,omitempty"`
 	CustomerName string `json:"customer_name,omitempty"`
+	Name string `json:"name,omitempty"`
 	Code string `json:"code,omitempty"`
+	CustomerId int32 `json:"customer_id,omitempty"`
 	VendorId int32 `json:"vendor_id,omitempty"`
 }

@@ -9,6 +9,8 @@
 package swagger
 
 type AddOnInputArgs struct {
-	Feature *FeatureInputArgs `json:"feature,omitempty"`
 	Price int32 `json:"price,omitempty"`
+	QuantityEnabled bool `json:"quantity_enabled,omitempty"`
+	Limit int32 `json:"limit,omitempty"`
+	Feature *FeatureInputArgs `json:"feature,omitempty"`
 }

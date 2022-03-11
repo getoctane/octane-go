@@ -12,19 +12,19 @@ import (
 )
 
 type CouponInputArgs struct {
-	DurationUnit string `json:"duration_unit,omitempty"`
 	ExcludedCustomers []string `json:"excluded_customers,omitempty"`
-	DiscountAmount int32 `json:"discount_amount"`
-	IsStartProrated bool `json:"is_start_prorated,omitempty"`
-	DiscountType string `json:"discount_type"`
 	IsEndProrated bool `json:"is_end_prorated,omitempty"`
+	DurationLength int32 `json:"duration_length,omitempty"`
+	Frequency string `json:"frequency"`
+	ExpirationTime time.Time `json:"expiration_time,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	DiscountAmount float64 `json:"discount_amount"`
 	ExcludedPricePlans []string `json:"excluded_price_plans,omitempty"`
 	Name string `json:"name"`
-	ExpirationTime time.Time `json:"expiration_time,omitempty"`
-	DurationLength int32 `json:"duration_length,omitempty"`
-	VendorId int32 `json:"vendor_id,omitempty"`
-	MaxUses int32 `json:"max_uses,omitempty"`
+	DurationUnit string `json:"duration_unit,omitempty"`
 	Code string `json:"code,omitempty"`
-	Frequency string `json:"frequency"`
-	DisplayName string `json:"display_name,omitempty"`
+	MaxUses int32 `json:"max_uses,omitempty"`
+	DiscountType string `json:"discount_type"`
+	IsStartProrated bool `json:"is_start_prorated,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
 }

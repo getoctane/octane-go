@@ -48,7 +48,15 @@ type APIClient struct {
 
 	CouponsApi *CouponsApiService
 
+	CustomerPortalApi *CustomerPortalApiService
+
+	CustomerPortalSettingsApi *CustomerPortalSettingsApiService
+
 	CustomersApi *CustomersApiService
+
+	InternalWebhooksApi *InternalWebhooksApiService
+
+	InvoicesApi *InvoicesApiService
 
 	MeasurementsApi *MeasurementsApiService
 
@@ -59,6 +67,8 @@ type APIClient struct {
 	PricePlansApi *PricePlansApiService
 
 	VendorsApi *VendorsApiService
+
+	WebhooksApi *WebhooksApiService
 }
 
 type service struct {
@@ -79,12 +89,17 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.BillingSettingsApi = (*BillingSettingsApiService)(&c.common)
 	c.CouponsApi = (*CouponsApiService)(&c.common)
+	c.CustomerPortalApi = (*CustomerPortalApiService)(&c.common)
+	c.CustomerPortalSettingsApi = (*CustomerPortalSettingsApiService)(&c.common)
 	c.CustomersApi = (*CustomersApiService)(&c.common)
+	c.InternalWebhooksApi = (*InternalWebhooksApiService)(&c.common)
+	c.InvoicesApi = (*InvoicesApiService)(&c.common)
 	c.MeasurementsApi = (*MeasurementsApiService)(&c.common)
 	c.MetersApi = (*MetersApiService)(&c.common)
 	c.PaymentGatewayCredentialApi = (*PaymentGatewayCredentialApiService)(&c.common)
 	c.PricePlansApi = (*PricePlansApiService)(&c.common)
 	c.VendorsApi = (*VendorsApiService)(&c.common)
+	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 
 	return c
 }

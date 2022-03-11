@@ -9,20 +9,26 @@
 package swagger
 
 type CreateBillingSettingsInputArgs struct {
-	PaymentGracePeriodLength int32 `json:"payment_grace_period_length,omitempty"`
-	InvoiceGracePeriodUnit string `json:"invoice_grace_period_unit,omitempty"`
-	RetryFrequencyLength int32 `json:"retry_frequency_length,omitempty"`
-	CustomerInvoiceDetailLevel string `json:"customer_invoice_detail_level,omitempty"`
-	InvoiceFixedComponentsAtStart bool `json:"invoice_fixed_components_at_start,omitempty"`
-	RetryAttempts int32 `json:"retry_attempts,omitempty"`
-	TaxRate float64 `json:"tax_rate,omitempty"`
-	InvoiceGracePeriodLength int32 `json:"invoice_grace_period_length,omitempty"`
-	ChargesEnabled bool `json:"charges_enabled,omitempty"`
-	CustomerId int32 `json:"customer_id,omitempty"`
 	AutoApproveInvoices bool `json:"auto_approve_invoices,omitempty"`
+	RetryFrequencyUnit string `json:"retry_frequency_unit,omitempty"`
+	RetryFrequencyLength int32 `json:"retry_frequency_length,omitempty"`
+	PaymentGracePeriodUnit string `json:"payment_grace_period_unit,omitempty"`
+	TaxViaPaymentProvider bool `json:"tax_via_payment_provider,omitempty"`
+	InvoiceOverages bool `json:"invoice_overages,omitempty"`
 	VendorId int32 `json:"vendor_id,omitempty"`
 	InvoiceViaOctane bool `json:"invoice_via_octane,omitempty"`
+	CustomerInvoiceDetailLevel string `json:"customer_invoice_detail_level,omitempty"`
+	ChargesEnabled bool `json:"charges_enabled,omitempty"`
+	InvoiceGracePeriodLength int32 `json:"invoice_grace_period_length,omitempty"`
+	TaxRate float64 `json:"tax_rate,omitempty"`
+	CustomerId int32 `json:"customer_id,omitempty"`
+	InvoiceMeteredComponentsAtStart bool `json:"invoice_metered_components_at_start,omitempty"`
+	StripeAutoAdvance bool `json:"stripe_auto_advance,omitempty"`
 	ShouldSendInvoiceToCustomers bool `json:"should_send_invoice_to_customers,omitempty"`
-	RetryFrequencyUnit string `json:"retry_frequency_unit,omitempty"`
-	PaymentGracePeriodUnit string `json:"payment_grace_period_unit,omitempty"`
+	InvoiceMemo string `json:"invoice_memo,omitempty"`
+	PaymentGracePeriodLength int32 `json:"payment_grace_period_length,omitempty"`
+	InvoiceFixedComponentsAtStart bool `json:"invoice_fixed_components_at_start,omitempty"`
+	InvoiceGracePeriodUnit string `json:"invoice_grace_period_unit,omitempty"`
+	RetryAttempts int32 `json:"retry_attempts,omitempty"`
+	DaysUntilDue int32 `json:"days_until_due,omitempty"`
 }
