@@ -27,11 +27,12 @@ func (api *measurementsAPI) Create(body Measurement) (Measurement, *http.Respons
 		body.Time = time.Now()
 	}
 	implMeasurement := swagger.Measurement{
-		Value:      body.Value,
-		Labels:     body.Labels,
-		Time:       body.Time,
-		MeterName:  body.MeterName,
-		ResetTotal: body.ResetTotal,
+		Value:        body.Value,
+		Labels:       body.Labels,
+		Time:         body.Time,
+		MeterName:    body.MeterName,
+		ResetTotal:   body.ResetTotal,
+		CustomerName: body.CustomerName,
 	}
 	implMeasurementReturn, resp, err := api.impl.MeasurementsApi.MeasurementsPost(
 		api.ctx(), implMeasurement)
@@ -68,11 +69,12 @@ func implMeasurementToMeasurement(implMeasurement *swagger.Measurement) Measurem
 	var measurement Measurement
 	if implMeasurement != nil {
 		measurement = Measurement{
-			Value:      implMeasurement.Value,
-			Labels:     implMeasurement.Labels,
-			Time:       implMeasurement.Time,
-			MeterName:  implMeasurement.MeterName,
-			ResetTotal: implMeasurement.ResetTotal,
+			Value:        implMeasurement.Value,
+			Labels:       implMeasurement.Labels,
+			Time:         implMeasurement.Time,
+			MeterName:    implMeasurement.MeterName,
+			ResetTotal:   implMeasurement.ResetTotal,
+			CustomerName: implMeasurement.CustomerName,
 		}
 	}
 	return measurement

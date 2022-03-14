@@ -10,17 +10,17 @@ package swagger
 
 type CreatePricePlanArgs struct {
 	BasePrice int32 `json:"base_price,omitempty"`
-	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
-	Trial *TrialInputArgs `json:"trial,omitempty"`
 	Description string `json:"description,omitempty"`
-	Discount *DiscountInputArgs `json:"discount,omitempty"`
-	Period string `json:"period,omitempty"`
-	CouponName string `json:"coupon_name,omitempty"`
-	Name string `json:"name,omitempty"`
-	Tags []string `json:"tags,omitempty"`
-	Limits []LimitInputArgs `json:"limits,omitempty"`
-	VendorId int32 `json:"vendor_id,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
 	Features []FeatureInputArgs `json:"features,omitempty"`
+	Trial *TrialInputArgs `json:"trial,omitempty"`
+	Discount *DiscountInputArgs `json:"discount,omitempty"`
+	Tags []string `json:"tags,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	CouponName string `json:"coupon_name,omitempty"`
+	Limits []LimitInputArgs `json:"limits,omitempty"`
+	Name string `json:"name,omitempty"`
+	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
 	AddOns []AddOnInputArgs `json:"add_ons,omitempty"`
+	Period string `json:"period,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
 }

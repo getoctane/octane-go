@@ -19,4 +19,5 @@ type AllOfCustomerContactInfo struct {
 	LogoUrl string `json:"logo_url,omitempty"`
 	Email string `json:"email,omitempty"`
 	Phone string `json:"phone,omitempty"`
+	LegalName string `json:"legal_name,omitempty"`
 }

@@ -1,0 +1,2 @@
+# Mark generated files as such, so that they do not appear in PRs
+internal/swagger/* linguist-generated=true
