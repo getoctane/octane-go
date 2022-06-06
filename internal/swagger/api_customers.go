@@ -1,4 +1,3 @@
-
 /*
  * Octane API
  *
@@ -11,11 +10,12 @@ package swagger
 
 import (
 	"context"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
-	"fmt"
+
 	"github.com/antihax/optional"
 )
 
@@ -2832,7 +2832,7 @@ CustomersApiService Get the current status for a customer.
 type CustomersApiCustomersCustomerNameUsageGetOpts struct {
     EndTime optional.Time
     StartTime optional.Time
-    MeterName optional.String
+    MeterName string
 }
 
 func (a *CustomersApiService) CustomersCustomerNameUsageGet(ctx context.Context, customerName string, localVarOptionals *CustomersApiCustomersCustomerNameUsageGetOpts) (CustomerUsage, *http.Response, error) {
@@ -2855,14 +2855,12 @@ func (a *CustomersApiService) CustomersCustomerNameUsageGet(ctx context.Context,
 		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
 	}
 
+	localVarQueryParams.Add("meter_name", localVarOptionals.MeterName)
 	if localVarOptionals != nil && localVarOptionals.EndTime.IsSet() {
 		localVarQueryParams.Add("end_time", parameterToString(localVarOptionals.EndTime.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.StartTime.IsSet() {
 		localVarQueryParams.Add("start_time", parameterToString(localVarOptionals.StartTime.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.MeterName.IsSet() {
-		localVarQueryParams.Add("meter_name", parameterToString(localVarOptionals.MeterName.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
