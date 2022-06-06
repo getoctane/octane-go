@@ -171,6 +171,10 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 		delimiter = ","
 	}
 
+	if t, isTime := obj.(time.Time); isTime {
+		return t.Format(time.RFC3339)
+	}
+
 	if reflect.TypeOf(obj).Kind() == reflect.Slice {
 		return strings.Trim(strings.Replace(fmt.Sprint(obj), " ", delimiter, -1), "[]")
 	}
@@ -345,17 +349,17 @@ func (c *APIClient) prepareRequest(
 }
 
 func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err error) {
-		if strings.Contains(contentType, "application/xml") {
-			if err = xml.Unmarshal(b, v); err != nil {
-				return err
-			}
-			return nil
-		} else if strings.Contains(contentType, "application/json") {
-			if err = json.Unmarshal(b, v); err != nil {
-				return err
-			}
-			return nil
+	if strings.Contains(contentType, "application/xml") {
+		if err = xml.Unmarshal(b, v); err != nil {
+			return err
 		}
+		return nil
+	} else if strings.Contains(contentType, "application/json") {
+		if err = json.Unmarshal(b, v); err != nil {
+			return err
+		}
+		return nil
+	}
 	return errors.New("undefined response type")
 }
 
