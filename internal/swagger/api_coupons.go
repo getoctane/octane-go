@@ -25,7 +25,8 @@ var (
 
 type CouponsApiService service
 /*
-CouponsApiService
+CouponsApiService Apply Coupon
+Applies a coupon to the provided customer.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 

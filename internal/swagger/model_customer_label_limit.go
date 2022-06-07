@@ -8,8 +8,7 @@
  */
 package swagger
 
-type AllOfUpdateSubscriptionArgsTrialOverride struct {
-	TimeUnitName string `json:"time_unit_name,omitempty"`
-	Credit float64 `json:"credit,omitempty"`
-	TimeLength float64 `json:"time_length,omitempty"`
+type CustomerLabelLimit struct {
+	Limit float64 `json:"limit,omitempty"`
+	Labels map[string]string `json:"labels,omitempty"`
 }

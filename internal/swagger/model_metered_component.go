@@ -9,9 +9,12 @@
 package swagger
 
 type MeteredComponent struct {
-	// Unique name identifier
 	MeterName string `json:"meter_name,omitempty"`
+	MeterDisplayName string `json:"meter_display_name,omitempty"`
 	PriceScheme *PriceScheme `json:"price_scheme,omitempty"`
-	// Limit to set on the metered component.
+	// Limit on the usage for the meter.
 	Limit float64 `json:"limit,omitempty"`
+	LabelLimits []MeteredComponentLabelLimit `json:"label_limits,omitempty"`
+	// Name to be used on invoice.
+	DisplayName string `json:"display_name,omitempty"`
 }

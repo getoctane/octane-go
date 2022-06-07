@@ -48,13 +48,13 @@ type APIClient struct {
 
 	CouponsApi *CouponsApiService
 
+	CreditsApi *CreditsApiService
+
 	CustomerPortalApi *CustomerPortalApiService
 
 	CustomerPortalSettingsApi *CustomerPortalSettingsApiService
 
 	CustomersApi *CustomersApiService
-
-	InternalWebhooksApi *InternalWebhooksApiService
 
 	InvoicesApi *InvoicesApiService
 
@@ -65,8 +65,6 @@ type APIClient struct {
 	PaymentGatewayCredentialApi *PaymentGatewayCredentialApiService
 
 	PricePlansApi *PricePlansApiService
-
-	VendorsApi *VendorsApiService
 
 	WebhooksApi *WebhooksApiService
 }
@@ -89,16 +87,15 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.BillingSettingsApi = (*BillingSettingsApiService)(&c.common)
 	c.CouponsApi = (*CouponsApiService)(&c.common)
+	c.CreditsApi = (*CreditsApiService)(&c.common)
 	c.CustomerPortalApi = (*CustomerPortalApiService)(&c.common)
 	c.CustomerPortalSettingsApi = (*CustomerPortalSettingsApiService)(&c.common)
 	c.CustomersApi = (*CustomersApiService)(&c.common)
-	c.InternalWebhooksApi = (*InternalWebhooksApiService)(&c.common)
 	c.InvoicesApi = (*InvoicesApiService)(&c.common)
 	c.MeasurementsApi = (*MeasurementsApiService)(&c.common)
 	c.MetersApi = (*MetersApiService)(&c.common)
 	c.PaymentGatewayCredentialApi = (*PaymentGatewayCredentialApiService)(&c.common)
 	c.PricePlansApi = (*PricePlansApiService)(&c.common)
-	c.VendorsApi = (*VendorsApiService)(&c.common)
 	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 
 	return c
@@ -169,10 +166,6 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 		delimiter = "\t"
 	case "csv":
 		delimiter = ","
-	}
-
-	if t, isTime := obj.(time.Time); isTime {
-		return t.Format(time.RFC3339)
 	}
 
 	if reflect.TypeOf(obj).Kind() == reflect.Slice {
@@ -349,17 +342,17 @@ func (c *APIClient) prepareRequest(
 }
 
 func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err error) {
-	if strings.Contains(contentType, "application/xml") {
-		if err = xml.Unmarshal(b, v); err != nil {
-			return err
+		if strings.Contains(contentType, "application/xml") {
+			if err = xml.Unmarshal(b, v); err != nil {
+				return err
+			}
+			return nil
+		} else if strings.Contains(contentType, "application/json") {
+			if err = json.Unmarshal(b, v); err != nil {
+				return err
+			}
+			return nil
 		}
-		return nil
-	} else if strings.Contains(contentType, "application/json") {
-		if err = json.Unmarshal(b, v); err != nil {
-			return err
-		}
-		return nil
-	}
 	return errors.New("undefined response type")
 }
 

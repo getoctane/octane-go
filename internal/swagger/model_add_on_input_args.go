@@ -9,8 +9,10 @@
 package swagger
 
 type AddOnInputArgs struct {
-	Price int32 `json:"price,omitempty"`
-	QuantityEnabled bool `json:"quantity_enabled,omitempty"`
-	Limit int32 `json:"limit,omitempty"`
 	Feature *FeatureInputArgs `json:"feature,omitempty"`
+	// Whether this add on can only be used & charged once
+	SingleUse bool `json:"single_use,omitempty"`
+	Price int32 `json:"price,omitempty"`
+	Limit int32 `json:"limit,omitempty"`
+	QuantityEnabled bool `json:"quantity_enabled,omitempty"`
 }

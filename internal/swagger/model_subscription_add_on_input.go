@@ -9,6 +9,8 @@
 package swagger
 
 type SubscriptionAddOnInput struct {
-	Name string `json:"name,omitempty"`
 	Quantity int32 `json:"quantity,omitempty"`
+	Name string `json:"name"`
+	// Override for the add-on price on this subscription.
+	Price float64 `json:"price,omitempty"`
 }

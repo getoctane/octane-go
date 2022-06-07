@@ -8,8 +8,7 @@
  */
 package swagger
 
-type UpdateVendorArgs struct {
-	ContactInfo *ContactInfoInputArgs `json:"contact_info,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
-	VendorId int32 `json:"vendor_id,omitempty"`
+type AccountingCustomer struct {
+	// ID of the customer in the target accounting platform
+	AccountingCustomerId string `json:"accounting_customer_id,omitempty"`
 }

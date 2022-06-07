@@ -9,10 +9,10 @@
 package swagger
 
 type UpdatePricePlanInPlaceArgs struct {
-	Description string `json:"description,omitempty"`
-	Features []FeatureInputArgs `json:"features,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
-	Limits []LimitInputArgs `json:"limits,omitempty"`
-	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
 	AddOns []AddOnInputArgs `json:"add_ons,omitempty"`
+	Limits []LimitInputArgs `json:"limits,omitempty"`
+	Features []FeatureInputArgs `json:"features,omitempty"`
+	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	Description string `json:"description,omitempty"`
 }

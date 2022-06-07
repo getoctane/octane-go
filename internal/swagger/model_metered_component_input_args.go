@@ -9,9 +9,14 @@
 package swagger
 
 type MeteredComponentInputArgs struct {
-	MeterId int32 `json:"meter_id,omitempty"`
-	Id int32 `json:"id,omitempty"`
-	MeterName string `json:"meter_name,omitempty"`
 	PriceScheme *PriceSchemeInputArgs `json:"price_scheme,omitempty"`
+	// Numeric limit to set on customer usage for the meter.
 	Limit int32 `json:"limit,omitempty"`
+	MeterId int32 `json:"meter_id,omitempty"`
+	// Name to be used on invoice.
+	DisplayName string `json:"display_name,omitempty"`
+	Id int32 `json:"id,omitempty"`
+	// Codename of the meter.
+	MeterName string `json:"meter_name,omitempty"`
+	LabelLimits []MeteredComponentLabelLimitInputArgs `json:"label_limits,omitempty"`
 }

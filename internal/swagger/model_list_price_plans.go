@@ -8,7 +8,7 @@
  */
 package swagger
 
-type UpcomingInvoices struct {
+type ListPricePlans struct {
 	// The id offset to start at when paging forwards
 	ForwardSecondarySortOffset int32 `json:"forward_secondary_sort_offset,omitempty"`
 	SortDirection string `json:"sort_direction,omitempty"`
@@ -16,6 +16,6 @@ type UpcomingInvoices struct {
 	Limit int32 `json:"limit,omitempty"`
 	// The sort column offset to start at when paging forwards
 	ForwardSortOffset string `json:"forward_sort_offset,omitempty"`
-	Invoices []UpcomingInvoice `json:"invoices,omitempty"`
+	PricePlans []PricePlan `json:"price_plans,omitempty"`
 	SortColumn string `json:"sort_column,omitempty"`
 }
