@@ -155,6 +155,11 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 
 // parameterToString convert interface{} parameters to string, using a delimiter if format is provided.
 func parameterToString(obj interface{}, collectionFormat string) string {
+
+ 	if t, isTime := obj.(time.Time); isTime { 
+		return t.Format(time.RFC3339) 
+ 	}
+
 	var delimiter string
 
 	switch collectionFormat {

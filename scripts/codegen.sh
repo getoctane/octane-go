@@ -28,7 +28,7 @@ rm -rf mount/
 trap "rm -rf ${PWD}/mount" EXIT
 mkdir -p mount/
 
-# Generate the typescript files from openapi spec
+# Generate the golang files from openapi spec
 docker run --rm \
   -v ${PWD}/mount:/mount \
   -v ${PWD}/testbin:/testbin \
@@ -63,6 +63,12 @@ cat mount/model_discount.go | \
   > mount/model_discount.go.tmp
 mv mount/model_discount.go.tmp \
   mount/model_discount.go
+
+cat mount/model_metered_component_label_limit.go | \
+  sed 's/Labels \*Object/Labels map[string]string/g' \
+  > mount/model_metered_component_label_limit.go.tmp
+mv mount/model_metered_component_label_limit.go.tmp \
+  mount/model_metered_component_label_limit.go
 
 cat mount/model_meter.go | \
   sed 's/MeterType \*Object/MeterType string/g' | \
@@ -158,6 +164,21 @@ cat mount/model_update_price_plan_args.go | \
   > mount/model_update_price_plan_args.go.tmp
 mv mount/model_update_price_plan_args.go.tmp \
   mount/model_update_price_plan_args.go
+
+
+#we want to force all timestamps sent to our api to conform to a certain format, so we help the caller here
+#by changing what is sent over the wire
+rfc_timestamp_insertion="func parameterToString(obj interface{}, collectionFormat string) string {\n\n \
+\tif t, isTime := obj.(time.Time); isTime { \n\
+\t\treturn t.Format(time.RFC3339) \n \
+\t}\n"
+
+cat mount/client.go | \
+  sed "s/func parameterToString.*/$rfc_timestamp_insertion/" \
+  > mount/client.go.tmp
+mv mount/client.go.tmp \
+  mount/client.go
+
 
 rm -f internal/swagger/*.go
 mkdir -p internal/swagger/

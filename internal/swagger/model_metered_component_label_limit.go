@@ -10,7 +10,7 @@ package swagger
 
 type MeteredComponentLabelLimit struct {
 	// Dictionary of labels (key: value) to which the limit applies. A value of 'any' will apply the limit to any single value of the field.
-	Labels *Object `json:"labels"`
+	Labels map[string]string `json:"labels"`
 	// Numeric limit set on the labels.
 	Limit float64 `json:"limit"`
 }
