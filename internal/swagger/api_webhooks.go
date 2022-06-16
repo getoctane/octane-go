@@ -25,7 +25,7 @@ var (
 
 type WebhooksApiService service
 /*
-WebhooksApiService Get all webhooks
+WebhooksApiService Get Webhooks
 Retrieve all webhooks for a given vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []Webhook
@@ -118,7 +118,8 @@ func (a *WebhooksApiService) WebhooksGet(ctx context.Context) ([]Webhook, *http.
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-WebhooksApiService
+WebhooksApiService Add Webhooks
+Add an endpoint to use with Octane&#x27;s Webhook API.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return Webhook
@@ -223,7 +224,8 @@ func (a *WebhooksApiService) WebhooksPost(ctx context.Context, body CreateWebhoo
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-WebhooksApiService
+WebhooksApiService Delete Webhook
+Delete and unregister a webhook URL given its UUID.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param uuid
 
@@ -303,8 +305,8 @@ func (a *WebhooksApiService) WebhooksUuidDelete(ctx context.Context, uuid string
 	return localVarHttpResponse, nil
 }
 /*
-WebhooksApiService Get specific webhooks
-Retrieve the webhook given the UUID for a vendor
+WebhooksApiService Get Webhook
+Retrieve a webhook given its UUID.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param uuid
 @return Webhook

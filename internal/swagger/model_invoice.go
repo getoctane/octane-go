@@ -12,31 +12,40 @@ import (
 )
 
 type Invoice struct {
-	// False if not paid yet
-	IsPaid bool `json:"is_paid,omitempty"`
-	LineItems []LineItems `json:"line_items,omitempty"`
-	Id string `json:"id,omitempty"`
 	LatestPaymentAttemptAt time.Time `json:"latest_payment_attempt_at,omitempty"`
-	// False if invoice has not been sent to the customer
-	IsInvoiced bool `json:"is_invoiced,omitempty"`
-	// False if not approved
-	IsApproved bool `json:"is_approved,omitempty"`
-	// Amount due before any credits are applied
-	SubTotal int32 `json:"sub_total,omitempty"`
-	// Any discount credits applied to the invoice
-	DiscountCredit int32 `json:"discount_credit,omitempty"`
-	EndTime time.Time `json:"end_time,omitempty"`
-	LatestInvoiceAttemptAt time.Time `json:"latest_invoice_attempt_at,omitempty"`
-	// Non-empty string if there was an error while processing payment
-	PaymentError string `json:"payment_error,omitempty"`
-	DueDate time.Time `json:"due_date,omitempty"`
-	// Total amount due
-	AmountDue int32 `json:"amount_due,omitempty"`
-	// The number of retries done to send the invoice
-	InvoiceRetryAttempt int32 `json:"invoice_retry_attempt,omitempty"`
+	// Tax amount applied to subtotal
+	TaxAmount int32 `json:"tax_amount,omitempty"`
 	// The number of retries done to process the payment
 	PaymentRetryAttempt int32 `json:"payment_retry_attempt,omitempty"`
+	LatestInvoiceAttemptAt time.Time `json:"latest_invoice_attempt_at,omitempty"`
+	// Any discount credits applied to the invoice
+	DiscountCredit int32 `json:"discount_credit,omitempty"`
+	PdfUrl string `json:"pdf_url,omitempty"`
+	// Non-empty string if there was an error while processing payment
+	PaymentError string `json:"payment_error,omitempty"`
+	// False if invoice has not been sent to the customer
+	IsInvoiced bool `json:"is_invoiced,omitempty"`
+	// [DEPRECATED] End time of the cycle in which the invoice was generated
+	EndTime time.Time `json:"end_time,omitempty"`
+	// Total amount due
+	AmountDue int32 `json:"amount_due,omitempty"`
+	// Amount due before any credits are applied
+	SubTotal int32 `json:"sub_total,omitempty"`
+	// [DEPRECATED] Start time of the cycle in which the invoice was generated
 	StartTime time.Time `json:"start_time,omitempty"`
+	// Earliest start time of line items covered by the invoice
+	MinItemStartTime time.Time `json:"min_item_start_time,omitempty"`
 	// Non-empty string if there was an error while sending out invoice
 	InvoicingError string `json:"invoicing_error,omitempty"`
+	// False if not approved
+	IsApproved bool `json:"is_approved,omitempty"`
+	// The number of retries done to send the invoice
+	InvoiceRetryAttempt int32 `json:"invoice_retry_attempt,omitempty"`
+	// False if not paid yet
+	IsPaid bool `json:"is_paid,omitempty"`
+	Id string `json:"id,omitempty"`
+	LineItems []LineItems `json:"line_items,omitempty"`
+	DueDate time.Time `json:"due_date,omitempty"`
+	// Latest end time of line items covered by the invoice
+	MaxItemEndTime time.Time `json:"max_item_end_time,omitempty"`
 }

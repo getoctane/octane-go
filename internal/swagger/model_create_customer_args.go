@@ -12,14 +12,15 @@ import (
 )
 
 type CreateCustomerArgs struct {
-	AutogeneratePaymentGatewayCustomer bool `json:"autogenerate_payment_gateway_customer,omitempty"`
 	Tags []string `json:"tags,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
+	AutogenerateAccountingCustomer bool `json:"autogenerate_accounting_customer,omitempty"`
+	AutogeneratePaymentGatewayCustomer bool `json:"autogenerate_payment_gateway_customer,omitempty"`
+	Name string `json:"name,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	PricePlanName string `json:"price_plan_name,omitempty"`
 	DisplayName string `json:"display_name,omitempty"`
 	ContactInfo *ContactInfoInputArgs `json:"contact_info,omitempty"`
 	PricePlanTag string `json:"price_plan_tag,omitempty"`
-	Name string `json:"name,omitempty"`
-	PricePlanName string `json:"price_plan_name,omitempty"`
 	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	VendorId int32 `json:"vendor_id,omitempty"`
 }

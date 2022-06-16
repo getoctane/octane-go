@@ -19,6 +19,7 @@ type PricePlan struct {
 	Description string `json:"description,omitempty"`
 	// Lowest denomination of currency. e.g. USD is represented as cents.
 	BasePrice float64 `json:"base_price,omitempty"`
+	BasePriceFrequency int32 `json:"base_price_frequency,omitempty"`
 	// Time period that defines the length of a price plan cycle. One of `day`, `week`, `month`, `quarter`, or `year`.
 	Period string `json:"period"`
 	Coupon *AllOfPricePlanCoupon `json:"coupon,omitempty"`

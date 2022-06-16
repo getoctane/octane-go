@@ -24,7 +24,7 @@ var (
 
 type PaymentGatewayCredentialApiService service
 /*
-PaymentGatewayCredentialApiService
+PaymentGatewayCredentialApiService Get PaymentGatewayCredential for Vendor
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentGatewayCredential
 */

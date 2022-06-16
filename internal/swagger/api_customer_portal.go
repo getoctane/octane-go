@@ -24,7 +24,8 @@ var (
 
 type CustomerPortalApiService service
 /*
-CustomerPortalApiService
+CustomerPortalApiService Get Payment Method Status
+Gets the current customer&#x27;s payment method status. Returns a 400 if the customer has no configuration or if the current payment provider doesn&#x27;t have customer-level payment status.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CustomerPaymentMethodStatus
 */
@@ -116,8 +117,8 @@ func (a *CustomerPortalApiService) EcpPaymentMethodStatusGet(ctx context.Context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CustomerPortalApiService Get Price Plans to show on the customer portal
-Fetch all price plans vendor is exposing to customers.
+CustomerPortalApiService Get Price Plans
+Get all price plans visible to the given customer. By default, all price plans are visible. Price plan visibility can be configured using the &#x60;/customer_portal_settings/&#x60; endpoint.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []PricePlan
 */

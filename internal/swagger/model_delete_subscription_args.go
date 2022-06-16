@@ -12,7 +12,9 @@ import (
 )
 
 type DeleteSubscriptionArgs struct {
-	ExpireAt time.Time `json:"expire_at,omitempty"`
-	CustomerId int32 `json:"customer_id,omitempty"`
 	VendorId int32 `json:"vendor_id,omitempty"`
+	CustomerId int32 `json:"customer_id,omitempty"`
+	// Boolean that indicates whether to expire the subscription at the end of thebilling cycle. If 'true' and `expire_at` is set, will return an error.
+	AtCycleEnd bool `json:"at_cycle_end,omitempty"`
+	ExpireAt time.Time `json:"expire_at,omitempty"`
 }

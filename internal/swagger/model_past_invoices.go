@@ -9,17 +9,13 @@
 package swagger
 
 type PastInvoices struct {
-	// The sort column offset to start at when paging forwards
-	ForwardSortOffset string `json:"forward_sort_offset,omitempty"`
-	// The sort column offset to start at when paging backwards
-	BackwardSortOffset string `json:"backward_sort_offset,omitempty"`
-	SortDirection string `json:"sort_direction,omitempty"`
-	Invoices []PastInvoice `json:"invoices,omitempty"`
-	// The id offset to start at when paging backwards
-	BackwardSecondarySortOffset int32 `json:"backward_secondary_sort_offset,omitempty"`
-	SortColumn string `json:"sort_column,omitempty"`
 	// The id offset to start at when paging forwards
 	ForwardSecondarySortOffset int32 `json:"forward_secondary_sort_offset,omitempty"`
+	SortDirection string `json:"sort_direction,omitempty"`
 	// The number of items to fetch. Defaults to 10.
 	Limit int32 `json:"limit,omitempty"`
+	// The sort column offset to start at when paging forwards
+	ForwardSortOffset string `json:"forward_sort_offset,omitempty"`
+	Invoices []PastInvoice `json:"invoices,omitempty"`
+	SortColumn string `json:"sort_column,omitempty"`
 }

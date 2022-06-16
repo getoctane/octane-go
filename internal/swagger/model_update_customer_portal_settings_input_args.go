@@ -9,7 +9,7 @@
 package swagger
 
 type UpdateCustomerPortalSettingsInputArgs struct {
+	VendorId int32 `json:"vendor_id,omitempty"`
 	PricePlanTagsFilter string `json:"price_plan_tags_filter,omitempty"`
 	PricePlanNamesFilter string `json:"price_plan_names_filter,omitempty"`
-	VendorId int32 `json:"vendor_id,omitempty"`
 }

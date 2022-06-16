@@ -31,4 +31,6 @@ type Subscription struct {
 	LimitsOverride []Limit `json:"limits_override,omitempty"`
 	// ISO-8601 formatted timestamp that defines when the subscription should take effect. If this field is omitted, the subscription is effective upon creation.
 	EffectiveAt time.Time `json:"effective_at,omitempty"`
+	// ISO-8601 formatted timestamp that defines when the subscription will expire.
+	ExpiredAt time.Time `json:"expired_at,omitempty"`
 }

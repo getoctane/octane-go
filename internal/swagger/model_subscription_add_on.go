@@ -13,4 +13,5 @@ type SubscriptionAddOn struct {
 	AddOn *AllOfSubscriptionAddOnAddOn `json:"add_on,omitempty"`
 	// Optional quantity of the add-on on the subscription
 	Quantity int32 `json:"quantity"`
+	Price float64 `json:"price,omitempty"`
 }

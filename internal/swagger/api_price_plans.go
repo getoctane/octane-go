@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"strings"
 	"fmt"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -94,6 +95,149 @@ func (a *PricePlansApiService) PricePlansGet(ctx context.Context) ([]PricePlan, 
 		}
 		if localVarHttpResponse.StatusCode == 200 {
 			var v []PricePlan
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+PricePlansApiService Get Paginated Price Plans
+List all price plans with pagination.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *PricePlansApiPricePlansPaginateGetOpts - Optional Parameters:
+     * @param "Tags" (optional.Interface of []string) - 
+     * @param "ForwardSecondarySortOffset" (optional.Int32) -  The id offset to start at when paging forwards
+     * @param "SortDirection" (optional.String) - 
+     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
+     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
+     * @param "SortColumn" (optional.String) - 
+     * @param "Names" (optional.Interface of []string) - 
+@return ListPricePlans
+*/
+
+type PricePlansApiPricePlansPaginateGetOpts struct {
+    Tags optional.Interface
+    ForwardSecondarySortOffset optional.Int32
+    SortDirection optional.String
+    Limit optional.Int32
+    ForwardSortOffset optional.String
+    SortColumn optional.String
+    Names optional.Interface
+}
+
+func (a *PricePlansApiService) PricePlansPaginateGet(ctx context.Context, localVarOptionals *PricePlansApiPricePlansPaginateGetOpts) (ListPricePlans, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue ListPricePlans
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/price_plans/paginate"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Tags.IsSet() {
+		localVarQueryParams.Add("tags", parameterToString(localVarOptionals.Tags.Value(), "multi"))
+	}
+	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
+		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
+		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
+		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
+		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Names.IsSet() {
+		localVarQueryParams.Add("names", parameterToString(localVarOptionals.Names.Value(), "multi"))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v ListPricePlans
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -593,7 +737,111 @@ func (a *PricePlansApiService) PricePlansPricePlanNamePut(ctx context.Context, b
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PricePlansApiService
+PricePlansApiService Get a Price Plan
+Fetch an existing price plan.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param tag
+ * @param pricePlanName
+@return PricePlan
+*/
+func (a *PricePlansApiService) PricePlansPricePlanNameTagGet(ctx context.Context, tag string, pricePlanName string) (PricePlan, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue PricePlan
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/price_plans/{price_plan_name}/{tag}"
+	localVarPath = strings.Replace(localVarPath, "{"+"tag"+"}", fmt.Sprintf("%v", tag), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"price_plan_name"+"}", fmt.Sprintf("%v", pricePlanName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(tag) < 1 {
+		return localVarReturnValue, nil, reportError("tag must have at least 1 elements")
+	}
+	if strlen(pricePlanName) < 1 {
+		return localVarReturnValue, nil, reportError("pricePlanName must have at least 1 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PricePlan
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
+PricePlansApiService Update a Price Plan In Place
+Edit a price plan without creating a new version.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param pricePlanName
@@ -703,7 +951,8 @@ func (a *PricePlansApiService) PricePlansUpdateInPlacePricePlanNamePost(ctx cont
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PricePlansApiService
+PricePlansApiService Update a Price Plan In Place
+Edit a price plan without creating a new version.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param tag

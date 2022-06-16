@@ -27,10 +27,6 @@ type Coupon1 struct {
 	MaxUses int32 `json:"max_uses,omitempty"`
 	// Customer facing code that can be used to apply coupon.
 	Code string `json:"code,omitempty"`
-	// True if prorate at application date, false otherwise
-	IsStartProrated bool `json:"is_start_prorated,omitempty"`
-	// True if prorate at end of duration, false otherwise
-	IsEndProrated bool `json:"is_end_prorated,omitempty"`
 	DiscountType string `json:"discount_type,omitempty"`
 	// The amount of discount to give based on discount_type
 	DiscountAmount float64 `json:"discount_amount"`

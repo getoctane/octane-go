@@ -9,7 +9,7 @@
 package swagger
 
 type CustomerPortalStripeCredential struct {
+	ClientSecret string `json:"client_secret,omitempty"`
 	PublishableKey string `json:"publishable_key,omitempty"`
 	AccountId string `json:"account_id,omitempty"`
-	ClientSecret string `json:"client_secret,omitempty"`
 }

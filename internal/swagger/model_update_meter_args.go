@@ -10,7 +10,5 @@ package swagger
 
 type UpdateMeterArgs struct {
 	Description string `json:"description,omitempty"`
-	ExpectedLabels []string `json:"expected_labels,omitempty"`
-	PrimaryLabels []string `json:"primary_labels,omitempty"`
 	DisplayName string `json:"display_name,omitempty"`
 }

@@ -53,9 +53,7 @@ func (api *metersAPI) Retrieve(meterName string) (Meter, *http.Response, error) 
 func (api *metersAPI) Update(meterName string, body UpdateMeterArgs) (Meter, *http.Response, error) {
 	implUpdateMeterArgs := swagger.UpdateMeterArgs{
 		Description:    body.Description,
-		PrimaryLabels:  body.PrimaryLabels,
 		DisplayName:    body.DisplayName,
-		ExpectedLabels: body.ExpectedLabels,
 	}
 	implMeter, resp, err := api.impl.MetersApi.MetersMeterNamePut(
 		api.ctx(), implUpdateMeterArgs, meterName)

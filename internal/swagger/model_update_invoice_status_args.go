@@ -8,10 +8,6 @@
  */
 package swagger
 
-type Vendor struct {
-	// Unique name identifier of a Vendor
-	Name string `json:"name"`
-	DisplayName string `json:"display_name,omitempty"`
-	ApiKey string `json:"api_key,omitempty"`
-	ContactInfo *AllOfVendorContactInfo `json:"contact_info,omitempty"`
+type UpdateInvoiceStatusArgs struct {
+	Status string `json:"status"`
 }

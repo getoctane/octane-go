@@ -12,18 +12,20 @@ import (
 )
 
 type UpdateSubscriptionArgs struct {
-	AlignToCalendar bool `json:"align_to_calendar,omitempty"`
-	PricePlanTag string `json:"price_plan_tag,omitempty"`
-	FeaturesOverride []FeatureInputArgs `json:"features_override,omitempty"`
-	PricePlanId int32 `json:"price_plan_id,omitempty"`
-	CouponOverrideId int32 `json:"coupon_override_id,omitempty"`
-	LimitsOverride []LimitInputArgs `json:"limits_override,omitempty"`
-	PricePlanName string `json:"price_plan_name,omitempty"`
-	DiscountOverride *AllOfUpdateSubscriptionArgsDiscountOverride `json:"discount_override,omitempty"`
-	CustomerId int32 `json:"customer_id,omitempty"`
-	CouponOverrideName string `json:"coupon_override_name,omitempty"`
 	TrialOverride *AllOfUpdateSubscriptionArgsTrialOverride `json:"trial_override,omitempty"`
-	AddOns []SubscriptionAddOnInput `json:"add_ons,omitempty"`
-	EffectiveAt time.Time `json:"effective_at,omitempty"`
 	VendorId int32 `json:"vendor_id,omitempty"`
+	AddOns []SubscriptionAddOnInput `json:"add_ons,omitempty"`
+	CouponOverrideName string `json:"coupon_override_name,omitempty"`
+	EffectiveAt time.Time `json:"effective_at,omitempty"`
+	AlignToCalendar bool `json:"align_to_calendar,omitempty"`
+	DiscountOverride *AllOfUpdateSubscriptionArgsDiscountOverride `json:"discount_override,omitempty"`
+	FeaturesOverride []FeatureInputArgs `json:"features_override,omitempty"`
+	CouponOverrideId int32 `json:"coupon_override_id,omitempty"`
+	PricePlanName string `json:"price_plan_name,omitempty"`
+	// Boolean that indicates whether to update the subscription at the end of thebilling cycle. If 'true' and `effective_at` is set, will return an error.
+	AtCycleEnd bool `json:"at_cycle_end,omitempty"`
+	PricePlanId int32 `json:"price_plan_id,omitempty"`
+	PricePlanTag string `json:"price_plan_tag,omitempty"`
+	CustomerId int32 `json:"customer_id,omitempty"`
+	LimitsOverride []LimitInputArgs `json:"limits_override,omitempty"`
 }

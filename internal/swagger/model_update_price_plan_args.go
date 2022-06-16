@@ -9,18 +9,20 @@
 package swagger
 
 type UpdatePricePlanArgs struct {
-	BasePrice int32 `json:"base_price,omitempty"`
-	Description string `json:"description,omitempty"`
-	Features []FeatureInputArgs `json:"features,omitempty"`
-	Trial *TrialInputArgs `json:"trial,omitempty"`
-	Discount *DiscountInputArgs `json:"discount,omitempty"`
 	Tags []string `json:"tags,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
-	CouponName string `json:"coupon_name,omitempty"`
-	Limits []LimitInputArgs `json:"limits,omitempty"`
-	Name string `json:"name,omitempty"`
-	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
-	AddOns []AddOnInputArgs `json:"add_ons,omitempty"`
-	Period string `json:"period,omitempty"`
 	VendorId int32 `json:"vendor_id,omitempty"`
+	AddOns []AddOnInputArgs `json:"add_ons,omitempty"`
+	Limits []LimitInputArgs `json:"limits,omitempty"`
+	// The frequency (as a an integer multiple of the period) at which to charge the base price.
+	BasePriceFrequency int32 `json:"base_price_frequency,omitempty"`
+	Name string `json:"name,omitempty"`
+	Features []FeatureInputArgs `json:"features,omitempty"`
+	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
+	CouponName string `json:"coupon_name,omitempty"`
+	Trial *TrialInputArgs `json:"trial,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	Discount *DiscountInputArgs `json:"discount,omitempty"`
+	Period string `json:"period,omitempty"`
+	Description string `json:"description,omitempty"`
+	BasePrice int32 `json:"base_price,omitempty"`
 }

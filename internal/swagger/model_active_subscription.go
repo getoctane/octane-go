@@ -27,9 +27,13 @@ type ActiveSubscription struct {
 	LimitsOverride []Limit `json:"limits_override,omitempty"`
 	// ISO-8601 formatted timestamp that defines when the subscription should take effect. If this field is omitted, the subscription is effective upon creation.
 	EffectiveAt time.Time `json:"effective_at,omitempty"`
+	// ISO-8601 formatted timestamp that defines when the subscription will expire.
+	ExpiredAt time.Time `json:"expired_at,omitempty"`
 	// Align billing cycles to a calendar unit if true. For example if the period is month, cycles will end on the first of every month.
 	AlignToCalendar bool `json:"align_to_calendar,omitempty"`
 	// Optional base price override for the associated subscription.
 	BasePriceOverride float64 `json:"base_price_override,omitempty"`
 	CurrentBillingCycle *BillingCycleDate `json:"current_billing_cycle,omitempty"`
+	TotalFixedPrice int32 `json:"total_fixed_price,omitempty"`
+	DiscountedFixedPrice int32 `json:"discounted_fixed_price,omitempty"`
 }
