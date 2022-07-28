@@ -14,6 +14,8 @@ type PriceScheme struct {
 	SchemeType string `json:"scheme_type,omitempty"`
 	// Array of price tiers, each of which consists of `price` and `cap` key:value pairs
 	Prices []PriceTier `json:"prices,omitempty"`
+	// Array of (key, value) meter labels to price on & the price tiers that should be used against those labels
+	PriceList []interface{} `json:"price_list,omitempty"`
 	TimeUnitName string `json:"time_unit_name,omitempty"`
 	UnitName string `json:"unit_name,omitempty"`
 }

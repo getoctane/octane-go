@@ -18,6 +18,8 @@ type ContactInfo struct {
 	Url string `json:"url,omitempty"`
 	LogoUrl string `json:"logo_url,omitempty"`
 	Email string `json:"email,omitempty"`
+	SecondaryEmails string `json:"secondary_emails,omitempty"`
 	Phone string `json:"phone,omitempty"`
 	LegalName string `json:"legal_name,omitempty"`
+	VatId string `json:"vat_id,omitempty"`
 }

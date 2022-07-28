@@ -12,11 +12,11 @@ import (
 )
 
 type UpdateCustomerArgs struct {
-	Tags []string `json:"tags,omitempty"`
 	VendorId int32 `json:"vendor_id,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
 	Name string `json:"name,omitempty"`
 	CreatedAt time.Time `json:"created_at,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
+	Tags []string `json:"tags,omitempty"`
 	ContactInfo *ContactInfoInputArgs `json:"contact_info,omitempty"`
 	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
 }

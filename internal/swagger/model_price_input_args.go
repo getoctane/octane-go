@@ -9,7 +9,7 @@
 package swagger
 
 type PriceInputArgs struct {
-	Price float64 `json:"price,omitempty"`
 	Description string `json:"description,omitempty"`
+	Price float64 `json:"price,omitempty"`
 	Cap float64 `json:"cap,omitempty"`
 }

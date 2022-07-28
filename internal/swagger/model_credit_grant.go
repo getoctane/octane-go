@@ -14,18 +14,18 @@ import (
 type CreditGrant struct {
 	// Number of credits granted
 	Amount float64 `json:"amount,omitempty"`
-	// A unique identifier for this grant
-	Uuid string `json:"uuid,omitempty"`
 	// The date at which this grant is effective
 	EffectiveAt time.Time `json:"effective_at,omitempty"`
-	// Total price paid for the credits
-	Price int32 `json:"price,omitempty"`
+	// A unique identifier for this grant
+	Uuid string `json:"uuid,omitempty"`
 	// The date at which this grant expires
 	ExpiresAt time.Time `json:"expires_at,omitempty"`
-	// Optional description
-	Description string `json:"description,omitempty"`
+	// Name of the customer who received the grant
+	CustomerName string `json:"customer_name,omitempty"`
 	// The source of the grant.
 	Source string `json:"source,omitempty"`
-	// Name of the customer receiving the grant
-	CustomerName string `json:"customer_name,omitempty"`
+	// Optional description. This is only viewable internally
+	Description string `json:"description,omitempty"`
+	// Total price paid for the credits, in cents
+	Price int32 `json:"price,omitempty"`
 }
