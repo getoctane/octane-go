@@ -9,26 +9,45 @@
 package swagger
 
 type CreateBillingSettingsInputArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
-	StripeAutoAdvance bool `json:"stripe_auto_advance,omitempty"`
-	ChargesEnabled bool `json:"charges_enabled,omitempty"`
-	InvoiceFixedComponentsAtStart bool `json:"invoice_fixed_components_at_start,omitempty"`
-	InvoiceMemo string `json:"invoice_memo,omitempty"`
-	CustomerInvoiceDetailLevel string `json:"customer_invoice_detail_level,omitempty"`
-	RetryFrequencyLength int32 `json:"retry_frequency_length,omitempty"`
-	RetryAttempts int32 `json:"retry_attempts,omitempty"`
-	TaxRate float64 `json:"tax_rate,omitempty"`
-	DaysUntilDue int32 `json:"days_until_due,omitempty"`
-	PaymentGracePeriodLength int32 `json:"payment_grace_period_length,omitempty"`
-	InvoiceOverages bool `json:"invoice_overages,omitempty"`
-	AutoApproveInvoices bool `json:"auto_approve_invoices,omitempty"`
-	ShouldSendInvoiceToCustomers bool `json:"should_send_invoice_to_customers,omitempty"`
-	CustomerId int32 `json:"customer_id,omitempty"`
-	InvoiceMeteredComponentsAtStart bool `json:"invoice_metered_components_at_start,omitempty"`
-	PaymentGracePeriodUnit string `json:"payment_grace_period_unit,omitempty"`
-	InvoiceGracePeriodUnit string `json:"invoice_grace_period_unit,omitempty"`
-	InvoiceGracePeriodLength int32 `json:"invoice_grace_period_length,omitempty"`
+	// Flag that controls whether to invoice through Octane or through payment provider
 	InvoiceViaOctane bool `json:"invoice_via_octane,omitempty"`
-	RetryFrequencyUnit string `json:"retry_frequency_unit,omitempty"`
+	// Flag that controls whether or not to invoice/charge gauge meters upfront according to their value at start of cycle. Only applies if invoice_fixed_components_at_start is enabled.
+	InvoiceMeteredComponentsAtStart bool `json:"invoice_metered_components_at_start,omitempty"`
+	// Optional description attached to the invoice
+	InvoiceMemo string `json:"invoice_memo,omitempty"`
+	// Flag that controls whether to do automated taxes via payment provider
 	TaxViaPaymentProvider bool `json:"tax_via_payment_provider,omitempty"`
+	// Time length after which to attempt invoice/payment retry.
+	RetryFrequencyLength int32 `json:"retry_frequency_length,omitempty"`
+	// Default value for whether to align billing cycles to calendar on subscriptions
+	AlignBillingCyclesToCalendar bool `json:"align_billing_cycles_to_calendar,omitempty"`
+	// Time length of the grace period between the end of invoice generation and the actual charge. *NOTE*: The specified length is unitless. Unit is designated with the `payment_grace_period_unit` field.
+	PaymentGracePeriodLength int32 `json:"payment_grace_period_length,omitempty"`
+	// Flag that controls whether or not to auto-charge the customer based on the invoice.
+	ChargesEnabled bool `json:"charges_enabled,omitempty"`
+	// If using stripe, this field can be used to configure whether invoices should be auto advanced for collection
+	StripeAutoAdvance bool `json:"stripe_auto_advance,omitempty"`
+	// Flag that controls the number of retry attempts for invoicing/payments.
+	RetryAttempts int32 `json:"retry_attempts,omitempty"`
+	CustomerInvoiceDetailLevel string `json:"customer_invoice_detail_level,omitempty"`
+	// Time length unit of the grace period between the end of invoice generation and actual charge. One of `minute`, `hour`, `day`.
+	PaymentGracePeriodUnit string `json:"payment_grace_period_unit,omitempty"`
+	// Time length unit of the grace period between the end of a billing cycle and invoice generation. Must be `day`.
+	InvoiceGracePeriodUnit string `json:"invoice_grace_period_unit,omitempty"`
+	// The percentage tax rate to apply to invoices.
+	TaxRate float64 `json:"tax_rate,omitempty"`
+	// Flag that controls whether or not invoices should be sent to customers.
+	ShouldSendInvoiceToCustomers bool `json:"should_send_invoice_to_customers,omitempty"`
+	// Time length of the grace period between the end of a billing cycle and invoice generation in days.
+	InvoiceGracePeriodLength int32 `json:"invoice_grace_period_length,omitempty"`
+	// Time length unit after which to attempt invoice/payment retry.
+	RetryFrequencyUnit string `json:"retry_frequency_unit,omitempty"`
+	// Flag that controls whether invoices are auto-approved or require manual approval
+	AutoApproveInvoices bool `json:"auto_approve_invoices,omitempty"`
+	// Flag that controls whether or not to invoice/charge the base rate, add ons and other fixed price plan components at the beginning of the billing cycle.
+	InvoiceFixedComponentsAtStart bool `json:"invoice_fixed_components_at_start,omitempty"`
+	// Sets the due date on invoices to the number of days after the invoice is sent
+	DaysUntilDue int32 `json:"days_until_due,omitempty"`
+	// Flag that controls whether or not to invoice/charge a true up for a billing cycle on the following invoice. Only applies if invoice_fixed_components_at_start is enabled.
+	InvoiceOverages bool `json:"invoice_overages,omitempty"`
 }

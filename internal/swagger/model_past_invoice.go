@@ -13,9 +13,9 @@ import (
 
 type PastInvoice struct {
 	AmountDue float64 `json:"amount_due,omitempty"`
-	StatusDescription string `json:"status_description,omitempty"`
 	Status string `json:"status,omitempty"`
-	ExportUrl string `json:"export_url,omitempty"`
-	DueDate time.Time `json:"due_date,omitempty"`
 	CustomerName string `json:"customer_name,omitempty"`
+	DueDate time.Time `json:"due_date,omitempty"`
+	ExportUrl string `json:"export_url,omitempty"`
+	StatusDescription string `json:"status_description,omitempty"`
 }

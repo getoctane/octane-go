@@ -8,8 +8,9 @@
  */
 package swagger
 
-type UpdateCustomerPortalSettingsInputArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
-	PricePlanNamesFilter string `json:"price_plan_names_filter,omitempty"`
-	PricePlanTagsFilter string `json:"price_plan_tags_filter,omitempty"`
+type CreateRefundArgs struct {
+	// Invoice that the refund should be against
+	InvoiceId int32 `json:"invoice_id,omitempty"`
+	// Amount to be refunded
+	Amount int32 `json:"amount,omitempty"`
 }

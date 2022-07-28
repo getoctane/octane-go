@@ -304,7 +304,7 @@ func (a *CustomerPortalApiService) EcpSetupIntentPost(ctx context.Context) (Cust
 }
 /*
 CustomerPortalApiService Cancel Subscription
-Delete the customer&#x27;s subscription.
+Cancel the customer&#x27;s subscription.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 */

@@ -9,6 +9,8 @@
 package swagger
 
 type CustomerMeasurementMappingInputArgs struct {
-	Label string `json:"label,omitempty"`
-	ValueRegex string `json:"value_regex,omitempty"`
+	// A regex used to match the value of the associated label key.
+	ValueRegex string `json:"value_regex"`
+	// The label key used to map measurements to customers.
+	Label string `json:"label"`
 }

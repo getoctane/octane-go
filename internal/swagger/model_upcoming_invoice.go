@@ -12,9 +12,7 @@ import (
 )
 
 type UpcomingInvoice struct {
-	GenerateDate time.Time `json:"generate_date,omitempty"`
-	StatusDescription string `json:"status_description,omitempty"`
-	Status string `json:"status,omitempty"`
 	ExportUrl string `json:"export_url,omitempty"`
 	CustomerName string `json:"customer_name,omitempty"`
+	GenerateDate time.Time `json:"generate_date,omitempty"`
 }

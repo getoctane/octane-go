@@ -9,6 +9,6 @@
 package swagger
 
 type RevenueBreakdown struct {
-	LineItems []LineItems `json:"line_items,omitempty"`
 	TotalRevenue float64 `json:"total_revenue,omitempty"`
+	LineItems []LineItems `json:"line_items,omitempty"`
 }
