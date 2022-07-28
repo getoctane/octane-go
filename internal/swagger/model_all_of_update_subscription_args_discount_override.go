@@ -9,6 +9,6 @@
 package swagger
 
 type AllOfUpdateSubscriptionArgsDiscountOverride struct {
-	Amount float64 `json:"amount,omitempty"`
 	DiscountType string `json:"discount_type,omitempty"`
+	Amount float64 `json:"amount,omitempty"`
 }

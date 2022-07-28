@@ -26,7 +26,7 @@ var (
 type WebhooksApiService service
 /*
 WebhooksApiService Get Webhooks
-Retrieve all webhooks for a given vendor.
+Get all Webhooks for a given Vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []Webhook
 */
@@ -118,7 +118,7 @@ func (a *WebhooksApiService) WebhooksGet(ctx context.Context) ([]Webhook, *http.
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-WebhooksApiService Add Webhooks
+WebhooksApiService Add Webhook
 Add an endpoint to use with Octane&#x27;s Webhook API.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body

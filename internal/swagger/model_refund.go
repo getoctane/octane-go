@@ -8,8 +8,6 @@
  */
 package swagger
 
-type UpdateCustomerPortalSettingsInputArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
-	PricePlanNamesFilter string `json:"price_plan_names_filter,omitempty"`
-	PricePlanTagsFilter string `json:"price_plan_tags_filter,omitempty"`
+type Refund struct {
+	Success bool `json:"success,omitempty"`
 }

@@ -101,7 +101,7 @@ func (a *BillingSettingsApiService) BillingSettingsDelete(ctx context.Context) (
 }
 /*
 BillingSettingsApiService Get Billing Settings
-Fetch the billing settings for a vendor.
+Get billing settings for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return BillingSettings
 */
@@ -193,7 +193,7 @@ func (a *BillingSettingsApiService) BillingSettingsGet(ctx context.Context) (Bil
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-BillingSettingsApiService Create billing settings.
+BillingSettingsApiService Create Billing Settings
 Create billing settings for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body

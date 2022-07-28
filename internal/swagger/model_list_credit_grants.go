@@ -8,7 +8,7 @@
  */
 package swagger
 
-type ListPricePlans struct {
+type ListCreditGrants struct {
 	// The unique offset to start at when paging forwards
 	ForwardSecondarySortOffset string `json:"forward_secondary_sort_offset,omitempty"`
 	// The number of items to fetch. Defaults to 10.
@@ -16,6 +16,6 @@ type ListPricePlans struct {
 	// The sort column offset to start at when paging forwards
 	ForwardSortOffset string `json:"forward_sort_offset,omitempty"`
 	SortDirection string `json:"sort_direction,omitempty"`
-	PricePlans []PricePlan `json:"price_plans,omitempty"`
+	CreditGrants []CreditGrant `json:"credit_grants,omitempty"`
 	SortColumn string `json:"sort_column,omitempty"`
 }

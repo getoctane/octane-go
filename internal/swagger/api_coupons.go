@@ -26,7 +26,7 @@ var (
 type CouponsApiService service
 /*
 CouponsApiService Apply Coupon
-Applies a coupon to the provided customer.
+Apply a coupon to the provided customer.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 
@@ -115,7 +115,7 @@ func (a *CouponsApiService) CouponsApplyCouponPost(ctx context.Context, body App
 }
 /*
 CouponsApiService Delete Coupon
-Delete a coupon by its unique name.
+Delete a specific coupon for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param couponName
 
@@ -196,7 +196,7 @@ func (a *CouponsApiService) CouponsCouponNameDelete(ctx context.Context, couponN
 }
 /*
 CouponsApiService Get Coupon
-Fetch a Coupon by its unique name.
+Get a specific coupon for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param couponName
 @return Coupon1
@@ -294,7 +294,7 @@ func (a *CouponsApiService) CouponsCouponNameGet(ctx context.Context, couponName
 }
 /*
 CouponsApiService Get Coupons
-Gets all the coupons for a vendor.
+Gets all coupons for a specific vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []Coupon1
 */
@@ -386,8 +386,8 @@ func (a *CouponsApiService) CouponsGet(ctx context.Context) ([]Coupon1, *http.Re
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CouponsApiService Create coupon
-Create a new coupon.
+CouponsApiService Create Coupons
+Create a coupon for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return Coupon1

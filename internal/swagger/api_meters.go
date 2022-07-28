@@ -26,7 +26,7 @@ var (
 type MetersApiService service
 /*
 MetersApiService Get Meters
-Retrieve all meters for a given vendor.
+Get all meters for a given vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []Meter
 */
@@ -119,6 +119,7 @@ func (a *MetersApiService) MetersGet(ctx context.Context) ([]Meter, *http.Respon
 }
 /*
 MetersApiService Archive Meter
+Update a meter by its unique name.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param meterName
 
@@ -280,7 +281,7 @@ func (a *MetersApiService) MetersMeterNameDelete(ctx context.Context, meterName 
 }
 /*
 MetersApiService Get Meter
-Fetch a meter by its unique name
+Get a meter by its unique name.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param meterName
 @return Meter
@@ -378,7 +379,7 @@ func (a *MetersApiService) MetersMeterNameGet(ctx context.Context, meterName str
 }
 /*
 MetersApiService Update Meter
-Update a meter by its unique name
+Update a meter by its unique name.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param meterName
@@ -489,7 +490,7 @@ func (a *MetersApiService) MetersMeterNamePut(ctx context.Context, body UpdateMe
 }
 /*
 MetersApiService Create Meter
-Create a new Meter.
+Create a new meter for a given vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return Meter
