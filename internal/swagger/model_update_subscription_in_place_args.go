@@ -9,7 +9,7 @@
 package swagger
 
 type UpdateSubscriptionInPlaceArgs struct {
-	DiscountOverride *AllOfUpdateSubscriptionInPlaceArgsDiscountOverride `json:"discount_override,omitempty"`
 	CouponOverrideName string `json:"coupon_override_name,omitempty"`
+	DiscountOverride *AllOfUpdateSubscriptionInPlaceArgsDiscountOverride `json:"discount_override,omitempty"`
 	AddOns []SubscriptionAddOnInput `json:"add_ons,omitempty"`
 }

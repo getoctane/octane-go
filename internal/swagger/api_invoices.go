@@ -29,26 +29,26 @@ type InvoicesApiService service
 InvoicesApiService Get Past Invoices
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *InvoicesApiInvoicesGetOpts - Optional Parameters:
-     * @param "ForwardSecondarySortOffset" (optional.Int32) -  The id offset to start at when paging forwards
-     * @param "SortDirection" (optional.String) - 
-     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
-     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
-     * @param "Status" (optional.String) - 
      * @param "SortColumn" (optional.String) - 
-     * @param "StartTime" (optional.Time) - 
+     * @param "ForwardSecondarySortOffset" (optional.String) -  The unique offset to start at when paging forwards
+     * @param "Status" (optional.String) - 
+     * @param "SortDirection" (optional.String) - 
+     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
      * @param "CustomerName" (optional.String) - 
+     * @param "StartTime" (optional.Time) - 
+     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
 @return PastInvoices
 */
 
 type InvoicesApiInvoicesGetOpts struct {
-    ForwardSecondarySortOffset optional.Int32
-    SortDirection optional.String
-    Limit optional.Int32
-    ForwardSortOffset optional.String
-    Status optional.String
     SortColumn optional.String
-    StartTime optional.Time
+    ForwardSecondarySortOffset optional.String
+    Status optional.String
+    SortDirection optional.String
+    ForwardSortOffset optional.String
     CustomerName optional.String
+    StartTime optional.Time
+    Limit optional.Int32
 }
 
 func (a *InvoicesApiService) InvoicesGet(ctx context.Context, localVarOptionals *InvoicesApiInvoicesGetOpts) (PastInvoices, *http.Response, error) {
@@ -67,29 +67,29 @@ func (a *InvoicesApiService) InvoicesGet(ctx context.Context, localVarOptionals 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
+		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
 		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
-		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
-		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
 		localVarQueryParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
-		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
+		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
+		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CustomerName.IsSet() {
+		localVarQueryParams.Add("customer_name", parameterToString(localVarOptionals.CustomerName.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.StartTime.IsSet() {
 		localVarQueryParams.Add("start_time", parameterToString(localVarOptionals.StartTime.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.CustomerName.IsSet() {
-		localVarQueryParams.Add("customer_name", parameterToString(localVarOptionals.CustomerName.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -173,7 +173,7 @@ func (a *InvoicesApiService) InvoicesGet(ctx context.Context, localVarOptionals 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-InvoicesApiService Update Invoice
+InvoicesApiService Update Invoice Status
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
  * @param invoiceUuid
@@ -273,7 +273,7 @@ func (a *InvoicesApiService) InvoicesInvoiceUuidPost(ctx context.Context, body U
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-InvoicesApiService Return invoice pdf
+InvoicesApiService Return Invoice PDF
 Return the invoice pdf for the given invoice_uuid, first validating token.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param invoiceUuidToken
@@ -364,26 +364,26 @@ func (a *InvoicesApiService) InvoicesInvoiceUuidTokenPdfGet(ctx context.Context,
 InvoicesApiService Get Upcoming Invoices
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *InvoicesApiInvoicesUpcomingGetOpts - Optional Parameters:
-     * @param "ForwardSecondarySortOffset" (optional.Int32) -  The id offset to start at when paging forwards
-     * @param "SortDirection" (optional.String) - 
-     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
-     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
-     * @param "Status" (optional.String) - 
      * @param "SortColumn" (optional.String) - 
-     * @param "StartTime" (optional.Time) - 
+     * @param "ForwardSecondarySortOffset" (optional.String) -  The unique offset to start at when paging forwards
+     * @param "Status" (optional.String) - 
+     * @param "SortDirection" (optional.String) - 
+     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
      * @param "CustomerName" (optional.String) - 
+     * @param "StartTime" (optional.Time) - 
+     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
 @return UpcomingInvoices
 */
 
 type InvoicesApiInvoicesUpcomingGetOpts struct {
-    ForwardSecondarySortOffset optional.Int32
-    SortDirection optional.String
-    Limit optional.Int32
-    ForwardSortOffset optional.String
-    Status optional.String
     SortColumn optional.String
-    StartTime optional.Time
+    ForwardSecondarySortOffset optional.String
+    Status optional.String
+    SortDirection optional.String
+    ForwardSortOffset optional.String
     CustomerName optional.String
+    StartTime optional.Time
+    Limit optional.Int32
 }
 
 func (a *InvoicesApiService) InvoicesUpcomingGet(ctx context.Context, localVarOptionals *InvoicesApiInvoicesUpcomingGetOpts) (UpcomingInvoices, *http.Response, error) {
@@ -402,29 +402,29 @@ func (a *InvoicesApiService) InvoicesUpcomingGet(ctx context.Context, localVarOp
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
+		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
 		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
-		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
-		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
 		localVarQueryParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
-		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
+		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
+		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CustomerName.IsSet() {
+		localVarQueryParams.Add("customer_name", parameterToString(localVarOptionals.CustomerName.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.StartTime.IsSet() {
 		localVarQueryParams.Add("start_time", parameterToString(localVarOptionals.StartTime.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.CustomerName.IsSet() {
-		localVarQueryParams.Add("customer_name", parameterToString(localVarOptionals.CustomerName.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

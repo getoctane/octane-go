@@ -27,7 +27,7 @@ var (
 type PricePlansApiService service
 /*
 PricePlansApiService Get All Price Plans
-Fetch all price plans associated with a vendor.
+Get all price plans associated with a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return []PricePlan
 */
@@ -123,24 +123,24 @@ PricePlansApiService Get Paginated Price Plans
 List all price plans with pagination.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *PricePlansApiPricePlansPaginateGetOpts - Optional Parameters:
-     * @param "Tags" (optional.Interface of []string) - 
-     * @param "ForwardSecondarySortOffset" (optional.Int32) -  The id offset to start at when paging forwards
-     * @param "SortDirection" (optional.String) - 
-     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
-     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
      * @param "SortColumn" (optional.String) - 
+     * @param "ForwardSecondarySortOffset" (optional.String) -  The unique offset to start at when paging forwards
+     * @param "SortDirection" (optional.String) - 
+     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
      * @param "Names" (optional.Interface of []string) - 
+     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
+     * @param "Tags" (optional.Interface of []string) - 
 @return ListPricePlans
 */
 
 type PricePlansApiPricePlansPaginateGetOpts struct {
-    Tags optional.Interface
-    ForwardSecondarySortOffset optional.Int32
-    SortDirection optional.String
-    Limit optional.Int32
-    ForwardSortOffset optional.String
     SortColumn optional.String
+    ForwardSecondarySortOffset optional.String
+    SortDirection optional.String
+    ForwardSortOffset optional.String
     Names optional.Interface
+    Limit optional.Int32
+    Tags optional.Interface
 }
 
 func (a *PricePlansApiService) PricePlansPaginateGet(ctx context.Context, localVarOptionals *PricePlansApiPricePlansPaginateGetOpts) (ListPricePlans, *http.Response, error) {
@@ -159,8 +159,8 @@ func (a *PricePlansApiService) PricePlansPaginateGet(ctx context.Context, localV
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Tags.IsSet() {
-		localVarQueryParams.Add("tags", parameterToString(localVarOptionals.Tags.Value(), "multi"))
+	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
+		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
 		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
@@ -168,17 +168,17 @@ func (a *PricePlansApiService) PricePlansPaginateGet(ctx context.Context, localV
 	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
 		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
 	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
 		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
-		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
-	}
 	if localVarOptionals != nil && localVarOptionals.Names.IsSet() {
 		localVarQueryParams.Add("names", parameterToString(localVarOptionals.Names.Value(), "multi"))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Tags.IsSet() {
+		localVarQueryParams.Add("tags", parameterToString(localVarOptionals.Tags.Value(), "multi"))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -263,6 +263,7 @@ func (a *PricePlansApiService) PricePlansPaginateGet(ctx context.Context, localV
 }
 /*
 PricePlansApiService Create Price Plan
+Create a price plan for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return PricePlan
@@ -368,6 +369,7 @@ func (a *PricePlansApiService) PricePlansPost(ctx context.Context, body CreatePr
 }
 /*
 PricePlansApiService Archive Price Plan
+Archive a price plan that has no active/scheduled subscription.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param pricePlanName
 
@@ -448,7 +450,7 @@ func (a *PricePlansApiService) PricePlansPricePlanNameArchivePost(ctx context.Co
 }
 /*
 PricePlansApiService Delete Price Plan
-Delete an existing Price Plan. Plans which map to active Subscriptions must be replaced or removed before deletion can occur.
+Delete an existing Price Plan. Price Plans which map to active Subscriptions must be replaced or removed before deletion can occur.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param pricePlanName
 
@@ -738,13 +740,13 @@ func (a *PricePlansApiService) PricePlansPricePlanNamePut(ctx context.Context, b
 }
 /*
 PricePlansApiService Get a Price Plan
-Fetch an existing price plan.
+Get an existing price plan.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param tag
  * @param pricePlanName
+ * @param tag
 @return PricePlan
 */
-func (a *PricePlansApiService) PricePlansPricePlanNameTagGet(ctx context.Context, tag string, pricePlanName string) (PricePlan, *http.Response, error) {
+func (a *PricePlansApiService) PricePlansPricePlanNameTagGet(ctx context.Context, pricePlanName string, tag string) (PricePlan, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -755,17 +757,17 @@ func (a *PricePlansApiService) PricePlansPricePlanNameTagGet(ctx context.Context
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/price_plans/{price_plan_name}/{tag}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag"+"}", fmt.Sprintf("%v", tag), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"price_plan_name"+"}", fmt.Sprintf("%v", pricePlanName), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag"+"}", fmt.Sprintf("%v", tag), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(tag) < 1 {
-		return localVarReturnValue, nil, reportError("tag must have at least 1 elements")
-	}
 	if strlen(pricePlanName) < 1 {
 		return localVarReturnValue, nil, reportError("pricePlanName must have at least 1 elements")
+	}
+	if strlen(tag) < 1 {
+		return localVarReturnValue, nil, reportError("tag must have at least 1 elements")
 	}
 
 	// to determine the Content-Type header
@@ -840,7 +842,7 @@ func (a *PricePlansApiService) PricePlansPricePlanNameTagGet(ctx context.Context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PricePlansApiService Update a Price Plan In Place
+PricePlansApiService Update Price Plan In Place
 Edit a price plan without creating a new version.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
@@ -951,15 +953,15 @@ func (a *PricePlansApiService) PricePlansUpdateInPlacePricePlanNamePost(ctx cont
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PricePlansApiService Update a Price Plan In Place
+PricePlansApiService Update Price Plan In Place
 Edit a price plan without creating a new version.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
- * @param tag
  * @param pricePlanName
+ * @param tag
 @return PricePlan
 */
-func (a *PricePlansApiService) PricePlansUpdateInPlacePricePlanNameTagPost(ctx context.Context, body UpdatePricePlanInPlaceArgs, tag string, pricePlanName string) (PricePlan, *http.Response, error) {
+func (a *PricePlansApiService) PricePlansUpdateInPlacePricePlanNameTagPost(ctx context.Context, body UpdatePricePlanInPlaceArgs, pricePlanName string, tag string) (PricePlan, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -970,17 +972,17 @@ func (a *PricePlansApiService) PricePlansUpdateInPlacePricePlanNameTagPost(ctx c
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/price_plans/update_in_place/{price_plan_name}/{tag}"
-	localVarPath = strings.Replace(localVarPath, "{"+"tag"+"}", fmt.Sprintf("%v", tag), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"price_plan_name"+"}", fmt.Sprintf("%v", pricePlanName), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"tag"+"}", fmt.Sprintf("%v", tag), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(tag) < 1 {
-		return localVarReturnValue, nil, reportError("tag must have at least 1 elements")
-	}
 	if strlen(pricePlanName) < 1 {
 		return localVarReturnValue, nil, reportError("pricePlanName must have at least 1 elements")
+	}
+	if strlen(tag) < 1 {
+		return localVarReturnValue, nil, reportError("tag must have at least 1 elements")
 	}
 
 	// to determine the Content-Type header

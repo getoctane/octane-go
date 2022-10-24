@@ -12,6 +12,6 @@ type ApplyCouponInputArgs struct {
 	VendorId int32 `json:"vendor_id,omitempty"`
 	Code string `json:"code,omitempty"`
 	Name string `json:"name,omitempty"`
-	CustomerId int32 `json:"customer_id,omitempty"`
 	CustomerName string `json:"customer_name,omitempty"`
+	CustomerId int32 `json:"customer_id,omitempty"`
 }

@@ -63,6 +63,7 @@ type (
 		UnitName     string           `json:"unit_name,omitempty"`
 		SchemeType   string           `json:"scheme_type,omitempty"`
 		Prices       []PriceInputArgs `json:"prices,omitempty"`
+		PriceList    []interface{}    `json:"price_list,omitempty"`
 	}
 
 	PriceInputArgs struct {
@@ -271,6 +272,16 @@ func pricePlanConvert(addons []AddOnInputArgs, features []FeatureInputArgs, tria
 					SchemeType:   component.PriceScheme.SchemeType,
 					Prices:       implPriceInputArgs,
 				}
+
+				if component.PriceScheme.PriceList != nil {
+					implPriceSchemeInputArgs = swagger.PriceSchemeInputArgs{
+						TimeUnitName: component.PriceScheme.TimeUnitName,
+						UnitName:     component.PriceScheme.UnitName,
+						SchemeType:   component.PriceScheme.SchemeType,
+						PriceList:    component.PriceScheme.PriceList,
+					}
+				}
+
 			}
 			implComponents = append(implComponents, swagger.MeteredComponentInputArgs{
 				MeterId:     component.MeterId,

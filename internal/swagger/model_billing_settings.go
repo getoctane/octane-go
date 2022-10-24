@@ -9,9 +9,9 @@
 package swagger
 
 type BillingSettings struct {
-	// Time length of the grace period between the end of a billing cycle and invoice generation. *NOTE*: The specified length is unitless. Unit is designated with the `invoice_grace_period_unit` field.
+	// Time length of the grace period between the end of a billing cycle and invoice generation in days.
 	InvoiceGracePeriodLength int32 `json:"invoice_grace_period_length,omitempty"`
-	// Time length unit of the grace period between the end of a billing cycle and invoice generation. One of `minute`, `hour`, `day`.
+	// Time length unit of the grace period between the end of a billing cycle and invoice generation. Must be `day`.
 	InvoiceGracePeriodUnit string `json:"invoice_grace_period_unit,omitempty"`
 	// Time length of the grace period between the end of invoice generation and the actual charge. *NOTE*: The specified length is unitless. Unit is designated with the `payment_grace_period_unit` field.
 	PaymentGracePeriodLength int32 `json:"payment_grace_period_length,omitempty"`
@@ -48,4 +48,6 @@ type BillingSettings struct {
 	DaysUntilDue int32 `json:"days_until_due"`
 	// If using stripe, this field can be used to configure whether invoices should be auto advanced for collection
 	StripeAutoAdvance bool `json:"stripe_auto_advance"`
+	// Default value for whether to align billing cycles to calendar on subscriptions
+	AlignBillingCyclesToCalendar bool `json:"align_billing_cycles_to_calendar"`
 }
