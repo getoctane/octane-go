@@ -82,6 +82,8 @@ type (
 
 	CustomersApiCustomersCustomerNameUsageGetOpts swagger.CustomersApiCustomersCustomerNameUsageGetOpts
 	CustomerUsage                                 swagger.CustomerUsage
+	CustomerPortalTokenInputArgs                  swagger.CustomerPortalTokenInputArgs
+	CustomerPortalToken                           swagger.CustomerPortalToken
 
 	customersAPI struct {
 		impl *swagger.APIClient
@@ -316,6 +318,17 @@ func (api *customersAPI) RetrieveUsage(customerName string, body CustomersApiCus
 		api.ctx(), customerName, &implCustomersApiCustomersCustomerNameUsageGetOpts)
 	customerUsage := implCustomerUsageToCustomerUsage(&implCustomerUsage)
 	return customerUsage, resp, err
+}
+
+func (api *customersAPI) GenerateEcpToken(args CustomerPortalTokenInputArgs) (CustomerPortalToken, *http.Response, error) {
+	implCustomerPortalArgs := swagger.CustomerPortalTokenInputArgs{
+		CustomerName: args.CustomerName,
+	}
+	customerPortalTokenImpl, httpResp, err := api.impl.CustomerPortalApi.EcpTokenPost(api.ctx(), implCustomerPortalArgs)
+	customerPortalToken := CustomerPortalToken{
+		Token: customerPortalTokenImpl.Token,
+	}
+	return customerPortalToken, httpResp, err
 }
 
 // Convert a Swagger Customer struct to our Customer struct

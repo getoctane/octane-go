@@ -10,11 +10,10 @@ import (
 type (
 	// Client is a client for accessing the Octane API.
 	Client struct {
-		Customers      *customersAPI
-		Measurements   *measurementsAPI
-		Meters         *metersAPI
-		PricePlans     *pricePlansAPI
-		CustomerPortal *customerPortalAPI
+		Customers    *customersAPI
+		Measurements *measurementsAPI
+		Meters       *metersAPI
+		PricePlans   *pricePlansAPI
 	}
 
 	// ClientOption is used to customize a Client.
@@ -57,11 +56,10 @@ func NewClient(token string, options ...ClientOption) *Client {
 			swagger.ContextAccessToken, token)
 	}
 	client := Client{
-		Customers:      newCustomersAPI(impl, ctx),
-		Measurements:   newMeasurementsAPI(impl, ctx),
-		Meters:         newMetersAPI(impl, ctx),
-		PricePlans:     newPricePlansAPI(impl, ctx),
-		CustomerPortal: newCustomerPortalAPI(impl, ctx),
+		Customers:    newCustomersAPI(impl, ctx),
+		Measurements: newMeasurementsAPI(impl, ctx),
+		Meters:       newMetersAPI(impl, ctx),
+		PricePlans:   newPricePlansAPI(impl, ctx),
 	}
 	return &client
 }
