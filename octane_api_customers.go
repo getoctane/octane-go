@@ -19,6 +19,7 @@ type (
 		PricePlanName                      string                                `json:"price_plan_name,omitempty"`
 		PricePlanTag                       string                                `json:"price_plan_tag,omitempty"`
 		AutogeneratePaymentGatewayCustomer bool                                  `json:"autogenerate_payment_gateway_customer,omitempty"`
+		CreatedAt                          time.Time                             `json:"created_at,omitempty"`
 	}
 	ContactInfoInputArgs struct {
 		Country      string `json:"country,omitempty"`
@@ -118,6 +119,10 @@ func (api *customersAPI) Create(body CreateCustomerArgs) (Customer, *http.Respon
 			Phone:        body.ContactInfo.Phone,
 		}
 	}
+	createdAt := body.CreatedAt
+	if createdAt.IsZero()  {
+		createdAt = time.Now()
+	}
 	implCreateCustomerArgs := swagger.CreateCustomerArgs{
 		VendorId:                           body.VendorId,
 		Tags:                               body.Tags,
@@ -128,6 +133,7 @@ func (api *customersAPI) Create(body CreateCustomerArgs) (Customer, *http.Respon
 		PricePlanName:                      body.PricePlanName,
 		PricePlanTag:                       body.PricePlanTag,
 		AutogeneratePaymentGatewayCustomer: body.AutogeneratePaymentGatewayCustomer,
+		CreatedAt:                          createdAt,
 	}
 	implCustomer, resp, err := api.impl.CustomersApi.CustomersPost(
 		api.ctx(), implCreateCustomerArgs)
