@@ -13,11 +13,11 @@ import (
 
 type CreateCreditGrantArgs struct {
 	// The date at which the grant is effective
-	EffectiveAt time.Time `json:"effective_at,omitempty"`
+	EffectiveAt *time.Time `json:"effective_at,omitempty"`
 	// Number of credits to grant
 	Amount float64 `json:"amount"`
 	// The date at which this grant expires
-	ExpiresAt time.Time `json:"expires_at,omitempty"`
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 	// Name of the customer receving the grant
 	CustomerName string `json:"customer_name"`
 	// Optional description. This is only viewable internally
