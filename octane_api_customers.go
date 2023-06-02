@@ -31,6 +31,7 @@ type (
 		City         string `json:"city,omitempty"`
 		Url          string `json:"url,omitempty"`
 		Phone        string `json:"phone,omitempty"`
+		LegalName    string `json:"legal_name,omitempty"`
 	}
 
 	CustomerMeasurementMappingInputArgs struct {
@@ -117,6 +118,7 @@ func (api *customersAPI) Create(body CreateCustomerArgs) (Customer, *http.Respon
 			City:         body.ContactInfo.City,
 			Url:          body.ContactInfo.Url,
 			Phone:        body.ContactInfo.Phone,
+			LegalName:    body.ContactInfo.LegalName,
 		}
 	}
 	createdAt := body.CreatedAt
@@ -170,6 +172,7 @@ func (api *customersAPI) Update(customerName string, body UpdateCustomerArgs) (C
 			City:         body.ContactInfo.City,
 			Url:          body.ContactInfo.Url,
 			Phone:        body.ContactInfo.Phone,
+			LegalName:    body.ContactInfo.LegalName,
 		}
 	}
 	implUpdateCustomerArgs := swagger.UpdateCustomerArgs{
