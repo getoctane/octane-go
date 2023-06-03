@@ -4,7 +4,6 @@ import (
 	"context"
 	"net/http"
 	"time"
-
 	"github.com/getoctane/octane-go/internal/swagger"
 )
 
@@ -33,11 +32,11 @@ type (
 		// Number of credits granted
 		Amount float64 `json:"amount,omitempty"`
 		// The date at which this grant is effective
-		EffectiveAt time.Time `json:"effective_at,omitempty"`
+		EffectiveAt* time.Time `json:"effective_at,omitempty"`
 		// A unique identifier for this grant
 		Uuid string `json:"uuid,omitempty"`
 		// The date at which this grant expires
-		ExpiresAt time.Time `json:"expires_at,omitempty"`
+		ExpiresAt *time.Time `json:"expires_at,omitempty"`
 		// Name of the customer who received the grant
 		CustomerName string `json:"customer_name,omitempty"`
 		// The source of the grant.
@@ -71,14 +70,25 @@ func (api *creditsAPI) Create(body CreateCreditGrantArgs) (CreditGrant, *http.Re
 
 
 func implCreditToCredit(implCredit *swagger.CreditGrant) CreditGrant {
-	return CreditGrant{
+	externalCreditGrant := CreditGrant{
 		Price: implCredit.Price,
 		Description: implCredit.Description,
 		Source:implCredit.Source, 
 		CustomerName: implCredit.CustomerName,
-		ExpiresAt: implCredit.ExpiresAt,
 		Uuid: implCredit.Uuid,
-		EffectiveAt: implCredit.EffectiveAt,
 		Amount: implCredit.Amount,
 	}
+	if len(implCredit.EffectiveAt) > 0 {
+		tsString := implCredit.EffectiveAt + "Z"
+		time_val, _ := time.Parse(time.RFC3339, tsString)
+		externalCreditGrant.EffectiveAt = &time_val
+	} 
+
+	if len(implCredit.ExpiresAt) > 0  {
+		tsString := implCredit.ExpiresAt + "Z"
+		time_val, _ := time.Parse(time.RFC3339, tsString)
+		externalCreditGrant.ExpiresAt = &time_val
+	}
+
+	return externalCreditGrant
 }
