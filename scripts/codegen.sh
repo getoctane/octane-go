@@ -166,13 +166,6 @@ mv mount/model_update_price_plan_args.go.tmp \
   mount/model_update_price_plan_args.go
 
 
-cat mount/model_create_credit_grant_args.go | \
-  sed 's/EffectiveAt \time.Time/EffectiveAt \*time.Time/g' \
-  > mount/model_create_credit_grant_args.go.tmp
-mv mount/model_create_credit_grant_args.go.tmp \
-  mount/model_create_credit_grant_args.go
-
-
 #we want to force all timestamps sent to our api to conform to a certain format, so we help the caller here
 #by changing what is sent over the wire
 rfc_timestamp_insertion="func parameterToString(obj interface{}, collectionFormat string) string {\n\n \

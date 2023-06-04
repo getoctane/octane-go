@@ -78,6 +78,13 @@ func implCreditToCredit(implCredit *swagger.CreditGrant) CreditGrant {
 		Uuid: implCredit.Uuid,
 		Amount: implCredit.Amount,
 	}
+
+	/**
+	The Octane APIs respond with dates that are compatible with
+	RFC3339, but do not have a "Z" at the end, which fails the golang
+	time parser, so we manually add it at the end. This is harmless because 
+	our times are in UTC anyways so there is no necessary timezone offset.
+	*/
 	if len(implCredit.EffectiveAt) > 0 {
 		tsString := implCredit.EffectiveAt + "Z"
 		time_val, _ := time.Parse(time.RFC3339, tsString)
