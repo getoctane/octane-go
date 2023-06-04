@@ -14,6 +14,7 @@ type (
 		Measurements *measurementsAPI
 		Meters       *metersAPI
 		PricePlans   *pricePlansAPI
+		Credits      *creditsAPI
 	}
 
 	// ClientOption is used to customize a Client.
@@ -60,6 +61,7 @@ func NewClient(token string, options ...ClientOption) *Client {
 		Measurements: newMeasurementsAPI(impl, ctx),
 		Meters:       newMetersAPI(impl, ctx),
 		PricePlans:   newPricePlansAPI(impl, ctx),
+		Credits:      newCreditsAPI(impl, ctx),
 	}
 	return &client
 }
