@@ -8,7 +8,9 @@
  */
 package swagger
 
-type AllOfPricePlanCoupon struct {
-	// Unique name identifier.
-	Name string `json:"name"`
+type CustomerMetadata struct {
+	// Value of property for customer
+	Value string `json:"value,omitempty"`
+	// Property name
+	Property string `json:"property,omitempty"`
 }

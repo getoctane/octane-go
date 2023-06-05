@@ -20,9 +20,8 @@ type Subscription struct {
 	PricePlan *AllOfSubscriptionPricePlan `json:"price_plan,omitempty"`
 	// Align billing cycles to a calendar unit if true. For example if the period is month, cycles will end on the first of every month.
 	AlignToCalendar bool `json:"align_to_calendar,omitempty"`
-	// Optional discount override for the associated subscription.
-	DiscountOverride *AllOfSubscriptionDiscountOverride `json:"discount_override,omitempty"`
-	AddOns []SubscriptionAddOn `json:"add_ons,omitempty"`
+	Discounts []AllOfSubscriptionDiscountsItems `json:"discounts,omitempty"`
+	AddOns *Object `json:"add_ons,omitempty"`
 	// Optional trial override for the associated subscription.
 	TrialOverride *AllOfSubscriptionTrialOverride `json:"trial_override,omitempty"`
 	// Optional base price override for the associated subscription.

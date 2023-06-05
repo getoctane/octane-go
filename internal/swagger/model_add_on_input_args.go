@@ -9,10 +9,12 @@
 package swagger
 
 type AddOnInputArgs struct {
-	QuantityEnabled bool `json:"quantity_enabled,omitempty"`
-	Feature *FeatureInputArgs `json:"feature,omitempty"`
-	// Whether this add on can only be used & charged once
-	SingleUse bool `json:"single_use,omitempty"`
 	Limit int32 `json:"limit,omitempty"`
+	Feature *FeatureInputArgs `json:"feature"`
 	Price int32 `json:"price,omitempty"`
+	// Whether this add on can only be used & charged once.
+	SingleUse bool `json:"single_use,omitempty"`
+	// This field indicates whether or not we should cut an invoice immediately upon attaching this add on to a price plan.
+	ImmediatelyCharge bool `json:"immediately_charge,omitempty"`
+	QuantityEnabled bool `json:"quantity_enabled,omitempty"`
 }

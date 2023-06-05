@@ -105,12 +105,6 @@ cat mount/model_active_subscription.go | \
 mv mount/model_active_subscription.go.tmp \
   mount/model_active_subscription.go
 
-cat mount/model_all_of_active_subscription_discount_override.go | \
-  sed 's/DiscountType \*Object/DiscountType string/g' \
-  > mount/model_all_of_active_subscription_discount_override.go.tmp
-mv mount/model_all_of_active_subscription_discount_override.go.tmp \
-  mount/model_all_of_active_subscription_discount_override.go
-
 cat mount/model_payment_gateway_credential.go | \
   sed 's/PaymentGateway \*Object/PaymentGateway string/g' \
   > mount/model_payment_gateway_credential.go.tmp
@@ -180,6 +174,15 @@ mv mount/client.go.tmp \
   mount/client.go
 
 
+#Remove unnecessary files that get generated incorrectly. Some of the Octane OpenAPI types are ambiguous
+#But we don't need to bother fixing them if they aren't used in the SDK
+rm mount/model_all_of_price_plan_discount.go
+rm mount/model_coupon1.go
+rm mount/model_all_of_active_subscription_discounts_items.go
+rm mount/model_active_subscription.go
+rm mount/model_all_of_subscription_discount_override.go
+
 rm -f internal/swagger/*.go
 mkdir -p internal/swagger/
 cp mount/*.go internal/swagger/
+

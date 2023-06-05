@@ -9,10 +9,12 @@
 package swagger
 
 type UpdatePricePlanInPlaceArgs struct {
-	DisplayName string `json:"display_name,omitempty"`
-	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
 	Limits []LimitInputArgs `json:"limits,omitempty"`
-	AddOns []AddOnInputArgs `json:"add_ons,omitempty"`
-	Features []FeatureInputArgs `json:"features,omitempty"`
 	Description string `json:"description,omitempty"`
+	Features []FeatureInputArgs `json:"features,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	// Custom invoice description for the base price line item.
+	BasePriceDescription string `json:"base_price_description,omitempty"`
+	AddOns []AddOnInputArgs `json:"add_ons,omitempty"`
+	MeteredComponents []MeteredComponentInputArgs `json:"metered_components,omitempty"`
 }

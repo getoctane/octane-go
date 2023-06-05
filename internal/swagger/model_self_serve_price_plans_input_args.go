@@ -8,9 +8,6 @@
  */
 package swagger
 
-// Add-on specification
-type AllOfSubscriptionAddOnAddOn struct {
-	Feature *Feature `json:"feature,omitempty"`
-	// Price of the add on
-	Price float64 `json:"price"`
+type SelfServePricePlansInputArgs struct {
+	PricePlanUuids []string `json:"price_plan_uuids,omitempty"`
 }

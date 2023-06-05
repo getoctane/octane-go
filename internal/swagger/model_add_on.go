@@ -9,7 +9,14 @@
 package swagger
 
 type AddOn struct {
-	Feature *Feature `json:"feature,omitempty"`
+	Feature *Feature `json:"feature"`
 	// Price of the add on
 	Price float64 `json:"price"`
+	// If true, customer is just charged once in the first billing cycle.
+	SingleUse bool `json:"single_use"`
+	QuantityEnabled bool `json:"quantity_enabled"`
+	// If true, immediately invoice the customer for this add on.
+	ImmediatelyCharge bool `json:"immediately_charge,omitempty"`
+	// The maximum number of add-ons that an end-customer can apply to their subscription.
+	Limit int32 `json:"limit,omitempty"`
 }

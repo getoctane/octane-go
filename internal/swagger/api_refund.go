@@ -24,7 +24,8 @@ var (
 
 type RefundApiService service
 /*
-RefundApiService
+RefundApiService Create Refund
+Create a refund for a paid invoice.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return Refund

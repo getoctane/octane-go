@@ -12,10 +12,13 @@ import (
 )
 
 type PastInvoice struct {
-	Status string `json:"status,omitempty"`
+	ExportUrl string `json:"export_url,omitempty"`
 	AmountDue float64 `json:"amount_due,omitempty"`
+	IssueDate time.Time `json:"issue_date,omitempty"`
+	CustomerName string `json:"customer_name,omitempty"`
 	DueDate time.Time `json:"due_date,omitempty"`
 	StatusDescription string `json:"status_description,omitempty"`
-	CustomerName string `json:"customer_name,omitempty"`
-	ExportUrl string `json:"export_url,omitempty"`
+	// External unique 'uuid' identifier for this Invoice.
+	Id string `json:"id,omitempty"`
+	Status string `json:"status,omitempty"`
 }

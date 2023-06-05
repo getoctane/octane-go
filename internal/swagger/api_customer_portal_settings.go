@@ -24,8 +24,8 @@ var (
 
 type CustomerPortalSettingsApiService service
 /*
-CustomerPortalSettingsApiService Get customer portal settings
-Fetch the customer portal settings for a vendor.
+CustomerPortalSettingsApiService Get Customer Portal Settings
+Fetch the Customer Portal settings for your account.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return CustomerPortalSettings
 */
@@ -117,8 +117,8 @@ func (a *CustomerPortalSettingsApiService) CustomerPortalSettingsGet(ctx context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CustomerPortalSettingsApiService Update customer portal settings
-Update customer portal settings for a vendor.
+CustomerPortalSettingsApiService Update Customer Portal Settings
+Update Customer Portal settings for your account.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return CustomerPortalSettings
