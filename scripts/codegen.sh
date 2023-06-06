@@ -173,13 +173,165 @@ cat mount/client.go | \
 mv mount/client.go.tmp \
   mount/client.go
 
+cat mount/model_subscription.go | \
+  sed 's/AddOns \*Object/AddOns \AddOn/g' \
+  > mount/model_subscription.go.tmp
+mv mount/model_subscription.go.tmp \
+  mount/model_subscription.go
+
+
+cat mount/model_credit_grant.go | \
+  sed 's/ExpiresAt time.Time/ExpiresAt \string/g' \
+  > mount/model_credit_grant.go.tmp
+mv mount/model_credit_grant.go.tmp \
+  mount/model_credit_grant.go
+
+cat mount/model_credit_grant.go | \
+  sed 's/EffectiveAt time.Time/EffectiveAt \string/g' \
+  > mount/model_credit_grant.go.tmp
+mv mount/model_credit_grant.go.tmp \
+  mount/model_credit_grant.go
+
+
+cat mount/model_all_of_active_subscription_discounts_items.go | \
+  sed 's/DiscountType \*Object/DiscountType \string/g' \
+  > mount/model_all_of_active_subscription_discounts_items.go.tmp
+mv mount/model_all_of_active_subscription_discounts_items.go.tmp \
+  mount/model_all_of_active_subscription_discounts_items.go
+
+cat mount/model_all_of_active_subscription_discounts_items.go | \
+  sed 's/MeteredComponent \*Object/MeteredComponent \MeteredComponent/g' \
+  > mount/model_all_of_active_subscription_discounts_items.go.tmp
+mv mount/model_all_of_active_subscription_discounts_items.go.tmp \
+  mount/model_all_of_active_subscription_discounts_items.go
+
+cat mount/model_all_of_active_subscription_discounts_items.go | \
+  sed 's/AddOn \*Object/AddOn \AddOn/g' \
+  > mount/model_all_of_active_subscription_discounts_items.go.tmp
+mv mount/model_all_of_active_subscription_discounts_items.go.tmp \
+  mount/model_all_of_active_subscription_discounts_items.go
+
+
+cat mount/model_active_subscription.go | \
+  sed 's/AddOns \*Object/AddOns \[]SubscriptionAddOnItem/g' \
+  > mount/model_active_subscription.go.tmp
+mv mount/model_active_subscription.go.tmp \
+  mount/model_active_subscription.go
+
+cat mount/model_all_of_customer_portal_usage_current_cycle_usage.go | \
+  sed 's/UsageByTime \[]Object/UsageByTime\ []CycleUsage/g' \
+  > mount/model_all_of_customer_portal_usage_current_cycle_usage.go.tmp
+mv mount/model_all_of_customer_portal_usage_current_cycle_usage.go.tmp \
+  mount/model_all_of_customer_portal_usage_current_cycle_usage.go
+
+
+cat mount/model_all_of_customer_portal_usage_previous_cycle_usage.go | \
+  sed 's/UsageByTime \[]Object/UsageByTime\ []CycleUsage/g' \
+  > mount/model_all_of_customer_portal_usage_previous_cycle_usage.go.tmp
+mv mount/model_all_of_customer_portal_usage_previous_cycle_usage.go.tmp \
+  mount/model_all_of_customer_portal_usage_previous_cycle_usage.go
+
+cat mount/model_coupon.go | \
+  sed 's/Frequency \*Object/Frequency \string/g' \
+  > mount/model_coupon.go.tmp
+mv mount/model_coupon.go.tmp \
+  mount/model_coupon.go
+
+cat mount/model_coupon.go | \
+  sed 's/DiscountType \*Object/DiscountType \string/g' \
+  > mount/model_coupon.go.tmp
+mv mount/model_coupon.go.tmp \
+  mount/model_coupon.go
+
+cat mount/model_all_of_subscription_discounts_items.go | \
+  sed 's/DiscountType \*Object/DiscountType \string/g' \
+  > mount/model_all_of_subscription_discounts_items.go.tmp
+mv mount/model_all_of_subscription_discounts_items.go.tmp \
+  mount/model_all_of_subscription_discounts_items.go
+
+cat mount/model_all_of_subscription_discounts_items.go | \
+  sed 's/AddOn \*Object/AddOn \AddOn/g' \
+  > mount/model_all_of_subscription_discounts_items.go.tmp
+mv mount/model_all_of_subscription_discounts_items.go.tmp \
+  mount/model_all_of_subscription_discounts_items.go
+
+cat mount/model_all_of_subscription_discounts_items.go | \
+  sed 's/MeteredComponent \*Object/MeteredComponent \MeteredComponent/g' \
+  > mount/model_all_of_subscription_discounts_items.go.tmp
+mv mount/model_all_of_subscription_discounts_items.go.tmp \
+  mount/model_all_of_subscription_discounts_items.go
+
+cat mount/model_all_of_customer_portal_active_subscription_subscription.go | \
+  sed 's/CustomerName \*Object/CustomerName \string/g' \
+  > mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp
+mv mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp \
+  mount/model_all_of_customer_portal_active_subscription_subscription.go
+
+cat mount/model_all_of_customer_portal_active_subscription_subscription.go | \
+  sed 's/Discounts \[]Object/Discounts []Discount/g' \
+  > mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp
+mv mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp \
+  mount/model_all_of_customer_portal_active_subscription_subscription.go
+
+cat mount/model_all_of_customer_portal_active_subscription_subscription.go | \
+  sed 's/PricePlanName \*Object/PricePlanName \string/g' \
+  > mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp
+mv mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp \
+  mount/model_all_of_customer_portal_active_subscription_subscription.go
+
+cat mount/model_all_of_customer_portal_active_subscription_subscription.go | \
+  sed 's/PricePlan \*Object/PricePlan \PricePlan/g' \
+  > mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp
+mv mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp \
+  mount/model_all_of_customer_portal_active_subscription_subscription.go
+
+cat mount/model_all_of_customer_portal_active_subscription_subscription.go | \
+  sed 's/AddOns \*Object/AddOns []AddOn/g' \
+  > mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp
+mv mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp \
+  mount/model_all_of_customer_portal_active_subscription_subscription.go
+
+cat mount/model_all_of_customer_portal_active_subscription_subscription.go | \
+  sed 's/TrialOverride \*Object/TrialOverride \Trial/g' \
+  > mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp
+mv mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp \
+  mount/model_all_of_customer_portal_active_subscription_subscription.go
+
+cat mount/model_all_of_customer_portal_active_subscription_subscription.go | \
+  sed 's/MeteredComponent \*Object/MeteredComponent \MeteredComponent/g' \
+  > mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp
+mv mount/model_all_of_customer_portal_active_subscription_subscription.go.tmp \
+  mount/model_all_of_customer_portal_active_subscription_subscription.go
+
+cat mount/model_create_credit_grant_args.go | \
+  sed 's/price,omitempty/price/g' \
+  > mount/model_create_credit_grant_args.go.tmp
+mv mount/model_create_credit_grant_args.go.tmp \
+  mount/model_create_credit_grant_args.go
+
+cat mount/model_create_credit_grant_args.go | \
+  sed 's/EffectiveAt time.Time/EffectiveAt \*time.Time/g' \
+  > mount/model_create_credit_grant_args.go.tmp
+mv mount/model_create_credit_grant_args.go.tmp \
+  mount/model_create_credit_grant_args.go
+
+cat mount/model_create_credit_grant_args.go | \
+  sed 's/ExpiresAt time.Time/ExpiresAt \*time.Time/g' \
+  > mount/model_create_credit_grant_args.go.tmp
+mv mount/model_create_credit_grant_args.go.tmp \
+  mount/model_create_credit_grant_args.go
+
+
+cat mount/model_credit_grant.go | \
+  sed '/import (/,+2d' \
+  > mount/model_credit_grant.go.tmp
+mv mount/model_credit_grant.go.tmp \
+  mount/model_credit_grant.go
 
 #Remove unnecessary files that get generated incorrectly. Some of the Octane OpenAPI types are ambiguous
 #But we don't need to bother fixing them if they aren't used in the SDK
 rm mount/model_all_of_price_plan_discount.go
 rm mount/model_coupon1.go
-rm mount/model_all_of_active_subscription_discounts_items.go
-rm mount/model_active_subscription.go
 rm mount/model_all_of_subscription_discount_override.go
 
 rm -f internal/swagger/*.go

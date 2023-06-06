@@ -22,12 +22,12 @@ type Coupon struct {
 	DurationUnit string `json:"duration_unit,omitempty"`
 	// ISO-8601 formatted timestamp that defines after what timestamp this coupon cannot be applied.
 	ExpirationTime time.Time `json:"expiration_time,omitempty"`
-	Frequency *Object `json:"frequency,omitempty"`
+	Frequency string `json:"frequency,omitempty"`
 	// The maximum number of times this coupon can be used.
 	MaxUses int32 `json:"max_uses,omitempty"`
 	// Customer facing code that can be used to apply coupon.
 	Code string `json:"code,omitempty"`
-	DiscountType *Object `json:"discount_type,omitempty"`
+	DiscountType string `json:"discount_type,omitempty"`
 	// The amount of discount to give based on discount_type
 	DiscountAmount float64 `json:"discount_amount"`
 	ExcludedCustomers []Customer1 `json:"excluded_customers,omitempty"`

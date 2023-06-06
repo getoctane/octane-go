@@ -12,7 +12,7 @@ import (
 )
 
 // List of discounts associated with this subscription.
-type AllOfSubscriptionDiscountsItems struct {
+type AllOfActiveSubscriptionDiscountsItems struct {
 	DiscountType string `json:"discount_type,omitempty"`
 	Amount float64 `json:"amount,omitempty"`
 	// The date when the discount is applied from.

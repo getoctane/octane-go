@@ -13,7 +13,7 @@ import (
 
 // Daily usage across the previous billing cycle.
 type AllOfCustomerPortalUsagePreviousCycleUsage struct {
-	UsageByTime []Object `json:"usage_by_time,omitempty"`
+	UsageByTime []CycleUsage `json:"usage_by_time,omitempty"`
 	// The start of the billing cycle in UTC.
 	CycleStart time.Time `json:"cycle_start,omitempty"`
 	// The end of the billing cycle in UTC.

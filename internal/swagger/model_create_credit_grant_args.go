@@ -15,9 +15,9 @@ type CreateCreditGrantArgs struct {
 	// Total price paid for the credits in cents. Defaults to $1 (100 cents) per credit if not specified
 	Price int32 `json:"price"`
 	// The date at which this grant expires
-	ExpiresAt time.Time `json:"expires_at,omitempty"`
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 	// The date at which the grant is effective
-	EffectiveAt time.Time `json:"effective_at,omitempty"`
+	EffectiveAt *time.Time `json:"effective_at,omitempty"`
 	// Optional description. This is only viewable internally
 	Description string `json:"description,omitempty"`
 	// Name of the customer receving the grant

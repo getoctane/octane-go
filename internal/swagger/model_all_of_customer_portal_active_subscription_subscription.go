@@ -14,17 +14,17 @@ import (
 // Customer's current active subscription. Includes the price plan and overrides they are subscribed to.
 type AllOfCustomerPortalActiveSubscriptionSubscription struct {
 	// Unique name identifier of a customer
-	CustomerName *Object `json:"customer_name"`
+	CustomerName string `json:"customer_name"`
 	// Unique name indentifier of a price plan
-	PricePlanName *Object `json:"price_plan_name"`
+	PricePlanName string `json:"price_plan_name"`
 	// Price plan associated with this subscription.
-	PricePlan *Object `json:"price_plan,omitempty"`
+	PricePlan PricePlan `json:"price_plan,omitempty"`
 	// Align billing cycles to a calendar unit if true. For example if the period is month, cycles will end on the first of every month.
 	AlignToCalendar bool `json:"align_to_calendar,omitempty"`
-	Discounts []Object `json:"discounts,omitempty"`
-	AddOns *Object `json:"add_ons,omitempty"`
+	Discounts []Discount `json:"discounts,omitempty"`
+	AddOns []AddOn `json:"add_ons,omitempty"`
 	// Optional trial override for the associated subscription.
-	TrialOverride *Object `json:"trial_override,omitempty"`
+	TrialOverride Trial `json:"trial_override,omitempty"`
 	// Optional base price override for the associated subscription.
 	BasePriceOverride float64 `json:"base_price_override,omitempty"`
 	FeaturesOverride []Feature `json:"features_override,omitempty"`
