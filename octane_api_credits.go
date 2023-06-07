@@ -20,7 +20,7 @@ type (
 		// Optional description. This is only viewable internally
 		Description string `json:"description,omitempty"`
 		// Total price paid for the credits in cents. Defaults to $1 (100 cents) per credit if not specified
-		Price *int32 `json:"price,omitempty"`
+		Price int32 `json:"price"`
 	}
 
 	creditsAPI struct {
