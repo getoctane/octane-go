@@ -9,6 +9,6 @@
 package swagger
 
 type CreateWebhookArgs struct {
-	Url string `json:"url,omitempty"`
 	EnableSignature bool `json:"enable_signature,omitempty"`
+	Url string `json:"url,omitempty"`
 }

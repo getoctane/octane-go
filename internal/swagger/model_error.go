@@ -9,12 +9,12 @@
 package swagger
 
 type ModelError struct {
-	// Error name
-	Status string `json:"status,omitempty"`
-	// Error code
-	Code int32 `json:"code,omitempty"`
-	// Errors
-	Errors *interface{} `json:"errors,omitempty"`
 	// Error message
 	Message string `json:"message,omitempty"`
+	// Errors
+	Errors *interface{} `json:"errors,omitempty"`
+	// Error code
+	Code int32 `json:"code,omitempty"`
+	// Error name
+	Status string `json:"status,omitempty"`
 }

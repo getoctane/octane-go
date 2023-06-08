@@ -9,7 +9,9 @@
 package swagger
 
 type UpdateSubscriptionInPlaceArgs struct {
-	CouponOverrideName string `json:"coupon_override_name,omitempty"`
+	// DEPRECATED - use discounts field
 	DiscountOverride *AllOfUpdateSubscriptionInPlaceArgsDiscountOverride `json:"discount_override,omitempty"`
 	AddOns []SubscriptionAddOnInput `json:"add_ons,omitempty"`
+	Discounts []DiscountInputArgs `json:"discounts,omitempty"`
+	CouponOverrideName string `json:"coupon_override_name,omitempty"`
 }

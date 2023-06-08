@@ -12,6 +12,6 @@ import (
 )
 
 type BillingCycleDate struct {
-	CycleEnd time.Time `json:"cycle_end,omitempty"`
-	CycleStart time.Time `json:"cycle_start,omitempty"`
+	CycleStart time.Time `json:"cycle_start"`
+	CycleEnd time.Time `json:"cycle_end"`
 }

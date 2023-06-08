@@ -52,9 +52,14 @@ type (
 	CustomerPaymentGatewayCredentialInputArgs swagger.CustomerPaymentGatewayCredentialInputArgs
 	PaymentGatewayCredential                  swagger.PaymentGatewayCredential
 
+	Discount struct {
+		Amount float64`json:"price_plan_name,omitempty"`
+		DiscountType string `json:"price_plan_name,omitempty"`
+	}
+
 	CreateSubscriptionArgs struct {
 		PricePlanName      string             `json:"price_plan_name,omitempty"`
-		DiscountOverride   *DiscountInputArgs `json:"discount_override,omitempty"`
+		Discounts 		   []Discount 	      `json:"discounts,omitempty"`
 		CouponOverrideName string             `json:"coupon_override_name,omitempty"`
 		EffectiveAt        time.Time          `json:"effective_at,omitempty"`
 		CouponOverrideId   int32              `json:"coupon_override_id,omitempty"`
@@ -63,9 +68,6 @@ type (
 		VendorId           int32              `json:"vendor_id,omitempty"`
 		PricePlanTag       string             `json:"price_plan_tag,omitempty"`
 	}
-
-	// Redeclared in octane_api_priceplans.go
-	// DiscountInputArgs swagger.DiscountInputArgs
 
 	UpdateSubscriptionArgs swagger.UpdateSubscriptionArgs
 	DeleteSubscriptionArgs swagger.DeleteSubscriptionArgs
@@ -228,13 +230,16 @@ func (api *customersAPI) CreateSubscription(customerName string, body CreateSubs
 		PricePlanId:        body.PricePlanId,
 		PricePlanTag:       body.PricePlanTag,
 	}
-	if body.DiscountOverride != nil {
-		implCreateSubscriptionArgs.DiscountOverride = &swagger.DiscountInputArgs{
-			Amount:       body.DiscountOverride.Amount,
-			DiscountType: body.DiscountOverride.DiscountType,
+	if body.Discounts != nil {
+		var discounts []swagger.DiscountInputArgs
+		for _, implDiscount := range body.Discounts {
+			discounts = append(discounts, swagger.DiscountInputArgs{
+												Amount:       implDiscount.Amount,
+												DiscountType: implDiscount.DiscountType,
+											})
 		}
+		implCreateSubscriptionArgs.Discounts = discounts
 	}
-	// TODO: if EffectiveAt is nil, causes 500 error
 	if implCreateSubscriptionArgs.EffectiveAt.IsZero() {
 		implCreateSubscriptionArgs.EffectiveAt = time.Now()
 	}
@@ -361,10 +366,10 @@ func implSubscriptionToSubscription(implSubscription *swagger.Subscription) Subs
 		subscription = Subscription{
 			CustomerName:      implSubscription.CustomerName,
 			PricePlanName:     implSubscription.PricePlanName,
-			DiscountOverride:  implSubscription.DiscountOverride,
 			TrialOverride:     implSubscription.TrialOverride,
 			BasePriceOverride: implSubscription.BasePriceOverride,
 			EffectiveAt:       implSubscription.EffectiveAt,
+			Discounts:         implSubscription.Discounts,
 		}
 	}
 	return subscription

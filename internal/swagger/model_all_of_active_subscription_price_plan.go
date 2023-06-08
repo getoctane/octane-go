@@ -13,6 +13,8 @@ import (
 
 // Price plan associated with this subscription.
 type AllOfActiveSubscriptionPricePlan struct {
+	// External facing unique identifier of a price plan
+	ExternalUuid string `json:"external_uuid,omitempty"`
 	// Unique name indentifier of a price plan
 	Name string `json:"name"`
 	// UI-friendly name used for data display. Defaults to `name`.
@@ -21,11 +23,15 @@ type AllOfActiveSubscriptionPricePlan struct {
 	// Lowest denomination of currency. e.g. USD is represented as cents.
 	BasePrice float64 `json:"base_price,omitempty"`
 	BasePriceFrequency int32 `json:"base_price_frequency,omitempty"`
+	// Custom invoice description for the base price line item.
+	BasePriceDescription string `json:"base_price_description,omitempty"`
 	// Time period that defines the length of a price plan cycle. One of `day`, `week`, `month`, `quarter`, or `year`.
 	Period string `json:"period"`
-	Coupon *Coupon `json:"coupon,omitempty"`
-	MeteredComponents []MeteredComponent `json:"metered_components,omitempty"`
-	Discount *Discount `json:"discount,omitempty"`
+	MeteredComponents []MeteredComponent `json:"metered_components"`
+	// Minimum amount to charge every 'period'
+	MinimumCharge int32 `json:"minimum_charge,omitempty"`
+	// The frequency (as a an integer multiple of the period) at which to charge the minimum charge.
+	MinimumChargeFrequency int32 `json:"minimum_charge_frequency,omitempty"`
 	Features []Feature `json:"features,omitempty"`
 	AddOns []AddOn `json:"add_ons,omitempty"`
 	Limits []Limit `json:"limits,omitempty"`

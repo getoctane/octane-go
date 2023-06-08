@@ -9,12 +9,18 @@
 package swagger
 
 type MeteredComponent struct {
-	MeterName string `json:"meter_name,omitempty"`
-	MeterDisplayName string `json:"meter_display_name,omitempty"`
-	PriceScheme *PriceScheme `json:"price_scheme,omitempty"`
+	MeterName string `json:"meter_name"`
+	MeterDisplayName string `json:"meter_display_name"`
+	PriceScheme *PriceScheme `json:"price_scheme"`
 	// Limit on the usage for the meter.
 	Limit float64 `json:"limit,omitempty"`
-	LabelLimits []MeteredComponentLabelLimit `json:"label_limits,omitempty"`
+	LabelLimits []MeteredComponentLabelLimit `json:"label_limits"`
 	// Name to be used on invoice.
 	DisplayName string `json:"display_name,omitempty"`
+	// External facing unique identifier of a metered component
+	ExternalUuid string `json:"external_uuid,omitempty"`
+	// Minimum charge for the metered component
+	MinimumCharge int32 `json:"minimum_charge,omitempty"`
+	// Minimum charge frequency (as a multiple of the price plan period) for the metered component
+	MinimumChargeFrequency int32 `json:"minimum_charge_frequency,omitempty"`
 }

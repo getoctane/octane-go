@@ -24,7 +24,8 @@ var (
 
 type PaymentGatewayCredentialApiService service
 /*
-PaymentGatewayCredentialApiService Get PaymentGatewayCredential for Vendor
+PaymentGatewayCredentialApiService Get PaymentGatewayCredential
+Returns the payment gateway information for your account (the Paddle or Stripe credentials used to issue and pay invoices)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return PaymentGatewayCredential
 */
@@ -116,7 +117,8 @@ func (a *PaymentGatewayCredentialApiService) PaymentGatewayCredentialsGet(ctx co
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-PaymentGatewayCredentialApiService Add PaymentGatewayCredential for Vendor
+PaymentGatewayCredentialApiService Add PaymentGatewayCredential
+Adds the credentials for a payment gateway, to be used to issue and pay invoices to your account.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return PaymentGatewayCredential

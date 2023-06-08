@@ -9,20 +9,20 @@
 package swagger
 
 type CreditGrant struct {
-	// Number of credits granted
-	Amount float64 `json:"amount,omitempty"`
-	// The date at which this grant is effective
-	EffectiveAt string `json:"effective_at,omitempty"`
-	// A unique identifier for this grant
-	Uuid string `json:"uuid,omitempty"`
-	// The date at which this grant expires
-	ExpiresAt string `json:"expires_at,omitempty"`
-	// Name of the customer who received the grant
-	CustomerName string `json:"customer_name,omitempty"`
-	// The source of the grant.
-	Source string `json:"source,omitempty"`
-	// Optional description. This is only viewable internally
-	Description string `json:"description,omitempty"`
 	// Total price paid for the credits, in cents
 	Price int32 `json:"price,omitempty"`
+	// The date at which this grant expires
+	ExpiresAt string `json:"expires_at,omitempty"`
+	// The date at which this grant is effective
+	EffectiveAt string `json:"effective_at,omitempty"`
+	// Optional description. This is only viewable internally
+	Description string `json:"description,omitempty"`
+	// A unique identifier for this grant
+	Uuid string `json:"uuid,omitempty"`
+	// Name of the customer who received the grant
+	CustomerName string `json:"customer_name,omitempty"`
+	// Number of credits granted
+	Amount float64 `json:"amount,omitempty"`
+	// The source of the grant.
+	Source string `json:"source,omitempty"`
 }

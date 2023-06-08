@@ -12,18 +12,20 @@ import (
 )
 
 type CreateSubscriptionArgs struct {
+	// DEPRECATED - use discounts field
+	DiscountOverride *AllOfCreateSubscriptionArgsDiscountOverride `json:"discount_override,omitempty"`
+	FeaturesOverride []FeatureInputArgs `json:"features_override,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
+	CustomerId int32 `json:"customer_id,omitempty"`
+	CouponOverrideId int32 `json:"coupon_override_id,omitempty"`
+	Discounts []DiscountInputArgs `json:"discounts,omitempty"`
 	EffectiveAt time.Time `json:"effective_at,omitempty"`
 	PricePlanTag string `json:"price_plan_tag,omitempty"`
-	VendorId int32 `json:"vendor_id,omitempty"`
-	LimitsOverride []LimitInputArgs `json:"limits_override,omitempty"`
-	AlignToCalendar bool `json:"align_to_calendar,omitempty"`
-	DiscountOverride *DiscountInputArgs `json:"discount_override,omitempty"`
+	PricePlanName string `json:"price_plan_name,omitempty"`
 	TrialOverride *TrialInputArgs `json:"trial_override,omitempty"`
-	CouponOverrideId int32 `json:"coupon_override_id,omitempty"`
+	LimitsOverride []LimitInputArgs `json:"limits_override,omitempty"`
 	PricePlanId int32 `json:"price_plan_id,omitempty"`
 	CouponOverrideName string `json:"coupon_override_name,omitempty"`
+	AlignToCalendar bool `json:"align_to_calendar,omitempty"`
 	AddOns []SubscriptionAddOnInput `json:"add_ons,omitempty"`
-	FeaturesOverride []FeatureInputArgs `json:"features_override,omitempty"`
-	PricePlanName string `json:"price_plan_name,omitempty"`
-	CustomerId int32 `json:"customer_id,omitempty"`
 }

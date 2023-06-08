@@ -10,5 +10,5 @@ package swagger
 
 type LimitInputArgs struct {
 	Limit float64 `json:"limit,omitempty"`
-	Feature *FeatureInputArgs `json:"feature,omitempty"`
+	Feature *FeatureInputArgs `json:"feature"`
 }

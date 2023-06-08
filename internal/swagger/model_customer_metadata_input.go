@@ -8,6 +8,7 @@
  */
 package swagger
 
-type UpdateInvoiceStatusArgs struct {
-	Status string `json:"status"`
+type CustomerMetadataInput struct {
+	Value string `json:"value,omitempty"`
+	Property string `json:"property,omitempty"`
 }

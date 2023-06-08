@@ -18,9 +18,8 @@ type ActiveSubscription struct {
 	PricePlanName string `json:"price_plan_name"`
 	// Price plan associated with this subscription.
 	PricePlan *AllOfActiveSubscriptionPricePlan `json:"price_plan,omitempty"`
-	// Optional discount override for the associated subscription.
-	DiscountOverride *AllOfActiveSubscriptionDiscountOverride `json:"discount_override,omitempty"`
-	AddOns []SubscriptionAddOn `json:"add_ons,omitempty"`
+	Discounts []AllOfActiveSubscriptionDiscountsItems `json:"discounts,omitempty"`
+	AddOns []SubscriptionAddOnItem `json:"add_ons,omitempty"`
 	// Optional trial override for the associated subscription.
 	TrialOverride *AllOfActiveSubscriptionTrialOverride `json:"trial_override,omitempty"`
 	FeaturesOverride []Feature `json:"features_override,omitempty"`

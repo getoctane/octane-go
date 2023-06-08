@@ -25,7 +25,8 @@ var (
 
 type CreditsApiService service
 /*
-CreditsApiService
+CreditsApiService Get Credit Grants
+Returns all the credit grants under your account.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return ListCreditGrants
@@ -130,7 +131,8 @@ func (a *CreditsApiService) CreditsGrantGet(ctx context.Context, body ListCredit
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CreditsApiService Void a credit grant
+CreditsApiService Void a Credit Grant
+Deactivates a credit grant with the given grant UUID.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param grantUuid
 
@@ -210,7 +212,8 @@ func (a *CreditsApiService) CreditsGrantGrantUuidVoidPost(ctx context.Context, g
 	return localVarHttpResponse, nil
 }
 /*
-CreditsApiService Create a credit grant
+CreditsApiService Create a Credit Grant
+Creates a credit grant for one of your customers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
 @return CreditGrant
@@ -315,13 +318,14 @@ func (a *CreditsApiService) CreditsGrantPost(ctx context.Context, body CreateCre
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CreditsApiService Fetch the credit ledger for a customer
+CreditsApiService Fetch a Credit Ledger
+Returns the credit ledger for one of your customers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param asOfStr
  * @param customerName
+ * @param asOfStr
 @return []CreditLedger
 */
-func (a *CreditsApiService) CreditsLedgerCustomerNameAsOfStrGet(ctx context.Context, asOfStr string, customerName string) ([]CreditLedger, *http.Response, error) {
+func (a *CreditsApiService) CreditsLedgerCustomerNameAsOfStrGet(ctx context.Context, customerName string, asOfStr string) ([]CreditLedger, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -332,17 +336,17 @@ func (a *CreditsApiService) CreditsLedgerCustomerNameAsOfStrGet(ctx context.Cont
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/credits/ledger/{customer_name}/{as_of_str}"
-	localVarPath = strings.Replace(localVarPath, "{"+"as_of_str"+"}", fmt.Sprintf("%v", asOfStr), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"as_of_str"+"}", fmt.Sprintf("%v", asOfStr), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(asOfStr) < 1 {
-		return localVarReturnValue, nil, reportError("asOfStr must have at least 1 elements")
-	}
 	if strlen(customerName) < 1 {
 		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
+	}
+	if strlen(asOfStr) < 1 {
+		return localVarReturnValue, nil, reportError("asOfStr must have at least 1 elements")
 	}
 
 	// to determine the Content-Type header
@@ -417,7 +421,8 @@ func (a *CreditsApiService) CreditsLedgerCustomerNameAsOfStrGet(ctx context.Cont
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
-CreditsApiService Fetch the credit ledger for a customer
+CreditsApiService Fetch a Credit Ledger
+Returns the credit ledger for one of your customers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param customerName
 @return []CreditLedger

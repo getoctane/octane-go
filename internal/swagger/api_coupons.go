@@ -199,15 +199,15 @@ CouponsApiService Get Coupon
 Get a specific coupon for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param couponName
-@return Coupon1
+@return Coupon
 */
-func (a *CouponsApiService) CouponsCouponNameGet(ctx context.Context, couponName string) (Coupon1, *http.Response, error) {
+func (a *CouponsApiService) CouponsCouponNameGet(ctx context.Context, couponName string) (Coupon, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue Coupon1
+		localVarReturnValue Coupon
 	)
 
 	// create path and map variables
@@ -268,7 +268,7 @@ func (a *CouponsApiService) CouponsCouponNameGet(ctx context.Context, couponName
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Coupon1
+			var v Coupon
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -296,15 +296,15 @@ func (a *CouponsApiService) CouponsCouponNameGet(ctx context.Context, couponName
 CouponsApiService Get Coupons
 Gets all coupons for a specific vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-@return []Coupon1
+@return []Coupon
 */
-func (a *CouponsApiService) CouponsGet(ctx context.Context) ([]Coupon1, *http.Response, error) {
+func (a *CouponsApiService) CouponsGet(ctx context.Context) ([]Coupon, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue []Coupon1
+		localVarReturnValue []Coupon
 	)
 
 	// create path and map variables
@@ -361,7 +361,7 @@ func (a *CouponsApiService) CouponsGet(ctx context.Context) ([]Coupon1, *http.Re
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []Coupon1
+			var v []Coupon
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()
@@ -390,15 +390,15 @@ CouponsApiService Create Coupons
 Create a coupon for a vendor.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param body
-@return Coupon1
+@return Coupon
 */
-func (a *CouponsApiService) CouponsPost(ctx context.Context, body CouponInputArgs) (Coupon1, *http.Response, error) {
+func (a *CouponsApiService) CouponsPost(ctx context.Context, body CouponInputArgs) (Coupon, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue Coupon1
+		localVarReturnValue Coupon
 	)
 
 	// create path and map variables
@@ -467,7 +467,7 @@ func (a *CouponsApiService) CouponsPost(ctx context.Context, body CouponInputArg
 				return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Coupon1
+			var v Coupon
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

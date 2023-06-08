@@ -9,13 +9,13 @@
 package swagger
 
 type ListPricePlans struct {
-	SortColumn string `json:"sort_column,omitempty"`
+	// The number of items to fetch. Defaults to 10.
+	Limit int32 `json:"limit,omitempty"`
+	SortDirection string `json:"sort_direction,omitempty"`
 	PricePlans []PricePlan `json:"price_plans,omitempty"`
 	// The unique offset to start at when paging forwards
 	ForwardSecondarySortOffset string `json:"forward_secondary_sort_offset,omitempty"`
-	SortDirection string `json:"sort_direction,omitempty"`
+	SortColumn string `json:"sort_column,omitempty"`
 	// The sort column offset to start at when paging forwards
 	ForwardSortOffset string `json:"forward_sort_offset,omitempty"`
-	// The number of items to fetch. Defaults to 10.
-	Limit int32 `json:"limit,omitempty"`
 }

@@ -25,10 +25,6 @@ type (
 		Credit       float64 `json:"credit,omitempty"`
 	}
 
-	DiscountInputArgs struct {
-		DiscountType string  `json:"discount_type,omitempty"`
-		Amount       float64 `json:"amount,omitempty"`
-	}
 
 	LimitInputArgs struct {
 		Feature *FeatureInputArgs `json:"feature,omitempty"`
@@ -36,7 +32,6 @@ type (
 	}
 
 	CreatePricePlanArgs struct {
-		CouponName        string                      `json:"coupon_name,omitempty"`
 		VendorId          int32                       `json:"vendor_id,omitempty"`
 		Description       string                      `json:"description,omitempty"`
 		Period            string                      `json:"period,omitempty"`
@@ -45,7 +40,6 @@ type (
 		Tags              []string                    `json:"tags,omitempty"`
 		Features          []FeatureInputArgs          `json:"features,omitempty"`
 		Trial             *TrialInputArgs             `json:"trial,omitempty"`
-		Discount          *DiscountInputArgs          `json:"discount,omitempty"`
 		DisplayName       string                      `json:"display_name,omitempty"`
 		Name              string                      `json:"name,omitempty"`
 		Limits            []LimitInputArgs            `json:"limits,omitempty"`
@@ -72,7 +66,6 @@ type (
 	}
 
 	UpdatePricePlanArgs struct {
-		CouponName        string                      `json:"coupon_name,omitempty"`
 		VendorId          int32                       `json:"vendor_id,omitempty"`
 		Description       string                      `json:"description,omitempty"`
 		Period            string                      `json:"period,omitempty"`
@@ -81,7 +74,6 @@ type (
 		Tags              []string                    `json:"tags,omitempty"`
 		Features          []FeatureInputArgs          `json:"features,omitempty"`
 		Trial             *TrialInputArgs             `json:"trial,omitempty"`
-		Discount          *DiscountInputArgs          `json:"discount,omitempty"`
 		DisplayName       string                      `json:"display_name,omitempty"`
 		Name              string                      `json:"name,omitempty"`
 		Limits            []LimitInputArgs            `json:"limits,omitempty"`
@@ -98,10 +90,9 @@ type (
 
 // Create creates Price Plan.
 func (api *pricePlansAPI) Create(body CreatePricePlanArgs) (PricePlan, *http.Response, error) {
-	implAddOns, implFeatures, implTrial, implDiscount, implLimits, implComponents :=
-		pricePlanConvert(body.AddOns, body.Features, body.Trial, body.Discount, body.Limits, body.MeteredComponents)
+	implAddOns, implFeatures, implTrial, implLimits, implComponents :=
+		pricePlanConvert(body.AddOns, body.Features, body.Trial, body.Limits, body.MeteredComponents)
 	implCreatePricePlanArgs := swagger.CreatePricePlanArgs{
-		CouponName:        body.CouponName,
 		VendorId:          body.VendorId,
 		Description:       body.Description,
 		Period:            body.Period,
@@ -110,7 +101,6 @@ func (api *pricePlansAPI) Create(body CreatePricePlanArgs) (PricePlan, *http.Res
 		Tags:              body.Tags,
 		Features:          implFeatures,
 		Trial:             implTrial,
-		Discount:          implDiscount,
 		DisplayName:       body.DisplayName,
 		Name:              body.Name,
 		Limits:            implLimits,
@@ -132,10 +122,9 @@ func (api *pricePlansAPI) Retrieve(pricePlanName string) (PricePlan, *http.Respo
 
 // Update updates a price plan by its unique name.
 func (api *pricePlansAPI) Update(pricePlanName string, body UpdatePricePlanArgs) (PricePlan, *http.Response, error) {
-	implAddOns, implFeatures, implTrial, implDiscount, implLimits, implComponents :=
-		pricePlanConvert(body.AddOns, body.Features, body.Trial, body.Discount, body.Limits, body.MeteredComponents)
+	implAddOns, implFeatures, implTrial, implLimits, implComponents :=
+		pricePlanConvert(body.AddOns, body.Features, body.Trial, body.Limits, body.MeteredComponents)
 	implUpdatePricePlanArgs := swagger.UpdatePricePlanArgs{
-		CouponName:        body.CouponName,
 		VendorId:          body.VendorId,
 		Description:       body.Description,
 		Period:            body.Period,
@@ -144,7 +133,6 @@ func (api *pricePlansAPI) Update(pricePlanName string, body UpdatePricePlanArgs)
 		Tags:              body.Tags,
 		Features:          implFeatures,
 		Trial:             implTrial,
-		Discount:          implDiscount,
 		DisplayName:       body.DisplayName,
 		Name:              body.Name,
 		Limits:            implLimits,
@@ -186,9 +174,7 @@ func implPricePlanToPricePlan(implPricePlan swagger.PricePlan) PricePlan {
 			Description:       implPricePlan.Description,
 			BasePrice:         implPricePlan.BasePrice,
 			Period:            implPricePlan.Period,
-			Coupon:            implPricePlan.Coupon,
 			MeteredComponents: implPricePlan.MeteredComponents,
-			Discount:          implPricePlan.Discount,
 			Features:          implPricePlan.Features,
 			Tags:              implPricePlan.Tags,
 			Trial:             implPricePlan.Trial,
@@ -198,8 +184,8 @@ func implPricePlanToPricePlan(implPricePlan swagger.PricePlan) PricePlan {
 }
 
 // Convert various price plan fields for create/update... holy heck
-func pricePlanConvert(addons []AddOnInputArgs, features []FeatureInputArgs, trial *TrialInputArgs, discount *DiscountInputArgs, limits []LimitInputArgs, components []MeteredComponentInputArgs) (
-	implAddOns []swagger.AddOnInputArgs, implFeatures []swagger.FeatureInputArgs, implTrial *swagger.TrialInputArgs, implDiscount *swagger.DiscountInputArgs, implLimits []swagger.LimitInputArgs,
+func pricePlanConvert(addons []AddOnInputArgs, features []FeatureInputArgs, trial *TrialInputArgs, limits []LimitInputArgs, components []MeteredComponentInputArgs) (
+	implAddOns []swagger.AddOnInputArgs, implFeatures []swagger.FeatureInputArgs, implTrial *swagger.TrialInputArgs,  implLimits []swagger.LimitInputArgs,
 	implComponents []swagger.MeteredComponentInputArgs) {
 	if addons != nil {
 		for _, addon := range addons {
@@ -231,12 +217,6 @@ func pricePlanConvert(addons []AddOnInputArgs, features []FeatureInputArgs, tria
 			TimeUnitName: trial.TimeUnitName,
 			TimeLength:   trial.TimeLength,
 			Credit:       trial.Credit,
-		}
-	}
-	if discount != nil {
-		implDiscount = &swagger.DiscountInputArgs{
-			DiscountType: discount.DiscountType,
-			Amount:       discount.Amount,
 		}
 	}
 	if limits != nil {

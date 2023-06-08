@@ -8,7 +8,7 @@
  */
 package swagger
 
-type AllOfUpdatePricePlanArgsDiscount struct {
-	Amount float64 `json:"amount,omitempty"`
-	DiscountType string `json:"discount_type,omitempty"`
+type CustomerPortalCreditPurchase struct {
+	// Number of credits to purchase.
+	Amount int32 `json:"amount"`
 }

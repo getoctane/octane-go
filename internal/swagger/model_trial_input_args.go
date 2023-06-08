@@ -9,7 +9,7 @@
 package swagger
 
 type TrialInputArgs struct {
-	TimeUnitName string `json:"time_unit_name,omitempty"`
-	Credit float64 `json:"credit,omitempty"`
 	TimeLength float64 `json:"time_length,omitempty"`
+	Credit float64 `json:"credit,omitempty"`
+	TimeUnitName string `json:"time_unit_name,omitempty"`
 }

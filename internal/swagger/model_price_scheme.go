@@ -12,10 +12,14 @@ type PriceScheme struct {
 	DisplayName string `json:"display_name,omitempty"`
 	Name string `json:"name,omitempty"`
 	SchemeType string `json:"scheme_type,omitempty"`
+	// Size of the unit batch to use for the prices. Can only be set if scheme_type='FLAT' or 'TIERED'. E.g. To charge $10 per 100 API Requests, set batch_size to 100.
+	BatchSize int32 `json:"batch_size,omitempty"`
 	// Array of price tiers, each of which consists of `price` and `cap` key:value pairs
 	Prices []PriceTier `json:"prices,omitempty"`
 	// Array of (key, value) meter labels to price on & the price tiers that should be used against those labels
 	PriceList []interface{} `json:"price_list,omitempty"`
 	TimeUnitName string `json:"time_unit_name,omitempty"`
 	UnitName string `json:"unit_name,omitempty"`
+	// The % increase/decrease in price after the minimum charge is reached.
+	PostMinimumChargePercentageChange float64 `json:"post_minimum_charge_percentage_change,omitempty"`
 }

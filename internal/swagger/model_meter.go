@@ -11,11 +11,13 @@ package swagger
 type Meter struct {
 	// Unique name identifier
 	Name string `json:"name"`
+	// Name of the event associated with this meter
+	EventName string `json:"event_name"`
 	// Name used for display in UI
 	DisplayName string `json:"display_name,omitempty"`
 	Description string `json:"description,omitempty"`
 	// Whether measurement values are to be considered incremental (versus a running total)
-	IsIncremental bool `json:"is_incremental,omitempty"`
+	IsIncremental bool `json:"is_incremental"`
 	MeterType string `json:"meter_type,omitempty"`
 	// The expected unit for the measurement values associated with this meter.
 	UnitName string `json:"unit_name,omitempty"`

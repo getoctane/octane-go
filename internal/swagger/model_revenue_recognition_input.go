@@ -8,10 +8,7 @@
  */
 package swagger
 
-type SubscriptionAddOn struct {
-	// Add-on specification
-	AddOn *AllOfSubscriptionAddOnAddOn `json:"add_on,omitempty"`
-	// Optional quantity of the add-on on the subscription
-	Quantity int32 `json:"quantity"`
-	Price float64 `json:"price,omitempty"`
+type RevenueRecognitionInput struct {
+	// List of customer names for which to compute booked/recognized revenue.
+	CustomerNames []string `json:"customer_names,omitempty"`
 }

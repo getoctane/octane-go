@@ -9,8 +9,10 @@
 package swagger
 
 type CreateRefundArgs struct {
+	// Invoice that the refund should be against
+	InvoiceId int32 `json:"invoice_id,omitempty"`
 	// Amount to be refunded
 	Amount int32 `json:"amount,omitempty"`
 	// Invoice that the refund should be against
-	InvoiceId int32 `json:"invoice_id,omitempty"`
+	InvoiceUuid string `json:"invoice_uuid,omitempty"`
 }

@@ -9,7 +9,7 @@
 package swagger
 
 type Limit struct {
-	Feature *Feature `json:"feature,omitempty"`
+	Feature *Feature `json:"feature"`
 	// Limit on feature
 	Limit float64 `json:"limit"`
 }

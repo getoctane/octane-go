@@ -44,6 +44,10 @@ type APIClient struct {
 
 	// API Services
 
+	AdminApi *AdminApiService
+
+	AvalaraApi *AvalaraApiService
+
 	BillingSettingsApi *BillingSettingsApiService
 
 	CouponsApi *CouponsApiService
@@ -56,7 +60,11 @@ type APIClient struct {
 
 	CustomersApi *CustomersApiService
 
+	FeaturesApi *FeaturesApiService
+
 	InvoicesApi *InvoicesApiService
+
+	LiveMeasurementsApi *LiveMeasurementsApiService
 
 	MeasurementsApi *MeasurementsApiService
 
@@ -67,6 +75,10 @@ type APIClient struct {
 	PricePlansApi *PricePlansApiService
 
 	RefundApi *RefundApiService
+
+	RevenueRecognitionApi *RevenueRecognitionApiService
+
+	SelfServeSettingsApi *SelfServeSettingsApiService
 
 	WebhooksApi *WebhooksApiService
 }
@@ -87,18 +99,24 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.AdminApi = (*AdminApiService)(&c.common)
+	c.AvalaraApi = (*AvalaraApiService)(&c.common)
 	c.BillingSettingsApi = (*BillingSettingsApiService)(&c.common)
 	c.CouponsApi = (*CouponsApiService)(&c.common)
 	c.CreditsApi = (*CreditsApiService)(&c.common)
 	c.CustomerPortalApi = (*CustomerPortalApiService)(&c.common)
 	c.CustomerPortalSettingsApi = (*CustomerPortalSettingsApiService)(&c.common)
 	c.CustomersApi = (*CustomersApiService)(&c.common)
+	c.FeaturesApi = (*FeaturesApiService)(&c.common)
 	c.InvoicesApi = (*InvoicesApiService)(&c.common)
+	c.LiveMeasurementsApi = (*LiveMeasurementsApiService)(&c.common)
 	c.MeasurementsApi = (*MeasurementsApiService)(&c.common)
 	c.MetersApi = (*MetersApiService)(&c.common)
 	c.PaymentGatewayCredentialApi = (*PaymentGatewayCredentialApiService)(&c.common)
 	c.PricePlansApi = (*PricePlansApiService)(&c.common)
 	c.RefundApi = (*RefundApiService)(&c.common)
+	c.RevenueRecognitionApi = (*RevenueRecognitionApiService)(&c.common)
+	c.SelfServeSettingsApi = (*SelfServeSettingsApiService)(&c.common)
 	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 
 	return c

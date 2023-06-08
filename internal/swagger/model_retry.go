@@ -8,7 +8,6 @@
  */
 package swagger
 
-type AllOfCreatePricePlanArgsDiscount struct {
-	Amount float64 `json:"amount,omitempty"`
-	DiscountType string `json:"discount_type,omitempty"`
+type Retry struct {
+	Success bool `json:"success,omitempty"`
 }
