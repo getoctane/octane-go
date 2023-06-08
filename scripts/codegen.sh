@@ -322,6 +322,8 @@ mv mount/model_create_credit_grant_args.go.tmp \
   mount/model_create_credit_grant_args.go
 
 
+#The above time -> string conversion makes the time import unnecessary,
+#so we strip that import below
 cat mount/model_credit_grant.go | \
   sed '/import (/,+2d' \
   > mount/model_credit_grant.go.tmp
