@@ -12,11 +12,11 @@ import (
 )
 
 type CreditLedger struct {
-	// Credit balance as of this change
-	Balance float64 `json:"balance,omitempty"`
-	// The time at which this credit balance change occurred.
-	Timestamp time.Time `json:"timestamp,omitempty"`
 	// The change in numer of credits
 	Amount int32 `json:"amount,omitempty"`
+	// The time at which this credit balance change occurred.
+	Timestamp time.Time `json:"timestamp,omitempty"`
 	Pending bool `json:"pending,omitempty"`
+	// Credit balance as of this change
+	Balance float64 `json:"balance,omitempty"`
 }

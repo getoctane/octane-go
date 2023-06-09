@@ -9,7 +9,7 @@
 package swagger
 
 type CustomerPortalLabelDisplayName struct {
+	DisplayName string `json:"display_name,omitempty"`
 	// The raw value of the label data
 	Name string `json:"name,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
 }

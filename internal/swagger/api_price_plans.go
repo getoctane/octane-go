@@ -234,24 +234,24 @@ PricePlansApiService Get Paginated Price Plans
 List all price plans with pagination.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *PricePlansApiPricePlansPaginateGetOpts - Optional Parameters:
-     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
-     * @param "Tags" (optional.Interface of []string) - 
-     * @param "SortDirection" (optional.String) - 
      * @param "ForwardSecondarySortOffset" (optional.String) -  The unique offset to start at when paging forwards
+     * @param "SortDirection" (optional.String) - 
+     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
+     * @param "Tags" (optional.Interface of []string) - 
+     * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
      * @param "Names" (optional.Interface of []string) - 
      * @param "SortColumn" (optional.String) - 
-     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
 @return ListPricePlans
 */
 
 type PricePlansApiPricePlansPaginateGetOpts struct {
-    Limit optional.Int32
-    Tags optional.Interface
-    SortDirection optional.String
     ForwardSecondarySortOffset optional.String
+    SortDirection optional.String
+    ForwardSortOffset optional.String
+    Tags optional.Interface
+    Limit optional.Int32
     Names optional.Interface
     SortColumn optional.String
-    ForwardSortOffset optional.String
 }
 
 func (a *PricePlansApiService) PricePlansPaginateGet(ctx context.Context, localVarOptionals *PricePlansApiPricePlansPaginateGetOpts) (ListPricePlans, *http.Response, error) {
@@ -270,26 +270,26 @@ func (a *PricePlansApiService) PricePlansPaginateGet(ctx context.Context, localV
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Tags.IsSet() {
-		localVarQueryParams.Add("tags", parameterToString(localVarOptionals.Tags.Value(), "multi"))
+	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
+		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
 		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
-		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
+		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Tags.IsSet() {
+		localVarQueryParams.Add("tags", parameterToString(localVarOptionals.Tags.Value(), "multi"))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Names.IsSet() {
 		localVarQueryParams.Add("names", parameterToString(localVarOptionals.Names.Value(), "multi"))
 	}
 	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
 		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
-		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

@@ -9,10 +9,10 @@
 package swagger
 
 type ValidateCredentialsArgs struct {
-	// True if using a Avalara sandbox account, False otherwise
-	SandboxMode bool `json:"sandbox_mode"`
 	// Username of the Avalara account
 	Username string `json:"username"`
+	// True if using a Avalara sandbox account, False otherwise
+	SandboxMode bool `json:"sandbox_mode"`
 	// Password of the Avalara account
 	Password string `json:"password"`
 }

@@ -9,18 +9,18 @@
 package swagger
 
 type PriceSchemeInputArgs struct {
-	// Array of (key, value) meter labels to price on & the price tiers that should be used against those labels
-	PriceList []interface{} `json:"price_list,omitempty"`
-	// One of 'FLAT', 'TIERED', or 'STAIRSTEP'
-	SchemeType string `json:"scheme_type"`
-	// The time unit for the metered component (e.g., month or hour)
-	TimeUnitName string `json:"time_unit_name,omitempty"`
 	// The name of the unit used for this metered component (e.g., gigabyte)
 	UnitName string `json:"unit_name,omitempty"`
-	// Array of price tiers, each of which consists of `price` and `cap` key:value pairs
-	Prices []PriceInputArgs `json:"prices,omitempty"`
 	// The % increase/decrease in price after the minimum charge is reached (e.g., 25.5 -> 25.5% increase).
 	PostMinimumChargePercentageChange float64 `json:"post_minimum_charge_percentage_change,omitempty"`
+	// Array of (key, value) meter labels to price on & the price tiers that should be used against those labels
+	PriceList []interface{} `json:"price_list,omitempty"`
+	// The time unit for the metered component (e.g., month or hour)
+	TimeUnitName string `json:"time_unit_name,omitempty"`
+	// One of 'FLAT', 'TIERED', or 'STAIRSTEP'
+	SchemeType string `json:"scheme_type"`
+	// Array of price tiers, each of which consists of `price` and `cap` key:value pairs
+	Prices []PriceInputArgs `json:"prices,omitempty"`
 	// Size of the unit batch to use for the prices. Can only be set if scheme_type='FLAT' or 'TIERED'. E.g. To charge $10 per 100 API Requests, set batch_size to 100.
 	BatchSize int32 `json:"batch_size,omitempty"`
 }

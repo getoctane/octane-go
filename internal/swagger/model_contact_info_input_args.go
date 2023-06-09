@@ -9,18 +9,18 @@
 package swagger
 
 type ContactInfoInputArgs struct {
-	Zipcode string `json:"zipcode,omitempty"`
 	VatId string `json:"vat_id,omitempty"`
-	City string `json:"city,omitempty"`
-	// List of secondary contact emails (all email communication will also be sent to these emails).
-	SecondaryEmails []string `json:"secondary_emails,omitempty"`
 	Country string `json:"country,omitempty"`
 	Url string `json:"url,omitempty"`
-	LogoUrl string `json:"logo_url,omitempty"`
-	LegalName string `json:"legal_name,omitempty"`
+	City string `json:"city,omitempty"`
+	Zipcode string `json:"zipcode,omitempty"`
+	State string `json:"state,omitempty"`
 	Email string `json:"email,omitempty"`
 	Phone string `json:"phone,omitempty"`
-	AddressLine1 string `json:"address_line_1,omitempty"`
 	AddressLine2 string `json:"address_line_2,omitempty"`
-	State string `json:"state,omitempty"`
+	AddressLine1 string `json:"address_line_1,omitempty"`
+	LogoUrl string `json:"logo_url,omitempty"`
+	// List of secondary contact emails (all email communication will also be sent to these emails).
+	SecondaryEmails []string `json:"secondary_emails,omitempty"`
+	LegalName string `json:"legal_name,omitempty"`
 }

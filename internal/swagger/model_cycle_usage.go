@@ -13,10 +13,10 @@ import (
 
 type CycleUsage struct {
 	UsageByTime []AllOfCycleUsageUsageByTimeItems `json:"usage_by_time,omitempty"`
+	// Total usage in the cycle.
+	TotalUsage int32 `json:"total_usage,omitempty"`
 	// The start of the billing cycle in UTC.
 	CycleStart time.Time `json:"cycle_start,omitempty"`
 	// The end of the billing cycle in UTC.
 	CycleEnd time.Time `json:"cycle_end,omitempty"`
-	// Total usage in the cycle.
-	TotalUsage int32 `json:"total_usage,omitempty"`
 }

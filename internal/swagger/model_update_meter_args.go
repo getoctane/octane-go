@@ -9,6 +9,6 @@
 package swagger
 
 type UpdateMeterArgs struct {
-	Description string `json:"description,omitempty"`
 	DisplayName string `json:"display_name,omitempty"`
+	Description string `json:"description,omitempty"`
 }

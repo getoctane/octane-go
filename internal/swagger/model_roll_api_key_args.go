@@ -12,8 +12,8 @@ import (
 )
 
 type RollApiKeyArgs struct {
-	// The API key you want to roll.
-	ApiKey string `json:"api_key"`
 	// The date at which this API key will expire. Will default to 7 days.
 	ExpiresAt time.Time `json:"expires_at,omitempty"`
+	// The API key you want to roll.
+	ApiKey string `json:"api_key"`
 }

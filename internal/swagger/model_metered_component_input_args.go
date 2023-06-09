@@ -9,18 +9,18 @@
 package swagger
 
 type MeteredComponentInputArgs struct {
-	// Numeric limit to set on customer usage for the meter.
-	Limit int32 `json:"limit,omitempty"`
+	LabelLimits []MeteredComponentLabelLimitInputArgs `json:"label_limits,omitempty"`
 	// Codename of the meter.
 	MeterName string `json:"meter_name,omitempty"`
 	// Minimum charge frequency (as a multiple of the price plan period) for the metered component
 	MinimumChargeFrequency int32 `json:"minimum_charge_frequency,omitempty"`
+	// Numeric limit to set on customer usage for the meter.
+	Limit int32 `json:"limit,omitempty"`
 	PriceScheme *PriceSchemeInputArgs `json:"price_scheme,omitempty"`
-	// Name to be used on invoice.
-	DisplayName string `json:"display_name,omitempty"`
-	LabelLimits []MeteredComponentLabelLimitInputArgs `json:"label_limits,omitempty"`
-	// Minimum charge for the metered component
-	MinimumCharge int32 `json:"minimum_charge,omitempty"`
 	Id int32 `json:"id,omitempty"`
 	MeterId int32 `json:"meter_id,omitempty"`
+	// Name to be used on invoice.
+	DisplayName string `json:"display_name,omitempty"`
+	// Minimum charge for the metered component
+	MinimumCharge int32 `json:"minimum_charge,omitempty"`
 }

@@ -12,14 +12,14 @@ import (
 )
 
 type LineItems struct {
-	Quantity float64 `json:"quantity,omitempty"`
-	StartTime time.Time `json:"start_time,omitempty"`
 	QuantityUnit string `json:"quantity_unit,omitempty"`
-	Price string `json:"price,omitempty"`
-	Metadata map[string]string `json:"metadata,omitempty"`
+	Quantity float64 `json:"quantity,omitempty"`
 	Description string `json:"description,omitempty"`
+	Id string `json:"id,omitempty"`
+	PriceInt int32 `json:"price_int,omitempty"`
+	StartTime time.Time `json:"start_time,omitempty"`
+	Metadata map[string]string `json:"metadata,omitempty"`
 	EndTime time.Time `json:"end_time,omitempty"`
 	Name string `json:"name,omitempty"`
-	PriceInt int32 `json:"price_int,omitempty"`
-	Id string `json:"id,omitempty"`
+	Price string `json:"price,omitempty"`
 }

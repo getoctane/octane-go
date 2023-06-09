@@ -13,6 +13,7 @@ import (
 
 // Customer's current active subscription. Includes the price plan and overrides they are subscribed to.
 type AllOfCustomerPortalActiveSubscriptionSubscription struct {
+	Uuid string `json:"uuid"`
 	// Unique name identifier of a customer
 	CustomerName string `json:"customer_name"`
 	// Unique name indentifier of a price plan

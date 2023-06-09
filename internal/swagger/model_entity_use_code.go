@@ -9,12 +9,12 @@
 package swagger
 
 type EntityUseCode struct {
-	// A list of countries where this use code is valid.
-	ValidCountries []string `json:"valid_countries,omitempty"`
-	// The Avalara-recognized entity use code for this definition.
-	Code string `json:"code,omitempty"`
 	// Text describing the meaning of this use code.
 	Description string `json:"description,omitempty"`
+	// The Avalara-recognized entity use code for this definition.
+	Code string `json:"code,omitempty"`
 	// The name of this entity use code.
 	Name string `json:"name,omitempty"`
+	// A list of countries where this use code is valid.
+	ValidCountries []string `json:"valid_countries,omitempty"`
 }

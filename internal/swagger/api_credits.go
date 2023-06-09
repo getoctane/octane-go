@@ -321,11 +321,11 @@ func (a *CreditsApiService) CreditsGrantPost(ctx context.Context, body CreateCre
 CreditsApiService Fetch a Credit Ledger
 Returns the credit ledger for one of your customers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param customerName
  * @param asOfStr
+ * @param customerName
 @return []CreditLedger
 */
-func (a *CreditsApiService) CreditsLedgerCustomerNameAsOfStrGet(ctx context.Context, customerName string, asOfStr string) ([]CreditLedger, *http.Response, error) {
+func (a *CreditsApiService) CreditsLedgerCustomerNameAsOfStrGet(ctx context.Context, asOfStr string, customerName string) ([]CreditLedger, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -336,17 +336,17 @@ func (a *CreditsApiService) CreditsLedgerCustomerNameAsOfStrGet(ctx context.Cont
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/credits/ledger/{customer_name}/{as_of_str}"
-	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"as_of_str"+"}", fmt.Sprintf("%v", asOfStr), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(customerName) < 1 {
-		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
-	}
 	if strlen(asOfStr) < 1 {
 		return localVarReturnValue, nil, reportError("asOfStr must have at least 1 elements")
+	}
+	if strlen(customerName) < 1 {
+		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
 	}
 
 	// to determine the Content-Type header

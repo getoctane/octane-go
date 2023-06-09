@@ -9,6 +9,8 @@
 package swagger
 
 type DeleteDiscountInputArgs struct {
+	// Number of billing cycles that the discount should expire in. Defaults to 0 (start of current billing cycle). If the inputted discount is scheduled, it is the number of billing cycles relative to the scheduled start. You can only shorten a discount, it is not possible to extend it.
+	BillingCycleDuration int32 `json:"billing_cycle_duration,omitempty"`
 	// External UUID representing the discount to be deleted.
 	DiscountUuid string `json:"discount_uuid"`
 }

@@ -9,8 +9,8 @@
 package swagger
 
 type AddFeaturesToPricePlanInput struct {
-	// List of new limits to add
-	Limits []LimitInputArgs `json:"limits,omitempty"`
 	// List of new features to add
 	Features []FeatureInputArgs `json:"features,omitempty"`
+	// List of new limits to add
+	Limits []LimitInputArgs `json:"limits,omitempty"`
 }

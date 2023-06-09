@@ -11,14 +11,14 @@ package swagger
 type CustomerPortalUsage struct {
 	// Name of the meter.
 	MeterName string `json:"meter_name,omitempty"`
-	// Display name of the meter.
-	MeterDisplayName string `json:"meter_display_name,omitempty"`
-	// Daily usage across the previous billing cycle.
-	PreviousCycleUsage *AllOfCustomerPortalUsagePreviousCycleUsage `json:"previous_cycle_usage,omitempty"`
 	// Type of the meter. E.g. COUNTER or GAUGE.
 	MeterType string `json:"meter_type,omitempty"`
 	// Name of the unit the meter uses.
 	UnitName string `json:"unit_name,omitempty"`
+	// Daily usage across the previous billing cycle.
+	PreviousCycleUsage *AllOfCustomerPortalUsagePreviousCycleUsage `json:"previous_cycle_usage,omitempty"`
 	// Daily usage across the current billing cycle.
 	CurrentCycleUsage *AllOfCustomerPortalUsageCurrentCycleUsage `json:"current_cycle_usage,omitempty"`
+	// Display name of the meter.
+	MeterDisplayName string `json:"meter_display_name,omitempty"`
 }

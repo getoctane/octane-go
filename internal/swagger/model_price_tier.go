@@ -11,8 +11,8 @@ package swagger
 type PriceTier struct {
 	// Cap of the tier, meaning that any subsequent usage will be bucketed into the following tier. If cap is undefined, it is effectively treated as Infinity.
 	Cap float64 `json:"cap,omitempty"`
-	// The price (in lowest currency denomination by which to charge, given that the usage is within the cap range.
-	Price float64 `json:"price"`
 	// The line item description to use if usage falls in this tier.
 	Description string `json:"description,omitempty"`
+	// The price (in lowest currency denomination by which to charge, given that the usage is within the cap range.
+	Price float64 `json:"price"`
 }

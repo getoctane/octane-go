@@ -9,7 +9,7 @@
 package swagger
 
 type CustomerPortalMeterLabels struct {
+	Key string `json:"key,omitempty"`
 	// Primary label values associated with the key
 	Values []string `json:"values,omitempty"`
-	Key string `json:"key,omitempty"`
 }

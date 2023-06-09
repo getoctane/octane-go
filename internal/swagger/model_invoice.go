@@ -12,49 +12,49 @@ import (
 )
 
 type Invoice struct {
-	// The date the invoice will be issued to the end customer or forwarded to the payment processor.
-	IssueDate time.Time `json:"issue_date,omitempty"`
 	// Amount due before any credits are applied
 	SubTotal int32 `json:"sub_total,omitempty"`
-	// Earliest start time of line items covered by the invoice
-	MinItemStartTime time.Time `json:"min_item_start_time,omitempty"`
-	// Any discount credits applied to the invoice
-	DiscountCredit int32 `json:"discount_credit,omitempty"`
-	// Tax amount applied to subtotal
-	TaxAmount int32 `json:"tax_amount,omitempty"`
-	LatestInvoiceAttemptAt time.Time `json:"latest_invoice_attempt_at,omitempty"`
-	LatestPaymentAttemptAt time.Time `json:"latest_payment_attempt_at,omitempty"`
-	// If there is an error processing this invoice, this field contains the error message.
-	StatusError string `json:"status_error,omitempty"`
-	// Name of the customer this invoice is for.
-	CustomerName string `json:"customer_name,omitempty"`
-	// False if invoice has not been sent to the customer
-	IsInvoiced bool `json:"is_invoiced,omitempty"`
-	// [DEPRECATED] Start time of the cycle in which the invoice was generated
-	StartTime time.Time `json:"start_time,omitempty"`
-	// Total amount due
-	AmountDue int32 `json:"amount_due,omitempty"`
-	LineItems []LineItems `json:"line_items,omitempty"`
-	// External unique 'uuid' identifier for this Invoice.
-	Id string `json:"id,omitempty"`
-	// Non-empty string if there was an error while sending out invoice
-	InvoicingError string `json:"invoicing_error,omitempty"`
 	// The number of retries done to send the invoice
 	InvoiceRetryAttempt int32 `json:"invoice_retry_attempt,omitempty"`
 	// False if not approved
 	IsApproved bool `json:"is_approved,omitempty"`
-	PdfUrl string `json:"pdf_url,omitempty"`
-	// False if not paid yet
-	IsPaid bool `json:"is_paid,omitempty"`
-	// Latest end time of line items covered by the invoice
-	MaxItemEndTime time.Time `json:"max_item_end_time,omitempty"`
-	DueDate time.Time `json:"due_date,omitempty"`
-	// [DEPRECATED] End time of the cycle in which the invoice was generated
-	EndTime time.Time `json:"end_time,omitempty"`
-	// The number of retries done to process the payment
-	PaymentRetryAttempt int32 `json:"payment_retry_attempt,omitempty"`
-	// Non-empty string if there was an error while processing payment
-	PaymentError string `json:"payment_error,omitempty"`
 	// The potentially permanent state this invoice can live in (e.g., ISSUED if the invoice has been issued to the customer)
 	Status string `json:"status,omitempty"`
+	LatestInvoiceAttemptAt time.Time `json:"latest_invoice_attempt_at,omitempty"`
+	// Earliest start time of line items covered by the invoice
+	MinItemStartTime time.Time `json:"min_item_start_time,omitempty"`
+	PdfUrl string `json:"pdf_url,omitempty"`
+	// The number of retries done to process the payment
+	PaymentRetryAttempt int32 `json:"payment_retry_attempt,omitempty"`
+	// Total amount due
+	AmountDue int32 `json:"amount_due,omitempty"`
+	// [DEPRECATED] End time of the cycle in which the invoice was generated
+	EndTime time.Time `json:"end_time,omitempty"`
+	// Latest end time of line items covered by the invoice
+	MaxItemEndTime time.Time `json:"max_item_end_time,omitempty"`
+	// False if not paid yet
+	IsPaid bool `json:"is_paid,omitempty"`
+	// External unique 'uuid' identifier for this Invoice.
+	Id string `json:"id,omitempty"`
+	// Tax amount applied to subtotal
+	TaxAmount int32 `json:"tax_amount,omitempty"`
+	// Any discount credits applied to the invoice
+	DiscountCredit int32 `json:"discount_credit,omitempty"`
+	// If there is an error processing this invoice, this field contains the error message.
+	StatusError string `json:"status_error,omitempty"`
+	// Non-empty string if there was an error while processing payment
+	PaymentError string `json:"payment_error,omitempty"`
+	// The date the invoice will be issued to the end customer or forwarded to the payment processor.
+	IssueDate time.Time `json:"issue_date,omitempty"`
+	// Name of the customer this invoice is for.
+	CustomerName string `json:"customer_name,omitempty"`
+	DueDate time.Time `json:"due_date,omitempty"`
+	// [DEPRECATED] Start time of the cycle in which the invoice was generated
+	StartTime time.Time `json:"start_time,omitempty"`
+	LineItems []LineItems `json:"line_items,omitempty"`
+	// False if invoice has not been sent to the customer
+	IsInvoiced bool `json:"is_invoiced,omitempty"`
+	// Non-empty string if there was an error while sending out invoice
+	InvoicingError string `json:"invoicing_error,omitempty"`
+	LatestPaymentAttemptAt time.Time `json:"latest_payment_attempt_at,omitempty"`
 }

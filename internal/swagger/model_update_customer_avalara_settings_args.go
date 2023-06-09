@@ -9,10 +9,10 @@
 package swagger
 
 type UpdateCustomerAvalaraSettingsArgs struct {
+	// True if Avalara integration should be enabled for this customer, False otherwise.
+	EnableIntegration bool `json:"enable_integration,omitempty"`
 	// Entity code describing this customer.
 	EntityUseCode string `json:"entity_use_code,omitempty"`
 	// Tax exemption number specific to this customer
 	ExemptionNumber string `json:"exemption_number,omitempty"`
-	// True if Avalara integration should be enabled for this customer, False otherwise.
-	EnableIntegration bool `json:"enable_integration,omitempty"`
 }

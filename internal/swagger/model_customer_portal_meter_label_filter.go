@@ -9,12 +9,12 @@
 package swagger
 
 type CustomerPortalMeterLabelFilter struct {
-	// The label key to group results by.
-	LabelGroupBy string `json:"label_group_by,omitempty"`
+	// The aggregate function to use for the meter.
+	Aggregate string `json:"aggregate,omitempty"`
 	// Name of the meter.
 	MeterName string `json:"meter_name"`
 	// Primary labels with keys and values
 	LabelFilters []CustomerPortalLabelFilter `json:"label_filters,omitempty"`
-	// The aggregate function to use for the meter.
-	Aggregate string `json:"aggregate,omitempty"`
+	// The label key to group results by.
+	LabelGroupBy string `json:"label_group_by,omitempty"`
 }

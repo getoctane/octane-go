@@ -20,6 +20,7 @@ type (
 		PricePlanTag                       string                                `json:"price_plan_tag,omitempty"`
 		AutogeneratePaymentGatewayCustomer bool                                  `json:"autogenerate_payment_gateway_customer,omitempty"`
 		CreatedAt                          time.Time                             `json:"created_at,omitempty"`
+		CustomerMetadata                   []CustomerMetadata
 	}
 	ContactInfoInputArgs struct {
 		Country      string `json:"country,omitempty"`
@@ -37,6 +38,10 @@ type (
 	CustomerMeasurementMappingInputArgs struct {
 		Label      string `json:"label,omitempty"`
 		ValueRegex string `json:"value_regex,omitempty"`
+	}
+	CustomerMetadata struct {
+		Property   string `json:"property,omitempty"`
+		Value string `json:"value,omitempty"`
 	}
 
 	UpdateCustomerArgs struct {
@@ -127,6 +132,15 @@ func (api *customersAPI) Create(body CreateCustomerArgs) (Customer, *http.Respon
 	if createdAt.IsZero()  {
 		createdAt = time.Now()
 	}
+	var newMetadata []swagger.CustomerMetadataInput
+	if body.CustomerMetadata != nil {
+		for _, currMetadum:= range(body.CustomerMetadata) {
+			newMetadata = append(newMetadata, swagger.CustomerMetadataInput {
+				Property: currMetadum.Property,
+				Value: currMetadum.Value,
+			})
+		}
+	}
 	implCreateCustomerArgs := swagger.CreateCustomerArgs{
 		VendorId:                           body.VendorId,
 		Tags:                               body.Tags,
@@ -138,6 +152,7 @@ func (api *customersAPI) Create(body CreateCustomerArgs) (Customer, *http.Respon
 		PricePlanTag:                       body.PricePlanTag,
 		AutogeneratePaymentGatewayCustomer: body.AutogeneratePaymentGatewayCustomer,
 		CreatedAt:                          createdAt,
+		CustomerMetadata:                   newMetadata,
 	}
 	implCustomer, resp, err := api.impl.CustomersApi.CustomersPost(
 		api.ctx(), implCreateCustomerArgs)
