@@ -12,14 +12,14 @@ import (
 )
 
 type CustomerPortalActiveSubscription struct {
-	// The total fixed price with all discounts applied.
-	DiscountedFixedPrice int32 `json:"discounted_fixed_price,omitempty"`
-	// The date that the customer will be invoiced for their current billing cycle.
-	InvoicingDate time.Time `json:"invoicing_date,omitempty"`
-	// Customer's current active biling cycle.
-	BillingCycle *AllOfCustomerPortalActiveSubscriptionBillingCycle `json:"billing_cycle"`
 	// The total fixed price the customer will be charged for this billing cycle. Includes the base price and any add ons.
 	TotalFixedPrice int32 `json:"total_fixed_price,omitempty"`
+	// Customer's current active biling cycle.
+	BillingCycle *AllOfCustomerPortalActiveSubscriptionBillingCycle `json:"billing_cycle"`
+	// The date that the customer will be invoiced for their current billing cycle.
+	InvoicingDate time.Time `json:"invoicing_date,omitempty"`
+	// The total fixed price with all discounts applied.
+	DiscountedFixedPrice int32 `json:"discounted_fixed_price,omitempty"`
 	// Customer's current active subscription. Includes the price plan and overrides they are subscribed to.
 	Subscription *AllOfCustomerPortalActiveSubscriptionSubscription `json:"subscription,omitempty"`
 }

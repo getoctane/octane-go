@@ -9,7 +9,7 @@
 package swagger
 
 type UpdateMeteredComponentLimitsInput struct {
+	LabelLimits []MeteredComponentLabelLimitInputArgs `json:"label_limits,omitempty"`
 	// Numeric limit to set on customer usage for the meter.
 	Limit int32 `json:"limit,omitempty"`
-	LabelLimits []MeteredComponentLabelLimitInputArgs `json:"label_limits,omitempty"`
 }

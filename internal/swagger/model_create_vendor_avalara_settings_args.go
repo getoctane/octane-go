@@ -9,24 +9,24 @@
 package swagger
 
 type CreateVendorAvalaraSettingsArgs struct {
-	// Username of the Avalara account.
-	Username string `json:"username"`
-	// Password of the Avalara account.
-	Password string `json:"password"`
-	// True if enabling logging for Avalara calls, false otherwise. Defaults to False.
-	EnableLogging bool `json:"enable_logging,omitempty"`
-	// True if connecting to Avalara sandbox account, false otherwise.
-	SandboxMode bool `json:"sandbox_mode"`
 	// True if the documents generated in Avalara should be committed, false otherwise. Defaults to False.
 	CommitDocuments bool `json:"commit_documents,omitempty"`
-	// The tax code to associate with the item that is representing the Octane invoice.
-	TaxCode string `json:"tax_code,omitempty"`
-	// The Avalara item code to use to represent all the line items on the Octane invoice.
-	ItemCode string `json:"item_code,omitempty"`
-	// The Avalara company code string to associate the Octane vendor with.
-	CompanyCode string `json:"company_code,omitempty"`
 	// The item description to use to represent all the lines on the Octane invoice.
 	ItemDescription string `json:"item_description,omitempty"`
 	// Enable/Disable the Avalara integration.
 	EnableIntegration bool `json:"enable_integration"`
+	// The Avalara item code to use to represent all the line items on the Octane invoice.
+	ItemCode string `json:"item_code,omitempty"`
+	// True if connecting to Avalara sandbox account, false otherwise.
+	SandboxMode bool `json:"sandbox_mode"`
+	// True if enabling logging for Avalara calls, false otherwise. Defaults to False.
+	EnableLogging bool `json:"enable_logging,omitempty"`
+	// Password of the Avalara account.
+	Password string `json:"password"`
+	// The Avalara company code string to associate the Octane vendor with.
+	CompanyCode string `json:"company_code,omitempty"`
+	// Username of the Avalara account.
+	Username string `json:"username"`
+	// The tax code to associate with the item that is representing the Octane invoice.
+	TaxCode string `json:"tax_code,omitempty"`
 }

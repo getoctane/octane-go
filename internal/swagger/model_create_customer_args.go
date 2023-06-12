@@ -12,15 +12,16 @@ import (
 )
 
 type CreateCustomerArgs struct {
-	VendorId int32 `json:"vendor_id,omitempty"`
-	Tags []string `json:"tags,omitempty"`
-	AutogenerateAccountingCustomer bool `json:"autogenerate_accounting_customer,omitempty"`
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	PricePlanTag string `json:"price_plan_tag,omitempty"`
 	PricePlanName string `json:"price_plan_name,omitempty"`
-	Name string `json:"name,omitempty"`
-	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
-	AutogeneratePaymentGatewayCustomer bool `json:"autogenerate_payment_gateway_customer,omitempty"`
+	Tags []string `json:"tags,omitempty"`
 	ContactInfo *ContactInfoInputArgs `json:"contact_info,omitempty"`
+	PricePlanTag string `json:"price_plan_tag,omitempty"`
+	VendorId int32 `json:"vendor_id,omitempty"`
+	AutogenerateAccountingCustomer bool `json:"autogenerate_accounting_customer,omitempty"`
+	MeasurementMappings []CustomerMeasurementMappingInputArgs `json:"measurement_mappings,omitempty"`
+	Name string `json:"name,omitempty"`
+	AutogeneratePaymentGatewayCustomer bool `json:"autogenerate_payment_gateway_customer,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	CustomerMetadata []CustomerMetadataInput `json:"customer_metadata,omitempty"`
 }

@@ -12,12 +12,12 @@ import (
 )
 
 type RevenueRecognitionEntry struct {
+	// The newly booked amount in this month (in cents).
+	Booked int32 `json:"booked,omitempty"`
 	// The month in which the revenue is booked and(or) recognized.
 	Month time.Time `json:"month,omitempty"`
 	// The change in deferred revenue this month (in cents).
 	Deferred int32 `json:"deferred,omitempty"`
 	// The change in recognized revenue this month (in cents).
 	Recognized int32 `json:"recognized,omitempty"`
-	// The newly booked amount in this month (in cents).
-	Booked int32 `json:"booked,omitempty"`
 }

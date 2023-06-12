@@ -1379,6 +1379,104 @@ func (a *CustomersApiService) CustomersCustomerNameCreditTopOffPlanPut(ctx conte
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
+CustomersApiService Get Daily Accrued Revenue
+Gets the daily accrued revenue for a customer broken down by line item until the beginning of the current hour.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param customerName
+@return []DailyAccruedRevenue
+*/
+func (a *CustomersApiService) CustomersCustomerNameDailyAccruedRevenueGet(ctx context.Context, customerName string) ([]DailyAccruedRevenue, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue []DailyAccruedRevenue
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/customers/{customer_name}/daily_accrued_revenue"
+	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(customerName) < 1 {
+		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []DailyAccruedRevenue
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
 CustomersApiService Delete Customer
 Delete a customer by their unique name.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2159,12 +2257,12 @@ func (a *CustomersApiService) CustomersCustomerNameIntegrationTaxAvalaraSettings
 CustomersApiService Generate Current Invoice
 Fetch current cycle revenue for a customer and generate an invoice.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param customerName
- * @param token
  * @param invoiceId
+ * @param token
+ * @param customerName
 @return ModelError
 */
-func (a *CustomersApiService) CustomersCustomerNameInvoiceInvoiceIdTokenGet(ctx context.Context, customerName string, token string, invoiceId int32) (ModelError, *http.Response, error) {
+func (a *CustomersApiService) CustomersCustomerNameInvoiceInvoiceIdTokenGet(ctx context.Context, invoiceId int32, token string, customerName string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -2175,21 +2273,21 @@ func (a *CustomersApiService) CustomersCustomerNameInvoiceInvoiceIdTokenGet(ctx 
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/customers/{customer_name}/invoice/{invoice_id}/{token}"
-	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"token"+"}", fmt.Sprintf("%v", token), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"invoice_id"+"}", fmt.Sprintf("%v", invoiceId), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"token"+"}", fmt.Sprintf("%v", token), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(customerName) < 1 {
-		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
+	if invoiceId < 0 {
+		return localVarReturnValue, nil, reportError("invoiceId must be greater than 0")
 	}
 	if strlen(token) < 1 {
 		return localVarReturnValue, nil, reportError("token must have at least 1 elements")
 	}
-	if invoiceId < 0 {
-		return localVarReturnValue, nil, reportError("invoiceId must be greater than 0")
+	if strlen(customerName) < 1 {
+		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
 	}
 
 	// to determine the Content-Type header
@@ -2259,26 +2357,26 @@ Get a list of invoices and their line items for a customer.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param customerName
  * @param optional nil or *CustomersApiCustomersCustomerNameInvoicesGetOpts - Optional Parameters:
-     * @param "StartTime" (optional.Time) - 
+     * @param "ForwardSecondarySortOffset" (optional.String) -  The unique offset to start at when paging forwards
+     * @param "SortDirection" (optional.String) - 
+     * @param "Status" (optional.String) - 
+     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
      * @param "Limit" (optional.Int32) -  The number of items to fetch. Defaults to 10.
      * @param "CustomerName" (optional.String) - 
-     * @param "SortDirection" (optional.String) - 
-     * @param "ForwardSecondarySortOffset" (optional.String) -  The unique offset to start at when paging forwards
+     * @param "StartTime" (optional.Time) - 
      * @param "SortColumn" (optional.String) - 
-     * @param "ForwardSortOffset" (optional.String) -  The sort column offset to start at when paging forwards
-     * @param "Status" (optional.String) - 
 @return []Invoice
 */
 
 type CustomersApiCustomersCustomerNameInvoicesGetOpts struct {
-    StartTime optional.Time
+    ForwardSecondarySortOffset optional.String
+    SortDirection optional.String
+    Status optional.String
+    ForwardSortOffset optional.String
     Limit optional.Int32
     CustomerName optional.String
-    SortDirection optional.String
-    ForwardSecondarySortOffset optional.String
+    StartTime optional.Time
     SortColumn optional.String
-    ForwardSortOffset optional.String
-    Status optional.String
 }
 
 func (a *CustomersApiService) CustomersCustomerNameInvoicesGet(ctx context.Context, customerName string, localVarOptionals *CustomersApiCustomersCustomerNameInvoicesGetOpts) ([]Invoice, *http.Response, error) {
@@ -2301,8 +2399,17 @@ func (a *CustomersApiService) CustomersCustomerNameInvoicesGet(ctx context.Conte
 		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
 	}
 
-	if localVarOptionals != nil && localVarOptionals.StartTime.IsSet() {
-		localVarQueryParams.Add("start_time", parameterToString(localVarOptionals.StartTime.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
+		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
+		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
+		localVarQueryParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
+		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
@@ -2310,20 +2417,11 @@ func (a *CustomersApiService) CustomersCustomerNameInvoicesGet(ctx context.Conte
 	if localVarOptionals != nil && localVarOptionals.CustomerName.IsSet() {
 		localVarQueryParams.Add("customer_name", parameterToString(localVarOptionals.CustomerName.Value(), ""))
 	}
-	if localVarOptionals != nil && localVarOptionals.SortDirection.IsSet() {
-		localVarQueryParams.Add("sort_direction", parameterToString(localVarOptionals.SortDirection.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ForwardSecondarySortOffset.IsSet() {
-		localVarQueryParams.Add("forward_secondary_sort_offset", parameterToString(localVarOptionals.ForwardSecondarySortOffset.Value(), ""))
+	if localVarOptionals != nil && localVarOptionals.StartTime.IsSet() {
+		localVarQueryParams.Add("start_time", parameterToString(localVarOptionals.StartTime.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.SortColumn.IsSet() {
 		localVarQueryParams.Add("sort_column", parameterToString(localVarOptionals.SortColumn.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.ForwardSortOffset.IsSet() {
-		localVarQueryParams.Add("forward_sort_offset", parameterToString(localVarOptionals.ForwardSortOffset.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Status.IsSet() {
-		localVarQueryParams.Add("status", parameterToString(localVarOptionals.Status.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -3352,12 +3450,12 @@ func (a *CustomersApiService) CustomersCustomerNameRevenueGet(ctx context.Contex
 CustomersApiService Generate Current Invoice
 Fetch current cycle revenue for a customer and generate an invoice.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param customerName
- * @param token
  * @param asOfStr
+ * @param token
+ * @param customerName
 @return ModelError
 */
-func (a *CustomersApiService) CustomersCustomerNameSampleInvoiceAsOfStrTokenGet(ctx context.Context, customerName string, token string, asOfStr string) (ModelError, *http.Response, error) {
+func (a *CustomersApiService) CustomersCustomerNameSampleInvoiceAsOfStrTokenGet(ctx context.Context, asOfStr string, token string, customerName string) (ModelError, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -3368,21 +3466,21 @@ func (a *CustomersApiService) CustomersCustomerNameSampleInvoiceAsOfStrTokenGet(
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/customers/{customer_name}/sample_invoice/{as_of_str}/{token}"
-	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"token"+"}", fmt.Sprintf("%v", token), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"as_of_str"+"}", fmt.Sprintf("%v", asOfStr), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"token"+"}", fmt.Sprintf("%v", token), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(customerName) < 1 {
-		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
+	if strlen(asOfStr) < 1 {
+		return localVarReturnValue, nil, reportError("asOfStr must have at least 1 elements")
 	}
 	if strlen(token) < 1 {
 		return localVarReturnValue, nil, reportError("token must have at least 1 elements")
 	}
-	if strlen(asOfStr) < 1 {
-		return localVarReturnValue, nil, reportError("asOfStr must have at least 1 elements")
+	if strlen(customerName) < 1 {
+		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
 	}
 
 	// to determine the Content-Type header
@@ -4355,16 +4453,114 @@ func (a *CustomersApiService) CustomersCustomerNameSubscriptionsPost(ctx context
 	return localVarReturnValue, localVarHttpResponse, nil
 }
 /*
+CustomersApiService Get Total Accrued Revenue
+Gets the total accrued revenue for a customer broken down by line item until the beginning of the current hour.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param customerName
+@return AccruedRevenue
+*/
+func (a *CustomersApiService) CustomersCustomerNameTotalAccruedRevenueGet(ctx context.Context, customerName string) (AccruedRevenue, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Get")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue AccruedRevenue
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/customers/{customer_name}/total_accrued_revenue"
+	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(customerName) < 1 {
+		return localVarReturnValue, nil, reportError("customerName must have at least 1 elements")
+	}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v AccruedRevenue
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		if localVarHttpResponse.StatusCode == 0 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+/*
 CustomersApiService Get Customer&#x27;s Usage Across Meters
 Get the usage for a customer across all meters in XLS format for a given time period.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param customerName
  * @param token
+ * @param customerName
  * @param startTime
  * @param endTime
 
 */
-func (a *CustomersApiService) CustomersCustomerNameUsageAcrossMetersTokenGet(ctx context.Context, customerName string, token string, startTime time.Time, endTime time.Time) (*http.Response, error) {
+func (a *CustomersApiService) CustomersCustomerNameUsageAcrossMetersTokenGet(ctx context.Context, token string, customerName string, startTime time.Time, endTime time.Time) (*http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Get")
 		localVarPostBody   interface{}
@@ -4375,17 +4571,17 @@ func (a *CustomersApiService) CustomersCustomerNameUsageAcrossMetersTokenGet(ctx
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/customers/{customer_name}/usage_across_meters/{token}"
-	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"token"+"}", fmt.Sprintf("%v", token), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"customer_name"+"}", fmt.Sprintf("%v", customerName), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(customerName) < 1 {
-		return nil, reportError("customerName must have at least 1 elements")
-	}
 	if strlen(token) < 1 {
 		return nil, reportError("token must have at least 1 elements")
+	}
+	if strlen(customerName) < 1 {
+		return nil, reportError("customerName must have at least 1 elements")
 	}
 
 	localVarQueryParams.Add("start_time", parameterToString(startTime, ""))

@@ -10,7 +10,7 @@ package swagger
 
 // Primary label key and prettified version of the key
 type AllOfCustomerPortalMeterLabelsWithDisplayNameKey struct {
+	DisplayName string `json:"display_name,omitempty"`
 	// The raw value of the label data
 	Name string `json:"name,omitempty"`
-	DisplayName string `json:"display_name,omitempty"`
 }

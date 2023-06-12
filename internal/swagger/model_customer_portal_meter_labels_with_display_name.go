@@ -9,8 +9,8 @@
 package swagger
 
 type CustomerPortalMeterLabelsWithDisplayName struct {
-	// Primary label values associated with the key
-	Values []CustomerPortalLabelDisplayName `json:"values,omitempty"`
 	// Primary label key and prettified version of the key
 	Key *AllOfCustomerPortalMeterLabelsWithDisplayNameKey `json:"key,omitempty"`
+	// Primary label values associated with the key
+	Values []CustomerPortalLabelDisplayName `json:"values,omitempty"`
 }

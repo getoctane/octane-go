@@ -9,7 +9,7 @@
 package swagger
 
 type PaymentGatewayCredentialInputArgs struct {
-	AuthToken string `json:"auth_token,omitempty"`
 	PaymentGateway string `json:"payment_gateway,omitempty"`
+	AuthToken string `json:"auth_token,omitempty"`
 	AccountId string `json:"account_id,omitempty"`
 }

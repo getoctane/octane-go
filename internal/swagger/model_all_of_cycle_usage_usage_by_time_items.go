@@ -13,12 +13,12 @@ import (
 
 // Usage by day.
 type AllOfCycleUsageUsageByTimeItems struct {
-	// Start of the 24 hour time window in UTC.
-	Time time.Time `json:"time,omitempty"`
-	// Label value. Only present if label_group_by is provided.
-	LabelValue string `json:"label_value,omitempty"`
 	// Total usage during this window.
 	Usage int32 `json:"usage,omitempty"`
+	// Label value. Only present if label_group_by is provided.
+	LabelValue string `json:"label_value,omitempty"`
+	// Start of the 24 hour time window in UTC.
+	Time time.Time `json:"time,omitempty"`
 	// Label key. Only present if label_group_by is provided.
 	LabelKey string `json:"label_key,omitempty"`
 }

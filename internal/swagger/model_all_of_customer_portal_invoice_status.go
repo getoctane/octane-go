@@ -13,16 +13,16 @@ import (
 
 // Information related to the current status of this invoice.
 type AllOfCustomerPortalInvoiceStatus struct {
-	// Time the invoice status was last updated.
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
-	UpdateSource string `json:"update_source,omitempty"`
-	// Creation time of this invoice status.
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	// The timestamp that the action will be performed at.
-	PendingActionTime time.Time `json:"pending_action_time,omitempty"`
-	Error_ string `json:"error,omitempty"`
 	// The current processing state for this invoice.
 	Status string `json:"status,omitempty"`
+	UpdateSource string `json:"update_source,omitempty"`
+	// The timestamp that the action will be performed at.
+	PendingActionTime time.Time `json:"pending_action_time,omitempty"`
 	// The current upcoming action associated with this invoice status, if any.
 	Action string `json:"action,omitempty"`
+	Error_ string `json:"error,omitempty"`
+	// Creation time of this invoice status.
+	CreatedAt time.Time `json:"created_at,omitempty"`
+	// Time the invoice status was last updated.
+	UpdatedAt time.Time `json:"updated_at,omitempty"`
 }

@@ -9,7 +9,7 @@
 package swagger
 
 type CustomerPortalLabelFilter struct {
+	Key string `json:"key,omitempty"`
 	// Primary label value associated with the key
 	Value string `json:"value,omitempty"`
-	Key string `json:"key,omitempty"`
 }

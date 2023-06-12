@@ -11,12 +11,12 @@ package swagger
 type TaxCode struct {
 	// A friendly description of this tax code.
 	Description string `json:"description,omitempty"`
-	// The Avalara Entity Use Code represented by this tax code.
-	EntityUseCode string `json:"entity_use_code,omitempty"`
-	// A code string that identifies this tax code.
-	TaxCode string `json:"tax_code,omitempty"`
 	// The unique ID number of this tax code.
 	Id string `json:"id,omitempty"`
 	// The type of this tax code.
 	TaxCodeTypeId string `json:"tax_code_type_id,omitempty"`
+	// The Avalara Entity Use Code represented by this tax code.
+	EntityUseCode string `json:"entity_use_code,omitempty"`
+	// A code string that identifies this tax code.
+	TaxCode string `json:"tax_code,omitempty"`
 }

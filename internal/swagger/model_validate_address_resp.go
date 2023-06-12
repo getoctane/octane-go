@@ -11,10 +11,10 @@ package swagger
 type ValidateAddressResp struct {
 	// Set if 'success' is True. The resolution quality of the geospatial coordinates.
 	ResolutionQuality string `json:"resolution_quality,omitempty"`
-	// Set if 'sucess' is True. Geospatial latitude measurement, in Decimal Degrees (string).
-	Longitude string `json:"longitude,omitempty"`
 	// True if validation was successful, False address is invalid.
 	Success bool `json:"success,omitempty"`
+	// Set if 'sucess' is True. Geospatial latitude measurement, in Decimal Degrees (string).
+	Longitude string `json:"longitude,omitempty"`
 	// Set if 'success' is True. Geospatial latitude measurement, in Decimal Degrees (string).
 	Latitude string `json:"latitude,omitempty"`
 	// Set if 'success' is False. Contains the details of why the address is invalid.

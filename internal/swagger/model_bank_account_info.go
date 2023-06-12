@@ -9,15 +9,15 @@
 package swagger
 
 type BankAccountInfo struct {
+	// Name of the bank
+	BankName string `json:"bank_name,omitempty"`
+	// Country the bank account is in.
+	Country string `json:"country,omitempty"`
+	// Bank account type. E.g. Savings/Checking
+	AccountType string `json:"account_type,omitempty"`
 	// Last 4 digits of the bank account number.
 	Last4 string `json:"last4,omitempty"`
 	ExternalId string `json:"external_id,omitempty"`
-	// Name of the bank
-	BankName string `json:"bank_name,omitempty"`
-	// Bank account type. E.g. Savings/Checking
-	AccountType string `json:"account_type,omitempty"`
-	// Country the bank account is in.
-	Country string `json:"country,omitempty"`
 	// Routing number for the bank accopunt
 	RoutingNumber int32 `json:"routing_number,omitempty"`
 }
