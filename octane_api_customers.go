@@ -41,7 +41,7 @@ type (
 	}
 	CustomerMetadata struct {
 		Property   string `json:"property,omitempty"`
-		Value string `json:"value,omitempty"`
+		Value      string `json:"value,omitempty"`
 	}
 
 	UpdateCustomerArgs struct {
