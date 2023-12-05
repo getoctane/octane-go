@@ -48,11 +48,12 @@ func (api *measurementsAPI) CreateMulti(body []Measurement) ([]Measurement, *htt
 			measurement.Time = time.Now()
 		}
 		implMeasurements = append(implMeasurements, swagger.Measurement{
-			Value:      measurement.Value,
-			Labels:     measurement.Labels,
-			Time:       measurement.Time,
-			MeterName:  measurement.MeterName,
-			ResetTotal: measurement.ResetTotal,
+			Value:        measurement.Value,
+			Labels:       measurement.Labels,
+			Time:         measurement.Time,
+			MeterName:    measurement.MeterName,
+			ResetTotal:   measurement.ResetTotal,
+			CustomerName: measurement.CustomerName,
 		})
 	}
 	implMeasurementsReturn, resp, err := api.impl.MeasurementsApi.MeasurementsMultiPost(
