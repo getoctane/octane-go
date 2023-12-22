@@ -33,6 +33,8 @@ func (api *measurementsAPI) Create(body Measurement) (Measurement, *http.Respons
 		MeterName:    body.MeterName,
 		ResetTotal:   body.ResetTotal,
 		CustomerName: body.CustomerName,
+		Id:           body.Id,
+		EventName:    body.EventName,
 	}
 	implMeasurementReturn, resp, err := api.impl.MeasurementsApi.MeasurementsPost(
 		api.ctx(), implMeasurement)
@@ -54,6 +56,8 @@ func (api *measurementsAPI) CreateMulti(body []Measurement) ([]Measurement, *htt
 			MeterName:    measurement.MeterName,
 			ResetTotal:   measurement.ResetTotal,
 			CustomerName: measurement.CustomerName,
+			Id:           measurement.Id,
+			EventName:    measurement.EventName,
 		})
 	}
 	implMeasurementsReturn, resp, err := api.impl.MeasurementsApi.MeasurementsMultiPost(
@@ -76,6 +80,8 @@ func implMeasurementToMeasurement(implMeasurement *swagger.Measurement) Measurem
 			MeterName:    implMeasurement.MeterName,
 			ResetTotal:   implMeasurement.ResetTotal,
 			CustomerName: implMeasurement.CustomerName,
+			Id:           implMeasurement.Id,
+			EventName:    implMeasurement.EventName,
 		}
 	}
 	return measurement
